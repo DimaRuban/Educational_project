@@ -1,12 +1,12 @@
-﻿using System;
+﻿using ProjectWithModels;
+using System;
 
-namespace Educational_project
+namespace EducationalProject
 {
     class Program
     {
         static void Main(string[] args)
-        {
-            
+        {  
         }
     }
 }
