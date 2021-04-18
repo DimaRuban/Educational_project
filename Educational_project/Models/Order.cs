@@ -4,18 +4,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Project_with_models.Models
+namespace ProjectWithModels
 {
     public class Order
     {
         public int Id { get; set; }
 
-        public DateTime CreateAt { get; set; }
+        public DateTime CreatedAt { get; set; }
 
         public string Address { get; set; }
 
         public decimal TotalPrice { get; set; }
 
-        public int UserId { get; set; }    
+        public int UserId { get; set; }
+
+        public int ProductId { get; set; }
+
+        public int Quantity { get; set; }
     }
 }

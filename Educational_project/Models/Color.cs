@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Project_with_models.Models
+namespace ProjectWithModels
 {
     public class Color
     {
