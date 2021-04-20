@@ -4,10 +4,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjectWithModels
+namespace StorePhone.Models
 {
     public class User
     {
+        public User()
+        {          
+        }
+
+        public User(int id, string firstName, string lastName, string emailAdress, string phoneNumber, string userName, string password, Role role)
+        {
+            Id = id;
+            FirstName = firstName;
+            LastName = lastName;
+            EmailAdress = emailAdress;
+            PhoneNumber = phoneNumber;
+            UserName = userName;
+            Password = password;
+            Role = role;
+        }
+
         public int Id { get; set; }
 
         public string FirstName { get; set; }
@@ -22,6 +38,6 @@ namespace ProjectWithModels
 
         public string Password { get; set; }
 
-        public int RoleId { get; set; }
+        public Role Role { get; set; }
     }
 }

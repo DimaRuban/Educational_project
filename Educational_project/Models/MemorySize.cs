@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjectWithModels
+namespace StorePhone.Models
 {
-    class MemorySize
+    public class MemorySize
     {
         public int Id { get; set; }
 

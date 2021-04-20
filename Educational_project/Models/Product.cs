@@ -4,10 +4,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjectWithModels
+namespace StorePhone.Models
 {
     public class Product
     {
+        public Product()
+        {       
+        }
+
+        public Product(int id ,string name, decimal price, Color color, MemorySize memorySize)
+        {
+            Id = id;
+            Name = name;
+            Price = price;
+            Color = color;
+            MemorySize = memorySize;
+        }
+
         public int Id { get; set; }
 
         public string Name { get; set; }
@@ -16,11 +29,11 @@ namespace ProjectWithModels
 
         public decimal Price { get; set; }
 
-        public int ColorId { get; set; }
+        public Color Color { get; set; }
 
-        public int MemoryId { get; set; }  
+        public MemorySize MemorySize { get; set; }  
         
-        public int CategoryId { get; set; }
+        public Category Category { get; set; }
 
         public string ImageName { get; set; }
     }
