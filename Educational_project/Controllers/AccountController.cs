@@ -6,16 +6,15 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace StorePhone
+namespace StorePhone.Controllers
 {
     public static class AccountController
     {
-        static List<User> users = new List<User>();
         public static void Registration()
         {
             try {
 
-                int newUserId = users.Count + 1;
+                int newUserId = DbContext.users.Count + 1;
 
                 Console.Write("Введите ваше имя: ");
                 string firstName = Console.ReadLine();
@@ -32,7 +31,7 @@ namespace StorePhone
                 Console.Write("Введите имя пользователя: ");
                 string userName = Console.ReadLine();
 
-                foreach (var user in users)
+                foreach (var user in DbContext.users)
                 {
                      if (user.UserName == userName)
                      {
@@ -46,7 +45,7 @@ namespace StorePhone
 
                 string role = "User";
 
-                users.Add(new User(newUserId, firstName, lastName, email, phoneNumber, userName, password, new Role { Name = role }));
+                DbContext.users.Add(new User(newUserId, firstName, lastName, email, phoneNumber, userName, password, new Role { Name = role }));
 
                 Console.WriteLine($"\n{firstName}, Ваш профиль успешно создан!\n");        
             }

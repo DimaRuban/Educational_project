@@ -5,11 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StorePhone
+namespace StorePhone.Controllers
 {
      public static class OrderController
      { 
-        static List<Order> orders = new List<Order>();
         public static int IdProductForBuy { get; set; }
         public static decimal  totalPriceOrder { get; set; }
 
@@ -23,7 +22,7 @@ namespace StorePhone
 
                 IdProductForBuy = int.Parse(Console.ReadLine());
 
-                foreach (var product in ProductController.products)
+                foreach (var product in DbContext.products)
                 {
                     if (product.Id == IdProductForBuy)
                     {
@@ -55,7 +54,7 @@ namespace StorePhone
         {
             try
             {
-                int newOrderId = orders.Count + 1;
+                int newOrderId = DbContext.orders.Count + 1;
 
                 DateTime dateTimeCreatedOrder = DateTime.Now;
 
@@ -70,7 +69,7 @@ namespace StorePhone
                 Console.Write("Введите кол-во товара для покупки: ");
                 int quantityProductForOrder = int.Parse(Console.ReadLine());
 
-                foreach (var product in ProductController.products)
+                foreach (var product in DbContext.products)
                     if (product.Id == IdProductForBuy)
                         totalPriceOrder = (decimal)quantityProductForOrder * product.Price;
                 Console.WriteLine($"\nСумма вашего заказа: {totalPriceOrder}");
@@ -80,11 +79,11 @@ namespace StorePhone
                 switch (confirmButton)
                 {
                     case 1:
-                        orders.Add(new Order(newOrderId, dateTimeCreatedOrder, new User { FirstName = userName }, new Product { Id = idProduct }, adress, quantityProductForOrder, totalPriceOrder));
+                        DbContext.orders.Add(new Order(newOrderId, dateTimeCreatedOrder, new User { FirstName = userName }, new Product { Id = idProduct }, adress, quantityProductForOrder, totalPriceOrder));
 
                         Console.WriteLine("\nЗаказ оформлен, с вами свяжется администатор!\n");
 
-                        foreach (var order in orders)
+                        foreach (var order in DbContext.orders)
                         {
                             Console.WriteLine($"Данные вашего заказа: \n Номер заказа: {order.Id}, Дата заказа: {order.CreatedAt}, Имя клиента: {order.User.FirstName}, Номер товара: {order.Product.Id}, Адресс доставки: {order.Address}, кол-во товара{quantityProductForOrder}, Сумма заказа: {totalPriceOrder}\n");
                         }

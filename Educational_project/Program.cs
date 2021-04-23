@@ -1,7 +1,5 @@
 ﻿using StorePhone;
-using StorePhone.Models;
 using System;
-using System.Collections.Generic;
 
 namespace EducationalProject
 {
@@ -9,6 +7,7 @@ namespace EducationalProject
     {
         static void Main(string[] args)
         {
+            DbContext.InitData();
             Console.WriteLine("Здравствуйте! Вас приветствует магазин Store Phone!\n");
             while (true)
             {
