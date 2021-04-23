@@ -1,13 +1,9 @@
 ﻿using StorePhone.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StorePhone.Controllers
 {
-     public static class OrderController
+    public static class OrderController
      { 
         public static int IdProductForBuy { get; set; }
         public static decimal  totalPriceOrder { get; set; }
