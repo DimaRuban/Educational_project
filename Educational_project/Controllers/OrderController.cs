@@ -1,28 +1,41 @@
 ﻿using StorePhone.Models;
+using StorePhone.Data;
+using StorePhone.UI;
+using StorePhone.Сontracts;
 using System;
+
 
 namespace StorePhone.Controllers
 {
-    public static class OrderController
-     { 
-        public static int IdProductForBuy { get; set; }
-        public static decimal  totalPriceOrder { get; set; }
-
-        public static void ChoiceProduct()
+    public class OrderController
+     {  
+        private readonly ILogger _logger;
+        private readonly IDbContext _dbContext;
+        private readonly ProductController _productController;
+        
+        int IdProductForBuy { get; set; }
+        decimal  totalPriceOrder { get; set; }
+        public OrderController(IDbContext dbContext, ILogger logger, ProductController productController)
         {
-            try
-            { 
-                ProductController.PrintProduct();
+            _dbContext = dbContext;
+            _logger = logger;
+            _productController = productController;
+        }
 
-                Console.Write("\nВведите Id товара, для покупки: ");
+        public void ChoiceProduct()
+        {   
+            try
+            {
+                _productController.PrintProduct();
+                _logger.PrintForDisplay("\nВведите Id товара, для покупки: ");
 
                 IdProductForBuy = int.Parse(Console.ReadLine());
 
-                foreach (var product in DbContext.products)
+                foreach (var product in _dbContext.products)
                 {
                     if (product.Id == IdProductForBuy)
                     {
-                        Console.Write($"\nВы действительно хотите оформить заказ Id = {product.Id}, Name = {product.Name} ?\n Да - 1,\n Нет - 2.\nВыберете действие: ");
+                        _logger.PrintForDisplay($"\nВы действительно хотите оформить заказ Id = {product.Id}, Name = {product.Name} ?\n Да - 1,\n Нет - 2.\nВыберете действие: ");
                         int confirmButton = int.Parse(Console.ReadLine());
                         switch (confirmButton)
                         {
@@ -41,47 +54,47 @@ namespace StorePhone.Controllers
             }
             catch (FormatException e)
             {
-                Console.WriteLine(e.Message +"\n");
+                _logger.PrintForDisplay(e.Message +"\n");
                 Menu.GetMenu();
             }
         }
 
-        public static void Buy()
+        public void Buy()
         {
             try
             {
-                int newOrderId = DbContext.orders.Count + 1;
+                int newOrderId = _dbContext.orders.Count + 1;
 
                 DateTime dateTimeCreatedOrder = DateTime.Now;
 
-                Console.Write("\nВведите ваше имя: ");
+                _logger.PrintForDisplay("\nВведите ваше имя: ");
                 string userName = Console.ReadLine();
 
                 int idProduct = IdProductForBuy;
 
-                Console.Write("Введите адрес доставки: ");
+                _logger.PrintForDisplay("Введите адрес доставки: ");
                 string adress = Console.ReadLine();
 
-                Console.Write("Введите кол-во товара для покупки: ");
+                _logger.PrintForDisplay("Введите кол-во товара для покупки: ");
                 int quantityProductForOrder = int.Parse(Console.ReadLine());
 
-                foreach (var product in DbContext.products)
+                foreach (var product in _dbContext.products)
                     if (product.Id == IdProductForBuy)
                         totalPriceOrder = (decimal)quantityProductForOrder * product.Price;
-                Console.WriteLine($"\nСумма вашего заказа: {totalPriceOrder}");
+                _logger.PrintForDisplay($"\nСумма вашего заказа: {totalPriceOrder}");
 
-                Console.Write($"\n    Купить?\n Да - 1,\n Нет - 2.\nВыберете действие: ");
+                _logger.PrintForDisplay($"\n    Купить?\n Да - 1,\n Нет - 2.\nВыберете действие: ");
                 int confirmButton = int.Parse(Console.ReadLine());
                 switch (confirmButton)
                 {
                     case 1:
-                        DbContext.orders.Add(new Order(newOrderId, dateTimeCreatedOrder, new User { FirstName = userName }, new Product { Id = idProduct }, adress, quantityProductForOrder, totalPriceOrder));
+                        _dbContext.orders.Add(new Order(newOrderId, dateTimeCreatedOrder, new User { FirstName = userName }, new Product { Id = idProduct }, adress, quantityProductForOrder, totalPriceOrder));
 
-                        Console.WriteLine("\nЗаказ оформлен, с вами свяжется администатор!\n");
+                        _logger.PrintForDisplay("\nЗаказ оформлен, с вами свяжется администатор!\n");
 
-                        foreach (var order in DbContext.orders)
+                        foreach (var order in _dbContext.orders)
                         {
-                            Console.WriteLine($"Данные вашего заказа: \n Номер заказа: {order.Id}, Дата заказа: {order.CreatedAt}, Имя клиента: {order.User.FirstName}, Номер товара: {order.Product.Id}, Адресс доставки: {order.Address}, кол-во товара{quantityProductForOrder}, Сумма заказа: {totalPriceOrder}\n");
+                            _logger.PrintForDisplay($"\nДанные вашего заказа: \n Номер заказа: {order.Id},\n Дата заказа: {order.CreatedAt},\n Имя клиента: {order.User.FirstName},\n Номер товара: {order.Product.Id},\n Адресс доставки: {order.Address},\n кол-во товара: {quantityProductForOrder},\n Сумма заказа: {totalPriceOrder}\n");
                         }
                         break;
                     case 2:
@@ -94,7 +107,7 @@ namespace StorePhone.Controllers
             }
             catch (FormatException e)
             {
-                Console.WriteLine(e.Message + "\n");
+                _logger.PrintForDisplay(e.Message + "\n");
                 Menu.GetMenu();
             }
         }

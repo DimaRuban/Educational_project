@@ -1,52 +1,67 @@
 ﻿using StorePhone.Models;
+using StorePhone.UI;
+using StorePhone.Data;
+using StorePhone.Validation;
+using StorePhone.Сontracts;
 using System;
+
 
 namespace StorePhone.Controllers
 {
-    public static class AccountController
+    public class AccountController
     {
-        public static void Registration()
+        private readonly IDbContext _dbContext;
+        private readonly ILogger _logger;
+        private readonly IValidator _validator;
+
+        public AccountController(IDbContext dbContext, ILogger logger, IValidator validator)
         {
+            _dbContext = dbContext;
+            _logger = logger;
+            _validator = validator;
+        }
+        public void Registration()
+        {          
             try {
+               
+                int newUserId = _dbContext.users.Count + 1;
 
-                int newUserId = DbContext.users.Count + 1;
-
-                Console.Write("Введите ваше имя: ");
+                _logger.PrintForDisplay("Введите ваше имя: ");
                 string firstName = Console.ReadLine();
 
-                Console.Write("Введите вашу фамилию: ");
+                _logger.PrintForDisplay("Введите вашу фамилию: ");
                 string lastName = Console.ReadLine();
 
-                Console.Write("Введите email: ");
-                string email = Console.ReadLine();                         
-               
-                Console.Write("Введите номер телефона: ");
-                string phoneNumber = Console.ReadLine();            
-             
-                Console.Write("Введите имя пользователя: ");
+                _logger.PrintForDisplay("Введите email: ");
+                string email = Console.ReadLine();
+
+                _logger.PrintForDisplay("Введите номер телефона: ");
+                string phoneNumber = Console.ReadLine();
+
+                _logger.PrintForDisplay("Введите имя пользователя: ");
                 string userName = Console.ReadLine();
 
-                foreach (var user in DbContext.users)
+                foreach (var user in _dbContext.users)
                 {
                      if (user.UserName == userName)
                      {
-                        Console.WriteLine("\nЭто имя пользователя уже занято, выберете другое!\n");
+                        _logger.PrintForDisplay("\nЭто имя пользователя уже занято, выберете другое!\n");
                         Registration();
                      }
                 }
 
-                Console.Write("Введите пароль: ");
+                _logger.PrintForDisplay("Введите пароль: ");
                 string password = Console.ReadLine();
 
                 string role = "User";
 
-                DbContext.users.Add(new User(newUserId, firstName, lastName, email, phoneNumber, userName, password, new Role { Name = role }));
+                _dbContext.users.Add(new User(newUserId, firstName, lastName, email, phoneNumber, userName, password, new Role { Name = role }));
 
-                Console.WriteLine($"\n{firstName}, Ваш профиль успешно создан!\n");        
+                _logger.PrintForDisplay($"\n{firstName}, Ваш профиль успешно создан!\n");        
             }
             catch (FormatException e)
             {
-                Console.WriteLine(e.Message + "\n");
+                _logger.PrintForDisplay(e.Message + "\n");
                 Registration();
             }
         }
