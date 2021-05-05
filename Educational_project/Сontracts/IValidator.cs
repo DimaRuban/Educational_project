@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace StorePhone.Сontracts
+﻿namespace StorePhone.Сontracts
 {
     public interface IValidator
     {
+        bool CheckingUserName(string userName)
+        {
+            return true;
+        }
         void CheckingPhoneNumber(string message) { }
         void CheckingHomeAdrress(string message) { }
     }

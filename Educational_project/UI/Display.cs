@@ -3,7 +3,7 @@ using System;
 
 namespace StorePhone.UI
 {
-    public class Logger : ILogger
+    public class Display : IDisplay
     {
         public void PrintForDisplay(string message)
         {
