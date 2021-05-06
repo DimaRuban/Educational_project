@@ -8,49 +8,32 @@ namespace StorePhone.Controllers
     {  
         public int IdProductForBuy { get; set; }
         public decimal TotalPriceOrder { get; set; }
+        public string UserName { get; set; }
+        public string Adress { get; set; }
+        public int QuantityProductForOrder { get; set; }
+        public int ConfirmButton { get; set; }
 
         private readonly IDbContext _dbContext;
-        private readonly IProductController _productController;
-        private readonly IOrderUi _orderUi;
 
-        public OrderController(IDbContext dbContext, IProductController productController, IOrderUi orderUi)
+        public OrderController(IDbContext dbContext)
         {
             _dbContext = dbContext;
-            _productController = productController;
-            _orderUi = orderUi;
         }
 
-        public void ChoiceProduct()
-        {   
-            _productController.PrintProduct();
-            _orderUi.ChoiceProductUi();
-            IdProductForBuy = _orderUi.IdProductForBuy;
-            switch (_orderUi.ConfirmButton)
-            {
-                case 1:
-                    Buy();
-                    break;
-                default:
-                    break;
-            }
-        }
         public void Buy()
         {
-            _orderUi.BuyUi();
              int newOrderId = _dbContext.Orders.Count + 1;
 
              DateTime dateTimeCreatedOrder = DateTime.Now;
 
              foreach (var product in _dbContext.Products)
                  if (product.Id == IdProductForBuy)
-                     TotalPriceOrder = (decimal)_orderUi.QuantityProductForOrder * product.Price;
-                _orderUi.PrintTotalPrice(TotalPriceOrder);
+                     TotalPriceOrder = (decimal)QuantityProductForOrder * product.Price;
  
-             switch (_orderUi.ConfirmButton)
+             switch (ConfirmButton)
              {
                    case 1:
-                        _dbContext.Orders.Add(new Order(newOrderId, dateTimeCreatedOrder, new User { FirstName = _orderUi.UserName }, new Product { Id = IdProductForBuy }, _orderUi.Adress, _orderUi.QuantityProductForOrder, TotalPriceOrder));
-                    _orderUi.InformAboutSuccess();
+                        _dbContext.Orders.Add(new Order(newOrderId, dateTimeCreatedOrder, new User { FirstName = UserName }, new Product { Id = IdProductForBuy }, Adress, QuantityProductForOrder, TotalPriceOrder));
                     break;
                 default:
                     break;

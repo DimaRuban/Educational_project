@@ -5,16 +5,16 @@ namespace StorePhone.UI
 {
     public class Menu : IMenu
     {
-        private readonly IProductController _productController;
-        private readonly IOrderController _orderController;
-        private readonly IAccountController _accountController;
+        private readonly IProductUi _productUi;
+        private readonly IOrderUi _orderUi;
+        private readonly IAccountUi _accountUi;
         private readonly IDisplay _display;
 
-        public Menu(IProductController productController, IOrderController orderController, IAccountController accountController, IDisplay display)
+        public Menu(IProductUi productUi, IOrderUi orderUi, IAccountUi accountUi, IDisplay display)
         {
-            _productController = productController;
-            _orderController = orderController;
-            _accountController = accountController;
+            _productUi = productUi;
+            _orderUi = orderUi;
+            _accountUi = accountUi;
             _display = display;
         }
         public void GetMenu()
@@ -26,21 +26,20 @@ namespace StorePhone.UI
                 switch (operation)
                 {
                     case 1:
-                        _productController.PrintProduct();
+                        _productUi.PrintProductUi();
                         break;
                     case 2:
-                        _productController.AddNewProduct();
+                        _productUi.AddNewProductUi();
                         break;
                     case 3:
-                        _orderController.ChoiceProduct();
+                        _orderUi.ChoiceProductUi();
                         break;
                     case 4:
-                        _accountController.Registration();
+                        _accountUi.RegistrationUi();
                         break;
                     case 0:
                         OutMenu();
                         break;
-
                     default:
                         _display.PrintForDisplay("\nВыбирете операцию из списка!");
                         break;

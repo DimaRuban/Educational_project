@@ -5,18 +5,15 @@ namespace StorePhone.UI
 {
     public class AccountUi : IAccountUi
     {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Email { get; set; }
-        public string PhoneNumber { get; set; }
-        public string UserName { get; set; }
-        public string Password { get; set; }
-
         private readonly IDisplay _display;
+        private readonly IAccountController _accountController;
+        private readonly IValidator _validator;
 
-        public AccountUi(IDisplay display)
+        public AccountUi(IDisplay display, IAccountController accountController, IValidator validator)
         {
             _display = display;
+            _accountController = accountController;
+            _validator = validator;
         }
 
         public void RegistrationUi()
@@ -24,22 +21,27 @@ namespace StorePhone.UI
             try
             {
                 _display.PrintForDisplay("Введите ваше имя: ");
-                FirstName = Console.ReadLine();
+                _accountController.FirstName = Console.ReadLine();
 
                 _display.PrintForDisplay("Введите вашу фамилию: ");
-                LastName = Console.ReadLine();
+                _accountController.LastName = Console.ReadLine();
 
                 _display.PrintForDisplay("Введите email: ");
-                Email = Console.ReadLine();
+                _accountController.Email = Console.ReadLine();
 
                 _display.PrintForDisplay("Введите номер телефона: ");
-                PhoneNumber = Console.ReadLine();
+                _accountController.PhoneNumber = Console.ReadLine();
 
                 _display.PrintForDisplay("Введите имя пользователя: ");
-                UserName = Console.ReadLine();
+                _accountController.UserName = Console.ReadLine();
+                if (_validator.CheckingUserName(_accountController.UserName) != true)
+                    RegistrationUi();
 
                 _display.PrintForDisplay("Введите пароль: ");
-                Password = Console.ReadLine();
+                _accountController.Password = Console.ReadLine();
+
+                _accountController.Registration();
+                InformAboutSuccessUi();
             }
             catch (FormatException e)
             {
@@ -47,9 +49,9 @@ namespace StorePhone.UI
                 RegistrationUi();
             }
         }
-        public void InformAboutSuccess()
+        public void InformAboutSuccessUi()
         {
-            _display.PrintForDisplay($"\n{FirstName}, Ваш профиль успешно создан!\n");
+            _display.PrintForDisplay($"\n{_accountController.FirstName}, Ваш профиль успешно создан!\n");
         }
     }
 }

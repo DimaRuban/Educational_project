@@ -5,31 +5,23 @@ namespace StorePhone.Controllers
 {
     public class ProductController : IProductController
     {
-        private readonly IDbContext _dbContext;
-        private readonly IProductUi _productUi;
+        public string NewProductName { get; set; }
+        public decimal NewProductPrice { get; set; }
+        public string NewProductColor { get; set; }
+        public int NewProductMemorySize { get; set; }
 
-        public ProductController(IDbContext dbContext, IProductUi productUi)
+        private readonly IDbContext _dbContext;
+
+        public ProductController(IDbContext dbContext)
         {   
             _dbContext = dbContext;
-            _productUi = productUi;
         }
 
         public void AddNewProduct()
         {
-             _productUi.AddNewProductUi();
              int newProductId = _dbContext.Products.Count + 1;
-             string newProductName =_productUi.NewProductName;             
-             decimal newProductPrice =_productUi.NewProductPrice;
-             string newProductColor =_productUi.NewProductColor;
-             int newProductMemorySize =_productUi.NewProductMemorySize;
                 
-            _dbContext.Products.Add(new Product(newProductId, newProductName, newProductPrice, new Color { Name = newProductColor }, new MemorySize { Size = newProductMemorySize }));
-            _productUi.InformAboutSuccess();
-        }
-        public void PrintProduct()
-        {
-            _dbContext.InitData();
-            _productUi.PrintProductUi();  
+            _dbContext.Products.Add(new Product(newProductId, NewProductName, NewProductPrice, new Color { Name = NewProductColor }, new MemorySize { Size = NewProductMemorySize }));
         }
     }
 }

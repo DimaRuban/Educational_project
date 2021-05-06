@@ -5,29 +5,26 @@ namespace StorePhone.Controllers
 {
     public class AccountController : IAccountController
     {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Email { get; set; }
+        public string PhoneNumber { get; set; }
+        public string UserName { get; set; }
+        public string Password { get; set; }
+
         private readonly IDbContext _dbContext;
-        private readonly IValidator _validator;
-        private readonly IAccountUi _accountUi;
-        public AccountController(IDbContext dbContext, IValidator validator, IAccountUi accountUi)
+
+        public AccountController(IDbContext dbContext)
         {
             _dbContext = dbContext;
-            _validator = validator;
-            _accountUi = accountUi;
         }
         public void Registration()
         {
-            _accountUi.RegistrationUi();
-
             int newUserId = _dbContext.Users.Count + 1;
-
-            if (_validator.CheckingUserName(_accountUi.UserName) != true)
-                Registration();
-
+           
             string role = "User";
 
-            _dbContext.Users.Add(new User(newUserId, _accountUi.FirstName, _accountUi.LastName, _accountUi.Email, _accountUi.PhoneNumber, _accountUi.UserName, _accountUi.Password, new Role { Name = role }));
-
-            _accountUi.InformAboutSuccess();
+            _dbContext.Users.Add(new User(newUserId, FirstName, LastName, Email, PhoneNumber, UserName, Password, new Role { Name = role }));
         }
     }
 }
