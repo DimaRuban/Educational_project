@@ -14,10 +14,12 @@ namespace StorePhone.Controllers
         public int ConfirmButton { get; set; }
 
         private readonly IDbContext _dbContext;
+        private readonly ILogger _logger;
 
-        public OrderController(IDbContext dbContext)
+        public OrderController(IDbContext dbContext, ILogger logger)
         {
             _dbContext = dbContext;
+            _logger = logger;
         }
 
         public void Buy()
@@ -34,6 +36,7 @@ namespace StorePhone.Controllers
              {
                    case 1:
                         _dbContext.Orders.Add(new Order(newOrderId, dateTimeCreatedOrder, new User { FirstName = UserName }, new Product { Id = IdProductForBuy }, Adress, QuantityProductForOrder, TotalPriceOrder));
+                        _logger.Log($"{dateTimeCreatedOrder} - был создан новый заказ, с ID = {newOrderId}");
                     break;
                 default:
                     break;

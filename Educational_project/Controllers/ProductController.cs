@@ -1,5 +1,6 @@
 ﻿using StorePhone.Models;
 using StorePhone.Сontracts;
+using System;
 
 namespace StorePhone.Controllers
 {
@@ -11,10 +12,12 @@ namespace StorePhone.Controllers
         public int NewProductMemorySize { get; set; }
 
         private readonly IDbContext _dbContext;
+        private readonly ILogger _logger;
 
-        public ProductController(IDbContext dbContext)
+        public ProductController(IDbContext dbContext,ILogger logger)
         {   
             _dbContext = dbContext;
+            _logger = logger;
         }
 
         public void AddNewProduct()
@@ -22,6 +25,7 @@ namespace StorePhone.Controllers
              int newProductId = _dbContext.Products.Count + 1;
                 
             _dbContext.Products.Add(new Product(newProductId, NewProductName, NewProductPrice, new Color { Name = NewProductColor }, new MemorySize { Size = NewProductMemorySize }));
+            _logger.Log($"{DateTime.Now} - был добавлен новый продукт, с ID = {newProductId}");
         }
     }
 }

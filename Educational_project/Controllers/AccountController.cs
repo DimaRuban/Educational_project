@@ -1,5 +1,6 @@
 ﻿using StorePhone.Models;
 using StorePhone.Сontracts;
+using System;
 
 namespace StorePhone.Controllers
 {
@@ -13,10 +14,12 @@ namespace StorePhone.Controllers
         public string Password { get; set; }
 
         private readonly IDbContext _dbContext;
+        private readonly ILogger _logger;
 
-        public AccountController(IDbContext dbContext)
+        public AccountController(IDbContext dbContext,ILogger logger)
         {
             _dbContext = dbContext;
+            _logger = logger;
         }
         public void Registration()
         {
@@ -25,6 +28,7 @@ namespace StorePhone.Controllers
             string role = "User";
 
             _dbContext.Users.Add(new User(newUserId, FirstName, LastName, Email, PhoneNumber, UserName, Password, new Role { Name = role }));
+            _logger.Log($"{DateTime.Now} - был добавлен новый пользователь, с ID = {newUserId}");
         }
     }
 }
