@@ -30,7 +30,7 @@ namespace StorePhone.Logging
             }
         }
 
-        public void WorkWithFiles(string messege)
+        public void WorkWithFiles(string message)
         {
             CreatFile();
 
@@ -38,7 +38,7 @@ namespace StorePhone.Logging
 
             using (StreamWriter streamWriter = new StreamWriter(pathFile, true, Encoding.Default))
             {
-                streamWriter.WriteLine(messege);
+                streamWriter.WriteLine(message);
             }
         }
     }

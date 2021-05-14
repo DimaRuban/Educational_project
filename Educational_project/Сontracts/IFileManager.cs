@@ -6,6 +6,6 @@
 
         void CreatFile(){}
 
-        public void WorkWithFiles(string messege){}
+        void WorkWithFiles(string message) {}
     }
 }

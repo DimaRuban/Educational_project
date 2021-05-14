@@ -10,9 +10,9 @@ namespace StorePhone.Logging
         {
             _fileManager = fileManager;
         }
-        public void Log(string messege)
+        public void Log(string message)
         {
-            _fileManager.WorkWithFiles(messege);
+            _fileManager.WorkWithFiles(message);
         }
     }
 }
