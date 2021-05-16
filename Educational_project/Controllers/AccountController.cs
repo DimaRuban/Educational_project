@@ -5,18 +5,13 @@ namespace StorePhone.Controllers
 {
     public class AccountController : IAccountController
     {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Email { get; set; }
-        public string PhoneNumber { get; set; }
-        public string UserName { get; set; }
-        public string Password { get; set; }
-
         private readonly IDbContext _dbContext;
+        private readonly User _user;
 
-        public AccountController(IDbContext dbContext)
+        public AccountController(IDbContext dbContext, User user)
         {
             _dbContext = dbContext;
+            _user = user;
         }
         public void Registration()
         {
@@ -24,7 +19,7 @@ namespace StorePhone.Controllers
            
             string role = "User";
 
-            _dbContext.Users.Add(new User(newUserId, FirstName, LastName, Email, PhoneNumber, UserName, Password, new Role { Name = role }));
+            _dbContext.Users.Add(new User(newUserId, _user.FirstName, _user.LastName, _user.EmailAddress, _user.PhoneNumber, _user.UserName, _user.Password, new Role { Name = role }));
         }
     }
 }

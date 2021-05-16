@@ -1,4 +1,5 @@
-﻿using StorePhone.Сontracts;
+﻿using StorePhone.Models;
+using StorePhone.Сontracts;
 using System;
 
 namespace StorePhone.UI
@@ -9,13 +10,15 @@ namespace StorePhone.UI
         private readonly IDisplay _display;
         private readonly IOrderController _orderController;
         private readonly IProductUi _productUi;
+        private readonly Order _order;
 
-        public OrderUi(IDbContext dbContext, IDisplay display, IOrderController orderController, IProductUi productUi)
+        public OrderUi(IDbContext dbContext, IDisplay display, IOrderController orderController, IProductUi productUi, Order order)
         {
             _dbContext = dbContext;
             _display = display;
             _orderController = orderController;
             _productUi = productUi;
+            _order = order;
         }
         public void ChoiceProductUi() 
         {
@@ -23,17 +26,17 @@ namespace StorePhone.UI
             {
                 _productUi.PrintProductUi();
                 _display.PrintForDisplay("\nВведите Id товара, для покупки: ");
-                _orderController.IdProductForBuy = int.Parse(Console.ReadLine());
+                _order.IdProductForBuy = int.Parse(Console.ReadLine());
                
                 foreach (var product in _dbContext.Products)
                 {
-                    if (product.Id == _orderController.IdProductForBuy)
+                    if (product.Id == _order.IdProductForBuy)
                     {
                         _display.PrintForDisplay($"\nВы действительно хотите оформить заказ Id = {product.Id}, Name = {product.Name} ?\n Да - 1,\n Нет - 2.\nВыберете действие: ");
-                        _orderController.ConfirmButton = int.Parse(Console.ReadLine());
+                        _order.ConfirmButton = int.Parse(Console.ReadLine());
                     }
                 }
-                switch (_orderController.ConfirmButton)
+                switch (_order.ConfirmButton)
                 {
                     case 1:
                         BuyUi();
@@ -52,21 +55,21 @@ namespace StorePhone.UI
             try
             {
                 _display.PrintForDisplay("\nВведите ваше имя: ");
-                _orderController.UserName = Console.ReadLine();
+                _order.UserName = Console.ReadLine();
 
                 _display.PrintForDisplay("Введите адрес доставки: ");
-                _orderController.Adress = Console.ReadLine();
+                _order.Address = Console.ReadLine();
 
                 _display.PrintForDisplay("Введите кол-во товара для покупки: ");
-                _orderController.QuantityProductForOrder = int.Parse(Console.ReadLine());
+                _order.Quantity = int.Parse(Console.ReadLine());
 
                 _display.PrintForDisplay($"\n   Купить?\n Да - 1,\n Нет - 2.\nВыберете действие: ");
-                _orderController.ConfirmButton = int.Parse(Console.ReadLine());
+                _order.ConfirmButton = int.Parse(Console.ReadLine());
                
-                if (_orderController.ConfirmButton == 1) 
+                if (_order.ConfirmButton == 1) 
                 {
                     _orderController.Buy();
-                    PrintTotalPriceUi(_orderController.TotalPriceOrder);
+                    PrintTotalPriceUi(_order.TotalPrice);
                     InformAboutSuccessUi();
                 }
             }
@@ -85,7 +88,7 @@ namespace StorePhone.UI
 
             foreach (var order in _dbContext.Orders)
             {
-                _display.PrintForDisplay($"\nДанные вашего заказа: \n Номер заказа: {order.Id},\n Дата заказа: {order.CreatedAt},\n Имя клиента: {order.User.FirstName},\n Номер товара: {order.Product.Id},\n Адресс доставки: {order.Address},\n кол-во товара: {_orderController.QuantityProductForOrder},\nСумма вашего заказа: {_orderController.TotalPriceOrder}\n\n");
+                _display.PrintForDisplay($"\nДанные вашего заказа: \n Номер заказа: {order.Id},\n Дата заказа: {order.CreatedAt},\n Имя клиента: {_order.UserName},\n Номер товара: {_order.IdProductForBuy},\n Адресс доставки: {order.Address},\n кол-во товара: {_order.Quantity},\nСумма вашего заказа: {_order.TotalPrice}\n\n");
             }
         }
     }      

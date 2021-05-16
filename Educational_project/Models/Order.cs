@@ -4,12 +4,14 @@ namespace StorePhone.Models
 {
     public class Order
     {
-        public Order(int id, DateTime createdAt, User user, Product product, string address, int quantity, decimal totalPrice  )
+        public Order()
+        {
+        }
+        public Order(int id, DateTime createdAt, string user, string address, int quantity, decimal totalPrice  )
         {
             Id = id;
             CreatedAt = createdAt;
-            User = user;
-            Product = product;
+            UserName = user;
             Address = address;
             Quantity = quantity;
             TotalPrice = totalPrice;         
@@ -23,10 +25,14 @@ namespace StorePhone.Models
 
         public decimal TotalPrice { get; set; }
 
-        public User User { get; set; }
+        public string UserName { get; set; }
 
         public Product Product { get; set; }
 
         public int Quantity { get; set; }
+
+        public int IdProductForBuy { get; set; }
+
+        public int ConfirmButton { get; set; }
     }
 }

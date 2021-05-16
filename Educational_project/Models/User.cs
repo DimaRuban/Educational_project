@@ -6,12 +6,12 @@
         {          
         }
 
-        public User(int id, string firstName, string lastName, string emailAdress, string phoneNumber, string userName, string password, Role role)
+        public User(int id, string firstName, string lastName, string emailAddress, string phoneNumber, string userName, string password, Role role)
         {
             Id = id;
             FirstName = firstName;
             LastName = lastName;
-            EmailAdress = emailAdress;
+            EmailAddress = emailAddress;
             PhoneNumber = phoneNumber;
             UserName = userName;
             Password = password;
@@ -24,7 +24,7 @@
 
         public string LastName { get; set; }
 
-        public string EmailAdress { get; set; }
+        public string EmailAddress { get; set; }
 
         public string PhoneNumber { get; set; }
 
