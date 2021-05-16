@@ -1,6 +1,7 @@
 ﻿using StorePhone.Models;
 using StorePhone.Сontracts;
 using System;
+using System.Linq;
 
 namespace StorePhone.Controllers
 {
@@ -17,9 +18,9 @@ namespace StorePhone.Controllers
 
         public void Buy()
         {
-             int newOrderId = _dbContext.Orders.Count + 1;
+             int newOrderId = _dbContext.Orders.Max(x => x.Id) + 1;
 
-             DateTime dateTimeCreatedOrder = DateTime.Now;
+            DateTime dateTimeCreatedOrder = DateTime.Now;
 
              foreach (var product in _dbContext.Products)
                  if (product.Id == _order.IdProductForBuy)

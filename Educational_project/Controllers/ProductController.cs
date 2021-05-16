@@ -1,7 +1,6 @@
 ﻿using StorePhone.Models;
 using StorePhone.Сontracts;
-using System;
-using System.Collections.Generic;
+using System.Linq;
 
 namespace StorePhone.Controllers
 {
@@ -18,7 +17,8 @@ namespace StorePhone.Controllers
 
         public void AddNewProduct()
         {
-            int newProductId = _dbContext.Products.Count + 1;
+            int newProductId = _dbContext.Products.Max(x => x.Id)+1;
+
             _dbContext.Products.Add(new Product(newProductId, _product.Name, _product.Price, _product.Color, _product.MemorySize));
         }
     }

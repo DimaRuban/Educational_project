@@ -80,16 +80,14 @@ namespace StorePhone.UI
         }
         public void PrintTotalPriceUi(decimal totalPrice)
         {
-            _display.PrintForDisplay($"\nСумма вашего заказа: {totalPrice} грн");
+            _display.PrintForDisplay($"\nСумма вашего заказа: {_order.TotalPrice} грн");
         }
         public void InformAboutSuccessUi()
         {
             _display.PrintForDisplay("\nЗаказ оформлен, с вами свяжется администатор!\n");
 
-            foreach (var order in _dbContext.Orders)
-            {
-                _display.PrintForDisplay($"\nДанные вашего заказа: \n Номер заказа: {order.Id},\n Дата заказа: {order.CreatedAt},\n Имя клиента: {_order.UserName},\n Номер товара: {_order.IdProductForBuy},\n Адресс доставки: {order.Address},\n кол-во товара: {_order.Quantity},\nСумма вашего заказа: {_order.TotalPrice}\n\n");
-            }
+            _display.PrintForDisplay($"\nДанные вашего заказа: \n Номер заказа: {_order.Id},\n Дата заказа: {_order.CreatedAt},\n Имя клиента: {_order.UserName},\n Номер товара: {_order.IdProductForBuy},\n Адресс доставки: {_order.Address},\n кол-во товара: {_order.Quantity},\nСумма вашего заказа: {_order.TotalPrice}\n\n");
+            
         }
     }      
  }
