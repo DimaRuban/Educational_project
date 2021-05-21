@@ -24,7 +24,7 @@ namespace EducationalProject
             var accountController = new AccountController(dbContext, user);
            
             var productUi = new ProductUi(display, dbContext, productController, product);
-            var orderUi = new OrderUi(dbContext, display, orderController, productUi, order);
+            var orderUi = new OrderUi(dbContext, display, orderController, productUi, validator, order);
             var accountUi = new AccountUi(display,accountController, validator, user);
 
             var menu = new Menu(productUi, orderUi, accountUi, display);

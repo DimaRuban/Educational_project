@@ -6,7 +6,13 @@
         {
             return true;
         }
-        void CheckingPhoneNumber(string message) { }
-        void CheckingHomeAdrress(string message) { }
+        bool CheckingPhoneNumber(string message) 
+        {
+            return true;
+        }
+        bool CheckingHomeAddress(string message) 
+        {
+            return true;
+        }
     }
 }

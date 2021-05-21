@@ -10,14 +10,16 @@ namespace StorePhone.UI
         private readonly IDisplay _display;
         private readonly IOrderController _orderController;
         private readonly IProductUi _productUi;
+        private readonly IValidator _validator;
         private readonly Order _order;
 
-        public OrderUi(IDbContext dbContext, IDisplay display, IOrderController orderController, IProductUi productUi, Order order)
+        public OrderUi(IDbContext dbContext, IDisplay display, IOrderController orderController, IProductUi productUi, IValidator validator, Order order)
         {
             _dbContext = dbContext;
             _display = display;
             _orderController = orderController;
             _productUi = productUi;
+            _validator = validator;
             _order = order;
         }
         public void ChoiceProductUi() 
@@ -59,6 +61,11 @@ namespace StorePhone.UI
 
                 _display.PrintForDisplay("Введите адрес доставки: ");
                 _order.Address = Console.ReadLine();
+                if (_validator.CheckingHomeAddress(_order.Address) != true)
+                {
+                    _display.PrintForDisplay("Вы ввели некорректный адрес!");
+                    BuyUi();
+                }
 
                 _display.PrintForDisplay("Введите кол-во товара для покупки: ");
                 _order.Quantity = int.Parse(Console.ReadLine());
