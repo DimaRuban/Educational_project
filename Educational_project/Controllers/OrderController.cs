@@ -9,11 +9,13 @@ namespace StorePhone.Controllers
     {  
         private readonly IDbContext _dbContext;
         private readonly Order _order;
+        private readonly ILogger _logger;
 
-        public OrderController(IDbContext dbContext, Order order)
+        public OrderController(IDbContext dbContext, Order order, ILogger logger)
         {
             _dbContext = dbContext;
             _order = order;
+            _logger = logger;
         }
 
         public void Buy()
@@ -30,6 +32,7 @@ namespace StorePhone.Controllers
              {
                    case 1:
                         _dbContext.Orders.Add(new Order(newOrderId, dateTimeCreatedOrder, _order.UserName, _order.Address, _order.Quantity, _order.TotalPrice));
+                        _logger.Log($"{dateTimeCreatedOrder} - был создан новый заказ, с ID = {newOrderId}");
                     break;
                 default:
                     break;
