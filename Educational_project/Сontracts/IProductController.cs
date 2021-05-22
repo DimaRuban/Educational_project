@@ -2,6 +2,6 @@
 {
     public interface IProductController
     {
-        void AddNewProduct() { }
+        void AddNewProduct(string name, decimal price, string color, int memorySize) { }
     }
 }
