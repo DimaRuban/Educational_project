@@ -7,22 +7,23 @@ namespace StorePhone.Logging
 {
     public class FileManager : IFileManager
     {
-        string pathDesktop = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + "\\Store Phone logging";
-        string dateNow = DateTime.Now.ToShortDateString();
-
-        void CreatFolder()
+        private void CreatFolder()
         {
-            if (Directory.Exists(pathDesktop) == false)
+            string path = Directory.GetCurrentDirectory() + "\\Store Phone system files";
+
+            if (Directory.Exists(path) == false)
             {
-                Directory.CreateDirectory(pathDesktop);
+                Directory.CreateDirectory(path);
             }
         }
 
-        void CreatFile()
+        private void CreatFile()
         {
             CreatFolder();
 
-            string pathFile = pathDesktop + "\\" + dateNow + ".txt";
+            string path = Directory.GetCurrentDirectory() + "\\Store Phone system files";
+
+            string pathFile = path + "\\" + DateTime.Now.ToShortDateString() + ".txt";
 
             if (File.Exists(pathFile) == false)
             {
@@ -34,9 +35,11 @@ namespace StorePhone.Logging
         {
             CreatFile();
 
-            string pathFile = pathDesktop + "\\" + dateNow + ".txt";
+            string path = Directory.GetCurrentDirectory() + "\\Store Phone system files";
 
-            using (StreamWriter streamWriter = new StreamWriter(pathFile, true, Encoding.Default))
+            string pathFile = path + "\\" + DateTime.Now.ToShortDateString() + ".txt";
+
+            using (StreamWriter streamWriter = new StreamWriter(pathFile, true, Encoding.UTF8))
             {
                 streamWriter.WriteLine(message);
             }

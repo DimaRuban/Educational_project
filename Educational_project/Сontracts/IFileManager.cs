@@ -2,10 +2,6 @@
 {
     public interface IFileManager
     {
-        void CreatFolder() { }
-
-        void CreatFile() { }
-
-        public void WorkWithFiles(string message) { }
+        void WorkWithFiles(string message) { }
     }
 }
