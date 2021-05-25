@@ -1,22 +1,26 @@
-﻿using StorePhone.Models;
-using StorePhone.Сontracts;
+﻿using StorePhone.Сontracts;
 using System;
 
 namespace StorePhone.UI
 {
     public class AccountUi : IAccountUi
     {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string EmailAddress { get; set; }
+        public string PhoneNumber { get; set; }
+        public string UserName { get; set; }
+        public string Password { get; set; }
+
         private readonly IDisplay _display;
         private readonly IAccountController _accountController;
         private readonly IValidator _validator;
-        private readonly User _user;
 
-        public AccountUi(IDisplay display, IAccountController accountController, IValidator validator, User user)
+        public AccountUi(IDisplay display, IAccountController accountController, IValidator validator)
         {
             _display = display;
             _accountController = accountController;
             _validator = validator;
-            _user = user;
         }
 
         public void RegistrationUi()
@@ -24,37 +28,37 @@ namespace StorePhone.UI
             try
             {
                 _display.PrintForDisplay("Введите ваше имя: ");
-                _user.FirstName = Console.ReadLine();
+                FirstName = Console.ReadLine();
 
                 _display.PrintForDisplay("Введите вашу фамилию: ");
-                _user.LastName = Console.ReadLine();
+                LastName = Console.ReadLine();
 
                 _display.PrintForDisplay("Введите email: ");
-                _user.EmailAddress = Console.ReadLine();
+                EmailAddress = Console.ReadLine();
 
                 _display.PrintForDisplay("Введите номер телефона: ");
-                _user.PhoneNumber = Console.ReadLine();
+                PhoneNumber = Console.ReadLine();
 
                 _display.PrintForDisplay("Введите имя пользователя: ");
-                _user.UserName = Console.ReadLine();
-                if (_validator.CheckingUserName(_user.UserName) != true)
+                UserName = Console.ReadLine();
+                if (_validator.CheckingUserName(UserName) != true)
                     RegistrationUi();
 
                 _display.PrintForDisplay("Введите пароль: ");
-                _user.Password = Console.ReadLine();
+                Password = Console.ReadLine();
 
-                _accountController.Registration();
+                _accountController.Registration(FirstName, LastName, EmailAddress, PhoneNumber, UserName, Password);
                 InformAboutSuccessUi();
             }
             catch (FormatException e)
             {
                 _display.PrintForDisplay(e.Message + "\n");
-                RegistrationUi();
+                _accountController.Registration(FirstName, LastName, EmailAddress, PhoneNumber, UserName, Password);
             }
         }
         public void InformAboutSuccessUi()
         {
-            _display.PrintForDisplay($"\n{_user.FirstName}, Ваш профиль успешно создан!\n");
+            _display.PrintForDisplay($"\n{FirstName}, Ваш профиль успешно создан!\n");
         }
     }
 }
