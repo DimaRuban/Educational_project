@@ -46,8 +46,6 @@ namespace StorePhone.UI
         }
         public void PrintProductUi()
         {
-            _dbContext.InitData();
-
             foreach (var product in _dbContext.Products)
             {
                 _display.PrintForDisplay($"\nId: {product.Id}, название: {product.Name}, цена: {product.Price}, цвет: {product.Color}, размер памяти:{product.MemorySize}");

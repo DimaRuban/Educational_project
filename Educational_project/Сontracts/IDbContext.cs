@@ -9,8 +9,6 @@ namespace StorePhone.Сontracts
 
          List<Order> Orders { get; set; }
 
-         List<User> Users { get; set; }
-
-         void InitData() { }
+         List<User> Users { get; set; }     
     }
 }

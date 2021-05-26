@@ -1,4 +1,5 @@
-﻿using StorePhone.Models;
+﻿using StorePhone.Logging;
+using StorePhone.Models;
 using StorePhone.Сontracts;
 using System;
 using System.Linq;
@@ -9,11 +10,13 @@ namespace StorePhone.Controllers
     {  
         private readonly IDbContext _dbContext;
         private readonly ILogger _logger;
+        private readonly ISerializer _serializer;
 
-        public OrderController(IDbContext dbContext, ILogger logger)
+        public OrderController(IDbContext dbContext, ILogger logger,ISerializer serialazer)
         {
             _dbContext = dbContext;
             _logger = logger;
+            _serializer = serialazer;
         }
         public decimal CountTotalPrice(int idProductForBuy, int quantity)
         {
@@ -24,12 +27,12 @@ namespace StorePhone.Controllers
                     totalPrice = (decimal)quantity * product.Price;
             return totalPrice;
         }
-
         public void Buy(decimal totalPrice, int quantity, string userName, string phoneNumber, string address)
         {
              int newOrderId = _dbContext.Orders.Max(x => x.Id) + 1;
 
             _dbContext.Orders.Add(new Order(newOrderId, DateTime.Now, userName, phoneNumber, address, quantity, totalPrice));
+            _serializer.SerializeOrders();
             _logger.Log($"{DateTime.Now} - был создан новый заказ, с ID = {newOrderId}");
         }
     }
