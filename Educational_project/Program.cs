@@ -19,12 +19,12 @@ namespace EducationalProject
             var accountController = new AccountController(dbContext);
            
             var productUi = new ProductUi(display, dbContext, productController);
-            var orderUi = new OrderUi(dbContext, display, orderController, productUi);
+            var orderUi = new OrderUi(display, orderController, productUi);
             var accountUi = new AccountUi(display,accountController, validator);
 
             var menu = new Menu(productUi, orderUi, accountUi, display);
 
-            display.PrintForDisplay("Здравствуйте! Вас приветствует магазин Store Phone!\n");
+            display.Print("Здравствуйте! Вас приветствует магазин Store Phone!\n");
             while (true)
             {
                 menu.GetMenu();         

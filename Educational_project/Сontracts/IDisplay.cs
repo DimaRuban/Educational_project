@@ -2,6 +2,6 @@
 {
     public interface IDisplay
     {
-        void PrintForDisplay(string message);
+        void Print(string message);
     }
 }

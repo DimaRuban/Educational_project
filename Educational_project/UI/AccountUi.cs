@@ -27,24 +27,24 @@ namespace StorePhone.UI
         {
             try
             {
-                _display.PrintForDisplay("Введите ваше имя: ");
+                _display.Print("Введите ваше имя: ");
                 FirstName = Console.ReadLine();
 
-                _display.PrintForDisplay("Введите вашу фамилию: ");
+                _display.Print("Введите вашу фамилию: ");
                 LastName = Console.ReadLine();
 
-                _display.PrintForDisplay("Введите email: ");
+                _display.Print("Введите email: ");
                 EmailAddress = Console.ReadLine();
 
-                _display.PrintForDisplay("Введите номер телефона: ");
+                _display.Print("Введите номер телефона: ");
                 PhoneNumber = Console.ReadLine();
 
-                _display.PrintForDisplay("Введите имя пользователя: ");
+                _display.Print("Введите имя пользователя: ");
                 UserName = Console.ReadLine();
                 if (_validator.CheckingUserName(UserName) != true)
                     RegistrationUi();
 
-                _display.PrintForDisplay("Введите пароль: ");
+                _display.Print("Введите пароль: ");
                 Password = Console.ReadLine();
 
                 _accountController.Registration(FirstName, LastName, EmailAddress, PhoneNumber, UserName, Password);
@@ -52,13 +52,13 @@ namespace StorePhone.UI
             }
             catch (FormatException e)
             {
-                _display.PrintForDisplay(e.Message + "\n");
+                _display.Print(e.Message + "\n");
                 RegistrationUi();
             }
         }
         public void InformAboutSuccessUi()
         {
-            _display.PrintForDisplay($"\n{FirstName}, Ваш профиль успешно создан!\n");
+            _display.Print($"\n{FirstName}, Ваш профиль успешно создан!\n");
         }
     }
 }

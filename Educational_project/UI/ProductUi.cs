@@ -24,16 +24,16 @@ namespace StorePhone.UI
         {
             try
             {             
-                _display.PrintForDisplay("Введите название: ");
+                _display.Print("Введите название: ");
                 Name = Console.ReadLine();
 
-                _display.PrintForDisplay("Введите стоимость: ");
+                _display.Print("Введите стоимость: ");
                 Price =  decimal.Parse(Console.ReadLine());
 
-                _display.PrintForDisplay("Введите цвет: ");
+                _display.Print("Введите цвет: ");
                 Color = Console.ReadLine();
 
-                _display.PrintForDisplay("Введите размер памяти: ");
+                _display.Print("Введите размер памяти: ");
                 MemorySize = int.Parse(Console.ReadLine());
 
                 _productController.AddNewProduct(Name, Price, Color, MemorySize);
@@ -42,7 +42,7 @@ namespace StorePhone.UI
             }
             catch (FormatException e)
             {
-                _display.PrintForDisplay(e.Message + "\n");
+                _display.Print(e.Message + "\n");
             }
         }
         public void PrintProductUi()
@@ -51,12 +51,12 @@ namespace StorePhone.UI
 
             foreach (var product in _dbContext.Products)
             {
-                _display.PrintForDisplay($"\nId: {product.Id}, название: {product.Name}, цена: {product.Price}, цвет: {product.Color}, размер памяти:{product.MemorySize}");
+                _display.Print($"\nId: {product.Id}, название: {product.Name}, цена: {product.Price}, цвет: {product.Color}, размер памяти:{product.MemorySize}");
             }
         }
         public void InformAboutSuccessUi()
         {
-            _display.PrintForDisplay("Вы успешно добавили новый продукт!");
+            _display.Print("Вы успешно добавили новый продукт!");
         }
     }
 }

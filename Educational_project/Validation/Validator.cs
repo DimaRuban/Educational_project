@@ -18,14 +18,11 @@ namespace StorePhone.Validation
             {
                 if (user.UserName == userName)
                 {
-                    _display.PrintForDisplay("\nЭто имя пользователя уже занято, выберете другое!\n");
+                    _display.Print("\nЭто имя пользователя уже занято, выберете другое!\n");
                     return false;
                 }
             }
             return true;
         }
-        void CheckingPhoneNumber(string message){}
-
-        void CheckingHomeAdrress(string message) { }
     }
 }

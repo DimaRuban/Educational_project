@@ -2,11 +2,7 @@
 {
     public interface IValidator
     {
-        bool CheckingUserName(string userName)
-        {
-            return true;
-        }
-        void CheckingPhoneNumber(string message) { }
-        void CheckingHomeAdrress(string message) { }
+        bool CheckingUserName(string userName);
+
     }
 }

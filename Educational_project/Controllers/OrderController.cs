@@ -13,6 +13,17 @@ namespace StorePhone.Controllers
         {
             _dbContext = dbContext;
         }
+        public string ChoiceProduct(int idProductForBuy)
+        {
+            foreach (var product in _dbContext.Products)
+            {
+                if (product.Id == idProductForBuy)
+                {
+                    return product.Name;
+                }
+            }
+            return "";
+        }
         public decimal CountTotalPrice(int idProductForBuy, int quantity)
         {
             decimal totalPrice = 0;
