@@ -5,11 +5,6 @@ namespace StorePhone.UI
 {
     public class ProductUi:IProductUi
     {
-        public string Name { get; set; }
-        public decimal Price { get; set; }
-        public string Color { get; set; }
-        public int MemorySize { get; set; }
-
         private readonly IDisplay _display;
         private readonly IDbContext _dbContext;
         private readonly IProductController _productController;
@@ -20,23 +15,23 @@ namespace StorePhone.UI
             _dbContext = dbContext;
             _productController = productController;
         }
-        public void AddNewProductUi()
+        public void AddProductUi()
         {
             try
             {             
                 _display.Print("Введите название: ");
-                Name = Console.ReadLine();
+                string name = Console.ReadLine();
 
                 _display.Print("Введите стоимость: ");
-                Price =  decimal.Parse(Console.ReadLine());
+                decimal price =  decimal.Parse(Console.ReadLine());
 
                 _display.Print("Введите цвет: ");
-                Color = Console.ReadLine();
+                string color = Console.ReadLine();
 
                 _display.Print("Введите размер памяти: ");
-                MemorySize = int.Parse(Console.ReadLine());
+                int memorySize = int.Parse(Console.ReadLine());
 
-                _productController.AddNewProduct(Name, Price, Color, MemorySize);
+                _productController.AddNewProduct(name, price, color, memorySize);
 
                 InformAboutSuccessUi();
             }
@@ -47,8 +42,6 @@ namespace StorePhone.UI
         }
         public void PrintProductUi()
         {
-            _dbContext.InitData();
-
             foreach (var product in _dbContext.Products)
             {
                 _display.Print($"\nId: {product.Id}, название: {product.Name}, цена: {product.Price}, цвет: {product.Color}, размер памяти:{product.MemorySize}");

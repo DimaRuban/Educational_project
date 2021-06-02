@@ -2,7 +2,7 @@
 {
     public interface IOrderUi 
     {
-        void ChoiceProductUi() { }
+        void ChooseProductUi() { }
         void BuyUi() { }
         void PrintTotalPriceUi(decimal totalPrice) {}
         void InformAboutSuccessUi() { }

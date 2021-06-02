@@ -2,7 +2,6 @@
 {
     public interface IValidator
     {
-        bool CheckingUserName(string userName);
-
+        bool IsUserExists(string userName);
     }
 }

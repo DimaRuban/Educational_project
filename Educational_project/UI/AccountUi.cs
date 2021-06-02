@@ -5,13 +5,6 @@ namespace StorePhone.UI
 {
     public class AccountUi : IAccountUi
     {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string EmailAddress { get; set; }
-        public string PhoneNumber { get; set; }
-        public string UserName { get; set; }
-        public string Password { get; set; }
-
         private readonly IDisplay _display;
         private readonly IAccountController _accountController;
         private readonly IValidator _validator;
@@ -23,42 +16,44 @@ namespace StorePhone.UI
             _validator = validator;
         }
 
-        public void RegistrationUi()
+        public void RegisterUi()
         {
             try
             {
                 _display.Print("Введите ваше имя: ");
-                FirstName = Console.ReadLine();
+                string firstName = Console.ReadLine();
 
                 _display.Print("Введите вашу фамилию: ");
-                LastName = Console.ReadLine();
+                string lastName = Console.ReadLine();
 
                 _display.Print("Введите email: ");
-                EmailAddress = Console.ReadLine();
+                string emailAddress = Console.ReadLine();
 
                 _display.Print("Введите номер телефона: ");
-                PhoneNumber = Console.ReadLine();
+                string phoneNumber = Console.ReadLine();
 
                 _display.Print("Введите имя пользователя: ");
-                UserName = Console.ReadLine();
-                if (_validator.CheckingUserName(UserName) != true)
-                    RegistrationUi();
-
+                string userName = Console.ReadLine();
+                if (_validator.IsUserExists(userName) != true)
+                {
+                    _display.Print("\nЭто имя пользователя уже занято, выберете другое!\n");
+                    RegisterUi();
+                }
                 _display.Print("Введите пароль: ");
-                Password = Console.ReadLine();
+                string password = Console.ReadLine();
 
-                _accountController.Registration(FirstName, LastName, EmailAddress, PhoneNumber, UserName, Password);
-                InformAboutSuccessUi();
+                _accountController.Register(firstName, lastName, emailAddress, phoneNumber, userName, password);
+                InformAboutSuccessUi(firstName);
             }
             catch (FormatException e)
             {
                 _display.Print(e.Message + "\n");
-                RegistrationUi();
+                RegisterUi();
             }
         }
-        public void InformAboutSuccessUi()
+        public void InformAboutSuccessUi(string firstName)
         {
-            _display.Print($"\n{FirstName}, Ваш профиль успешно создан!\n");
+            _display.Print($"\n{firstName}, Ваш профиль успешно создан!\n");
         }
     }
 }

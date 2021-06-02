@@ -29,13 +29,13 @@ namespace StorePhone.UI
                         _productUi.PrintProductUi();
                         break;
                     case 2:
-                        _productUi.AddNewProductUi();
+                        _productUi.AddProductUi();
                         break;
                     case 3:
-                        _orderUi.ChoiceProductUi();
+                        _orderUi.ChooseProductUi();
                         break;
                     case 4:
-                        _accountUi.RegistrationUi();
+                        _accountUi.RegisterUi();
                         break;
                     case 0:
                         OutMenu();
@@ -51,7 +51,7 @@ namespace StorePhone.UI
                 GetMenu();
             }
         }
-        void OutMenu ()
+        private void OutMenu ()
         {
             Environment.Exit(0);
         }

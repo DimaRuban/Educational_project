@@ -12,9 +12,9 @@ namespace StorePhone.Controllers
         {
             _dbContext = dbContext;
         }
-        public void Registration(string firstName, string lastName, string emailAddress, string phoneNumber, string userName, string password)
+        public void Register(string firstName, string lastName, string emailAddress, string phoneNumber, string userName, string password)
         {
-            int newUserId = _dbContext.Users.Max(x => x.Id) + 1;
+            var newUserId = _dbContext.Users.Max(x => x.Id) + 1;
 
             string role = "User";
 

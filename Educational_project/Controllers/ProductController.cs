@@ -13,9 +13,9 @@ namespace StorePhone.Controllers
             _dbContext = dbContext;
         }
 
-        public void AddNewProduct(string name, decimal price, string color, int memorySize)
+        public void AddProduct(string name, decimal price, string color, int memorySize)
         {
-            int newProductId = _dbContext.Products.Max(x => x.Id) + 1;
+            var newProductId = _dbContext.Products.Max(x => x.Id) + 1;
 
             _dbContext.Products.Add(new Product(newProductId, name, price, color, memorySize));
         }

@@ -2,7 +2,7 @@
 {
     public interface IAccountUi
     {
-         void RegistrationUi() { }
+         void RegisterUi() { }
          void InformAboutSuccessUi() { }
     }
 }

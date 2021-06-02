@@ -23,7 +23,7 @@ namespace EducationalProject
             var accountUi = new AccountUi(display,accountController, validator);
 
             var menu = new Menu(productUi, orderUi, accountUi, display);
-
+            dbContext.InitData();
             display.Print("Здравствуйте! Вас приветствует магазин Store Phone!\n");
             while (true)
             {
