@@ -34,7 +34,7 @@ namespace StorePhone.UI
 
                 _display.PrintForDisplay("Введите номер телефона: ");
                 _user.PhoneNumber = Console.ReadLine();
-                if (_validator.CheckingPhoneNumber(_user.PhoneNumber) == true)
+                if (_validator.CheckingPhoneNumber(_user.PhoneNumber) != true)
                 {
                     _display.PrintForDisplay("\nВведите корректный номер телефона!");
                     RegistrationUi();

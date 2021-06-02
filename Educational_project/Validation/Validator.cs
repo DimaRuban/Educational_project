@@ -27,15 +27,11 @@ namespace StorePhone.Validation
         }
         public bool CheckingPhoneNumber(string message)
         {
-            string patternForPhoneNumber1 = @"^((8|\+38)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$";
-            var expressionForPhoneNumber1 = new Regex(patternForPhoneNumber1, RegexOptions.Compiled);
-            var isMatch1 = expressionForPhoneNumber1.IsMatch(message);
-
-            string patternForPhoneNumber2 = @"\+\d{3}\(\d{2}\)\d{3}\s\d{2}\s\d{2}";
-            var expressionForPhoneNumber2 = new Regex(patternForPhoneNumber2, RegexOptions.Compiled);
-            var isMatch2 = expressionForPhoneNumber2.IsMatch(message);
-
-            if (isMatch1 == isMatch2 == true)
+            string patternForPhoneNumber = @"\+?([0-9]{2})?[0]\(?[0-9]{2}\)?\s?[0-9]{3}\s?[0-9]{2}\s?[0-9]{2}";
+            var expressionForPhoneNumber = new Regex(patternForPhoneNumber, RegexOptions.Compiled);
+            var isMatch = expressionForPhoneNumber.IsMatch(message);
+         
+            if (isMatch == true)
                 return true;
             else return false;
         }
