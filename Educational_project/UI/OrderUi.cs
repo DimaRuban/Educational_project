@@ -32,7 +32,7 @@ namespace StorePhone.UI
                 _productUi.PrintProductUi();
                 _display.Print("\nВведите Id товара, для покупки: ");
                 IdProductForBuy = int.Parse(Console.ReadLine());               
-                _display.Print($"\nВы действительно хотите оформить заказ Id = {IdProductForBuy}, Name = {_orderController.ChoiceProduct(IdProductForBuy)} ?\n Да - 1,\n Нет - 2.\nВыберете действие: ");
+                _display.Print($"\nВы действительно хотите оформить заказ Id = {IdProductForBuy}, Name = {_orderController.GetNameForProductId(IdProductForBuy)} ?\n Да - 1,\n Нет - 2.\nВыберете действие: ");
                 ConfirmButton = int.Parse(Console.ReadLine());
                                 
                 switch (ConfirmButton)
