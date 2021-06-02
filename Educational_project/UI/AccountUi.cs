@@ -34,7 +34,7 @@ namespace StorePhone.UI
 
                 _display.PrintForDisplay("Введите номер телефона: ");
                 _user.PhoneNumber = Console.ReadLine();
-                if (_validator.CheckingPhoneNumber(_user.PhoneNumber) != true)
+                if (_validator.IsPhoneNumberValid(_user.PhoneNumber) != true)
                 {
                     _display.PrintForDisplay("\nВведите корректный номер телефона!");
                     RegistrationUi();
@@ -42,7 +42,7 @@ namespace StorePhone.UI
 
                 _display.PrintForDisplay("Введите имя пользователя: ");
                 _user.UserName = Console.ReadLine();
-                if (_validator.CheckingUserName(_user.UserName) != true)
+                if (_validator.IsUserNameValid(_user.UserName) != true)
                     RegistrationUi();
 
                 _display.PrintForDisplay("Введите пароль: ");

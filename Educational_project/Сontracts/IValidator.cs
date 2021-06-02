@@ -2,17 +2,10 @@
 {
     public interface IValidator
     {
-        bool CheckingUserName(string userName)
-        {
-            return true;
-        }
-        bool CheckingPhoneNumber(string message) 
-        {
-            return true;
-        }
-        bool CheckingHomeAddress(string message) 
-        {
-            return true;
-        }
+        bool IsUserNameValid(string userName);
+
+        bool IsPhoneNumberValid(string message);
+
+        bool IsHomeAddressValid(string message);
     }
 }

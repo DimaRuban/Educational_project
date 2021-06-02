@@ -13,7 +13,7 @@ namespace StorePhone.Validation
             _dbContext = dbContext;
             _display = display;
         }
-        public bool CheckingUserName(string userName)
+        public bool IsUserNameValid(string userName)
         {
             foreach (var user in _dbContext.Users)
             {
@@ -25,7 +25,7 @@ namespace StorePhone.Validation
             }
             return true;
         }
-        public bool CheckingPhoneNumber(string message)
+        public bool IsPhoneNumberValid(string message)
         {
             string patternForPhoneNumber = @"\+?([0-9]{2})?[0]\(?[0-9]{2}\)?\s?[0-9]{3}\s?[0-9]{2}\s?[0-9]{2}";
             var expressionForPhoneNumber = new Regex(patternForPhoneNumber, RegexOptions.Compiled);
@@ -36,7 +36,7 @@ namespace StorePhone.Validation
             else return false;
         }
 
-        public bool CheckingHomeAddress(string message)
+        public bool IsHomeAddressValid(string message)
         {
             string patternForHomeAdress = @"^(улица|ул\.)\s?[а-яA-Я]+(\.|,)\s?(дом|д\.)\s?[1-9]+(,\s?(квартира|кв\.)\s?[1-9]+)?$";
             var expressionForHomeAdress = new Regex(patternForHomeAdress, RegexOptions.Compiled);

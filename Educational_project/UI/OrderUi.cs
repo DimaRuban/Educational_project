@@ -61,7 +61,7 @@ namespace StorePhone.UI
 
                 _display.PrintForDisplay("Введите адрес доставки: ");
                 _order.Address = Console.ReadLine();
-                if (_validator.CheckingHomeAddress(_order.Address) != true)
+                if (_validator.IsHomeAddressValid(_order.Address) != true)
                 {
                     _display.PrintForDisplay("Вы ввели некорректный адрес!");
                     BuyUi();
