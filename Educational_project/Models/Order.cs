@@ -1,13 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ProjectWithModels
+namespace StorePhone.Models
 {
     public class Order
     {
+        public Order()
+        {
+        }
+        public Order(int id, DateTime createdAt, string user, string phoneNumber,string address, int quantity, decimal totalPrice  )
+        {
+            Id = id;
+            CreatedAt = createdAt;
+            UserName = user;
+            PhoneNumber = phoneNumber;
+            Address = address;
+            Quantity = quantity;
+            TotalPrice = totalPrice;         
+        }
+
         public int Id { get; set; }
 
         public DateTime CreatedAt { get; set; }
@@ -16,9 +26,10 @@ namespace ProjectWithModels
 
         public decimal TotalPrice { get; set; }
 
-        public int UserId { get; set; }
+        public string UserName { get; set; }
+        public string PhoneNumber { get; set; }
 
-        public int ProductId { get; set; }
+        public Product Product { get; set; }
 
         public int Quantity { get; set; }
     }
