@@ -4,6 +4,6 @@
     {
          void AddProductUi(){}
          void PrintProductUi(){}
-         void InformAboutSuccessUi(){}
+         private void InformAboutSuccessUi(){}
     }
 }

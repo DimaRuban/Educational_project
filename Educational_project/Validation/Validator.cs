@@ -6,7 +6,7 @@ namespace StorePhone.Validation
     {
         private readonly IDbContext _dbContext;
 
-        public Validator(IDbContext dbContext, IDisplay display)
+        public Validator(IDbContext dbContext)
         {
             _dbContext = dbContext;
         }

@@ -3,6 +3,6 @@
     public interface IAccountUi
     {
          void RegisterUi() { }
-         void InformAboutSuccessUi() { }
+         private void InformAboutSuccessUi() { }
     }
 }

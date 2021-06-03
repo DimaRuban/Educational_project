@@ -3,8 +3,8 @@
     public interface IOrderUi 
     {
         void ChooseProductUi() { }
-        void BuyUi() { }
-        void PrintTotalPriceUi(decimal totalPrice) {}
-        void InformAboutSuccessUi() { }
+        private void BuyUi() { }
+        private void PrintTotalPriceUi(decimal totalPrice) {}
+        private void InformAboutSuccessUi() { }
     }
 }

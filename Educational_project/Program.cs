@@ -12,7 +12,7 @@ namespace EducationalProject
             var display = new Display();
             var dbContext = new DbContext();
            
-            var validator = new Validator(dbContext, display);
+            var validator = new Validator(dbContext);
 
             var productController = new ProductController(dbContext);
             var orderController = new OrderController(dbContext);

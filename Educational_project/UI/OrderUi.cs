@@ -5,7 +5,8 @@ namespace StorePhone.UI
 {
     public class OrderUi : IOrderUi
     {
-        public int IdProductForBuy { get; set; }
+        private int IdProductForBuy { get; set; }
+
         private readonly IDisplay _display;
         private readonly IOrderController _orderController;
         private readonly IProductUi _productUi;
@@ -23,7 +24,8 @@ namespace StorePhone.UI
             {
                 _productUi.PrintProductUi();
                 _display.Print("\nВведите Id товара, для покупки: ");
-                int idProductForBuy = int.Parse(Console.ReadLine());               
+                IdProductForBuy = int.Parse(Console.ReadLine());   
+                
                 _display.Print($"\nВы действительно хотите оформить заказ Id = {IdProductForBuy}, Name = {_orderController.GetNameForProductId(IdProductForBuy)} ?\n Да - 1,\n Нет - 2.\nВыберете действие: ");
                 int confirmButton = int.Parse(Console.ReadLine());
                                 
@@ -42,7 +44,7 @@ namespace StorePhone.UI
             }
         }
 
-        public void BuyProductUi() 
+        private void BuyProductUi() 
         {
             try
             {
@@ -82,12 +84,12 @@ namespace StorePhone.UI
             }
         }
 
-        public void PrintTotalPriceUi(decimal totalPrice)
+        private void PrintTotalPriceUi(decimal totalPrice)
         {
             _display.Print($"\nСумма вашего заказа: {totalPrice} грн");
         }
 
-        public void InformAboutSuccessUi(string userName, string phoneNumber, int IdProductForBuy, string address, int quantity, decimal totalPrice)
+        private void InformAboutSuccessUi(string userName, string phoneNumber, int IdProductForBuy, string address, int quantity, decimal totalPrice)
         {
             _display.Print("\nЗаказ оформлен, с вами свяжется администатор!\n");
 

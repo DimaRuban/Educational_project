@@ -31,7 +31,7 @@ namespace StorePhone.UI
                 _display.Print("Введите размер памяти: ");
                 int memorySize = int.Parse(Console.ReadLine());
 
-                _productController.AddNewProduct(name, price, color, memorySize);
+                _productController.AddProduct(name, price, color, memorySize);
 
                 InformAboutSuccessUi();
             }
@@ -47,7 +47,7 @@ namespace StorePhone.UI
                 _display.Print($"\nId: {product.Id}, название: {product.Name}, цена: {product.Price}, цвет: {product.Color}, размер памяти:{product.MemorySize}");
             }
         }
-        public void InformAboutSuccessUi()
+        private void InformAboutSuccessUi()
         {
             _display.Print("Вы успешно добавили новый продукт!");
         }

@@ -39,6 +39,7 @@ namespace StorePhone.UI
                     _display.Print("\nЭто имя пользователя уже занято, выберете другое!\n");
                     RegisterUi();
                 }
+
                 _display.Print("Введите пароль: ");
                 string password = Console.ReadLine();
 
@@ -51,7 +52,7 @@ namespace StorePhone.UI
                 RegisterUi();
             }
         }
-        public void InformAboutSuccessUi(string firstName)
+        private void InformAboutSuccessUi(string firstName)
         {
             _display.Print($"\n{firstName}, Ваш профиль успешно создан!\n");
         }
