@@ -6,20 +6,17 @@ namespace StorePhone.Validation
     public class Validator : IValidator
     {
         private readonly IDbContext _dbContext;
-        private readonly IDisplay _display;
 
-        public Validator(IDbContext dbContext, IDisplay display)
+        public Validator(IDbContext dbContext)
         {
             _dbContext = dbContext;
-            _display = display;
         }
-        public bool IsUserNameValid(string userName)
+        public bool IsUserExists(string userName)
         {
             foreach (var user in _dbContext.Users)
             {
                 if (user.UserName == userName)
                 {
-                    _display.PrintForDisplay("\nЭто имя пользователя уже занято, выберете другое!\n");
                     return false;
                 }
             }

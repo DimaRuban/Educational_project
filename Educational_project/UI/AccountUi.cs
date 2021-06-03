@@ -42,8 +42,11 @@ namespace StorePhone.UI
 
                 _display.PrintForDisplay("Введите имя пользователя: ");
                 _user.UserName = Console.ReadLine();
-                if (_validator.IsUserNameValid(_user.UserName) != true)
+                if (_validator.IsUserExists(_user.UserName) != true)
+                {
+                    _display.PrintForDisplay("\nЭто имя пользователя уже занято, выберете другое!\n");
                     RegistrationUi();
+                }
 
                 _display.PrintForDisplay("Введите пароль: ");
                 _user.Password = Console.ReadLine();

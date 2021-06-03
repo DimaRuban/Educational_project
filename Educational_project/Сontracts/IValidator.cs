@@ -2,7 +2,7 @@
 {
     public interface IValidator
     {
-        bool IsUserNameValid(string userName);
+        bool IsUserExists(string userName);
 
         bool IsPhoneNumberValid(string message);
 
