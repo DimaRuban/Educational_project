@@ -7,13 +7,11 @@ namespace StorePhone.UI
     {
         private readonly IDisplay _display;
         private readonly IAccountController _accountController;
-        private readonly IValidator _validator;
 
-        public AccountUi(IDisplay display, IAccountController accountController, IValidator validator)
+        public AccountUi(IDisplay display, IAccountController accountController)
         {
             _display = display;
             _accountController = accountController;
-            _validator = validator;
         }
 
         public void RegisterUi()
@@ -34,12 +32,7 @@ namespace StorePhone.UI
 
                 _display.Print("Введите имя пользователя: ");
                 string userName = Console.ReadLine();
-                if (_validator.IsUserExists(userName) != true)
-                {
-                    _display.Print("\nЭто имя пользователя уже занято, выберете другое!\n");
-                    RegisterUi();
-                }
-
+            
                 _display.Print("Введите пароль: ");
                 string password = Console.ReadLine();
 

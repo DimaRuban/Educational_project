@@ -8,6 +8,8 @@ namespace StorePhone.Controllers
     {
         private readonly IDbContext _dbContext;
 
+        private readonly string role = "User";
+
         public AccountController(IDbContext dbContext)
         {
             _dbContext = dbContext;
@@ -16,9 +18,21 @@ namespace StorePhone.Controllers
         {
             var newUserId = _dbContext.Users.Max(x => x.Id) + 1;
 
-            string role = "User";
-
-            _dbContext.Users.Add(new User(newUserId, firstName, lastName, emailAddress, phoneNumber, userName, password, new Role { Name = role }));
+            if (IsUserExists(userName) == true)
+            {
+               _dbContext.Users.Add(new User(newUserId, firstName, lastName, emailAddress, phoneNumber, userName, password, new Role { Name = role }));
+            }         
+        }
+        private bool IsUserExists(string userName)
+        {
+            foreach (var user in _dbContext.Users)
+            {
+                if (user.UserName == userName)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }
