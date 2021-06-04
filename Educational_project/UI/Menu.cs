@@ -21,7 +21,7 @@ namespace StorePhone.UI
         {
             try
             {
-                _display.PrintForDisplay("\n\n*********МЕНЮ*********\n\nПросмотреть товар - 1,\nДобавить товар - 2,\nКупить товар - 3,\nЗарегистрироваться - 4,\nЗакрыть меню - 0\n\nВыберете дейсвие из списка: ");
+                _display.Print("\n\n*********МЕНЮ*********\n\nПросмотреть товар - 1,\nДобавить товар - 2,\nКупить товар - 3,\nЗарегистрироваться - 4,\nЗакрыть меню - 0\n\nВыберете дейсвие из списка: ");
                 int operation = int.Parse(Console.ReadLine());
                 switch (operation)
                 {
@@ -29,29 +29,29 @@ namespace StorePhone.UI
                         _productUi.PrintProductUi();
                         break;
                     case 2:
-                        _productUi.AddNewProductUi();
+                        _productUi.AddProductUi();
                         break;
                     case 3:
-                        _orderUi.ChoiceProductUi();
+                        _orderUi.ChooseProductUi();
                         break;
                     case 4:
-                        _accountUi.RegistrationUi();
+                        _accountUi.RegisterUi();
                         break;
                     case 0:
                         OutMenu();
                         break;
                     default:
-                        _display.PrintForDisplay("\nВыбирете операцию из списка!");
+                        _display.Print("\nВыбирете операцию из списка!");
                         break;
                 }
             }
             catch (FormatException e)
             {
-                _display.PrintForDisplay(e.Message + "\n");
+                _display.Print(e.Message + "\n");
                 GetMenu();
             }
         }
-        void OutMenu ()
+        private void OutMenu()
         {
             Environment.Exit(0);
         }

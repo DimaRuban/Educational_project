@@ -2,8 +2,8 @@
 {
     public interface IProductUi
     {
-         void AddNewProductUi(){}
-         void PrintProductUi(){}
-         void InformAboutSuccessUi(){}
+        void AddProductUi() { }
+        void PrintProductUi() { }
+        private void InformAboutSuccessUi() { }
     }
 }

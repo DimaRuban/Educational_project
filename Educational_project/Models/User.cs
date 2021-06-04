@@ -3,7 +3,7 @@
     public class User
     {
         public User()
-        {          
+        {
         }
 
         public User(int id, string firstName, string lastName, string emailAddress, string phoneNumber, string userName, string password, Role role)

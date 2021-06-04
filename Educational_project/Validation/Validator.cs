@@ -5,23 +5,6 @@ namespace StorePhone.Validation
 {
     public class Validator : IValidator
     {
-        private readonly IDbContext _dbContext;
-
-        public Validator(IDbContext dbContext)
-        {
-            _dbContext = dbContext;
-        }
-        public bool IsUserExists(string userName)
-        {
-            foreach (var user in _dbContext.Users)
-            {
-                if (user.UserName == userName)
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
         public bool IsPhoneNumberValid(string message)
         {
             string patternForPhoneNumber = @"\+?([0-9]{2})?[0]\(?[0-9]{2}\)?\s?[0-9]{3}\s?[0-9]{2}\s?[0-9]{2}";

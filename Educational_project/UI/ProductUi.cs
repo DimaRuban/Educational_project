@@ -1,58 +1,55 @@
-﻿using StorePhone.Models;
-using StorePhone.Сontracts;
+﻿using StorePhone.Сontracts;
 using System;
 
 namespace StorePhone.UI
 {
-    public class ProductUi:IProductUi
+    public class ProductUi : IProductUi
     {
         private readonly IDisplay _display;
         private readonly IDbContext _dbContext;
         private readonly IProductController _productController;
-        private readonly Product _product;
 
-        public ProductUi(IDisplay display, IDbContext dbContext, IProductController productController, Product product)
+        public ProductUi(IDisplay display, IDbContext dbContext, IProductController productController)
         {
             _display = display;
             _dbContext = dbContext;
             _productController = productController;
-            _product = product;
         }
-        public void AddNewProductUi()
+        public void AddProductUi()
         {
             try
-            {             
-                _display.PrintForDisplay("Введите название: ");
-                _product.Name = Console.ReadLine();
+            {
+                _display.Print("Введите название: ");
+                string name = Console.ReadLine();
 
-                _display.PrintForDisplay("Введите стоимость: ");
-                _product.Price =  decimal.Parse(Console.ReadLine());
+                _display.Print("Введите стоимость: ");
+                decimal price = decimal.Parse(Console.ReadLine());
 
-                _display.PrintForDisplay("Введите цвет: ");
-                _product.Color = Console.ReadLine();
+                _display.Print("Введите цвет: ");
+                string color = Console.ReadLine();
 
-                _display.PrintForDisplay("Введите размер памяти: ");
-                _product.MemorySize = int.Parse(Console.ReadLine());
+                _display.Print("Введите размер памяти: ");
+                int memorySize = int.Parse(Console.ReadLine());
 
-                _productController.AddNewProduct();
+                _productController.AddProduct(name, price, color, memorySize);
+
                 InformAboutSuccessUi();
             }
             catch (FormatException e)
             {
-                _display.PrintForDisplay(e.Message + "\n");
+                _display.Print(e.Message + "\n");
             }
         }
         public void PrintProductUi()
         {
-            _dbContext.InitData();
             foreach (var product in _dbContext.Products)
             {
-                _display.PrintForDisplay($"\nId: {product.Id}, название: {product.Name}, цена: {product.Price}, цвет: {product.Color}, размер памяти:{product.MemorySize}");
+                _display.Print($"\nId: {product.Id}, название: {product.Name}, цена: {product.Price}, цвет: {product.Color}, размер памяти:{product.MemorySize}");
             }
         }
-        public void InformAboutSuccessUi()
+        private void InformAboutSuccessUi()
         {
-            _display.PrintForDisplay("Вы успешно добавили новый продукт!");
+            _display.Print("Вы успешно добавили новый продукт!");
         }
     }
 }

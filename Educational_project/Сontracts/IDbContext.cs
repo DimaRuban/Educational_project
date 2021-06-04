@@ -5,12 +5,12 @@ namespace StorePhone.Сontracts
 {
     public interface IDbContext
     {
-         List<Product> Products { get; set; }
+        List<Product> Products { get; set; }
 
-         List<Order> Orders { get; set; }
+        List<Order> Orders { get; set; }
 
-         List<User> Users { get; set; }
+        List<User> Users { get; set; }
 
-         void InitData() { }
+        void InitData() { }
     }
 }

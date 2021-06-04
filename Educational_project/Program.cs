@@ -9,27 +9,23 @@ namespace EducationalProject
     class Program
     {
         static void Main(string[] args)
-        {   
+        {
             var display = new Display();
             var dbContext = new DbContext();
-           
-            var validator = new Validator(dbContext, display);
 
-            var product = new Product();
-            var order = new Order();
-            var user = new User();
+            var validator = new Validator();
 
-            var productController = new ProductController(dbContext, product);
-            var orderController = new OrderController(dbContext, order);
-            var accountController = new AccountController(dbContext, user);
-           
-            var productUi = new ProductUi(display, dbContext, productController, product);
-            var orderUi = new OrderUi(dbContext, display, orderController, productUi, validator, order);
-            var accountUi = new AccountUi(display,accountController, validator, user);
+            var productController = new ProductController(dbContext);
+            var orderController = new OrderController(dbContext);
+            var accountController = new AccountController(dbContext);
+
+            var productUi = new ProductUi(display, dbContext, productController);
+            var orderUi = new OrderUi(display, orderController, productUi, validator);
+            var accountUi = new AccountUi(display, accountController, validator);
 
             var menu = new Menu(productUi, orderUi, accountUi, display);
-
-            display.PrintForDisplay("Здравствуйте! Вас приветствует магазин Store Phone!\n");
+            dbContext.InitData();
+            display.Print("Здравствуйте! Вас приветствует магазин Store Phone!\n");
             while (true)
             {
                 menu.GetMenu();         

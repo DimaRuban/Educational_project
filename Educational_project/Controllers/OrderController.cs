@@ -6,34 +6,32 @@ using System.Linq;
 namespace StorePhone.Controllers
 {
     public class OrderController : IOrderController
-    {  
+    {
         private readonly IDbContext _dbContext;
-        private readonly Order _order;
 
-        public OrderController(IDbContext dbContext, Order order)
+        public OrderController(IDbContext dbContext)
         {
             _dbContext = dbContext;
-            _order = order;
+        }
+        public string GetNameForProductId(int id)
+        {
+            return _dbContext.Products.FirstOrDefault(x => x.Id == id)?.Name;
+        }
+        public decimal CountTotalPrice(int idProductForBuy, int quantity)
+        {
+            decimal totalPrice = 0;
+
+            foreach (var product in _dbContext.Products)
+                if (product.Id == idProductForBuy)
+                    totalPrice = (decimal)quantity * product.Price;
+            return totalPrice;
         }
 
-        public void Buy()
+        public void BuyProduct(decimal totalPrice, int quantity, string userName, string phoneNumber, string address)
         {
-             int newOrderId = _dbContext.Orders.Max(x => x.Id) + 1;
+            var newOrderId = _dbContext.Orders.Max(x => x.Id) + 1;
 
-            DateTime dateTimeCreatedOrder = DateTime.Now;
-
-             foreach (var product in _dbContext.Products)
-                 if (product.Id == _order.IdProductForBuy)
-                    _order.TotalPrice = (decimal)_order.Quantity * product.Price;
- 
-             switch (_order.ConfirmButton)
-             {
-                   case 1:
-                        _dbContext.Orders.Add(new Order(newOrderId, dateTimeCreatedOrder, _order.UserName, _order.Address, _order.Quantity, _order.TotalPrice));
-                    break;
-                default:
-                    break;
-            }
+            _dbContext.Orders.Add(new Order(newOrderId, DateTime.Now, userName, phoneNumber, address, quantity, totalPrice));
         }
     }
 }

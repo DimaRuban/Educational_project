@@ -7,19 +7,17 @@ namespace StorePhone.Controllers
     public class ProductController : IProductController
     {
         private readonly IDbContext _dbContext;
-        private readonly Product _product;
 
-        public ProductController(IDbContext dbContext, Product product)
-        {   
+        public ProductController(IDbContext dbContext)
+        {
             _dbContext = dbContext;
-            _product = product;
         }
 
-        public void AddNewProduct()
+        public void AddProduct(string name, decimal price, string color, int memorySize)
         {
-            int newProductId = _dbContext.Products.Max(x => x.Id)+1;
+            var newProductId = _dbContext.Products.Max(x => x.Id) + 1;
 
-            _dbContext.Products.Add(new Product(newProductId, _product.Name, _product.Price, _product.Color, _product.MemorySize));
+            _dbContext.Products.Add(new Product(newProductId, name, price, color, memorySize));
         }
     }
 }
