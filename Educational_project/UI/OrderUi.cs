@@ -5,46 +5,34 @@ namespace StorePhone.UI
 {
     public class OrderUi : IOrderUi
     {
-        public int ConfirmButton { get; set; }
-        public int IdProductForBuy { get; set; }
-        public decimal TotalPrice { get; set; }
-        public string UserName { get; set; }
-        public string PhoneNumber { get; set; }
-        public string Address { get; set; }
-        public int Quantity { get; set; }
+        private int IdProductForBuy { get; set; }
 
-        private readonly IDbContext _dbContext;
         private readonly IDisplay _display;
         private readonly IOrderController _orderController;
         private readonly IProductUi _productUi;
 
-        public OrderUi(IDbContext dbContext, IDisplay display, IOrderController orderController, IProductUi productUi)
+        public OrderUi( IDisplay display, IOrderController orderController, IProductUi productUi)
         {
-            _dbContext = dbContext;
             _display = display;
             _orderController = orderController;
             _productUi = productUi;
         }
-        public void ChoiceProductUi() 
+
+        public void ChooseProductUi() 
         {
             try
             {
                 _productUi.PrintProductUi();
-                _display.PrintForDisplay("\nВведите Id товара, для покупки: ");
-                IdProductForBuy = int.Parse(Console.ReadLine());
-               
-                foreach (var product in _dbContext.Products)
-                {
-                    if (product.Id == IdProductForBuy)
-                    {
-                        _display.PrintForDisplay($"\nВы действительно хотите оформить заказ Id = {product.Id}, Name = {product.Name} ?\n Да - 1,\n Нет - 2.\nВыберете действие: ");
-                        ConfirmButton = int.Parse(Console.ReadLine());
-                    }
-                }
-                switch (ConfirmButton)
+                _display.Print("\nВведите Id товара, для покупки: ");
+                IdProductForBuy = int.Parse(Console.ReadLine());   
+                
+                _display.Print($"\nВы действительно хотите оформить заказ Id = {IdProductForBuy}, Name = {_orderController.GetNameForProductId(IdProductForBuy)} ?\n Да - 1,\n Нет - 2.\nВыберете действие: ");
+                int confirmButton = int.Parse(Console.ReadLine());
+                                
+                switch (confirmButton)
                 {
                     case 1:
-                        BuyUi();
+                        BuyProductUi();
                         break;
                     default:
                         break;
@@ -52,58 +40,60 @@ namespace StorePhone.UI
             }
             catch (FormatException e)
             {
-                _display.PrintForDisplay(e.Message + "\n");
+                _display.Print(e.Message + "\n");
             }
         }
-        public void BuyUi() 
+
+        private void BuyProductUi() 
         {
             try
             {
-                _display.PrintForDisplay("\nВведите ваше имя: ");
-                UserName = Console.ReadLine();
+                _display.Print("\nВведите ваше имя: ");
+                string userName = Console.ReadLine();
 
-                _display.PrintForDisplay("Введите номер телефона: ");
-                PhoneNumber = Console.ReadLine();
+                _display.Print("Введите номер телефона: ");
+                string phoneNumber = Console.ReadLine();
 
-                _display.PrintForDisplay("Введите адрес доставки: ");
-                Address = Console.ReadLine();
+                _display.Print("Введите адрес доставки: ");
+                string address = Console.ReadLine();
 
-                _display.PrintForDisplay("Введите кол-во товара для покупки: ");
-                Quantity = int.Parse(Console.ReadLine());
+                _display.Print("Введите кол-во товара для покупки: ");
+                int quantity = int.Parse(Console.ReadLine());
 
-                _display.PrintForDisplay($"\n   Купить?\n Да - 1,\n Нет - 2.\nВыберете действие: ");
-                ConfirmButton = int.Parse(Console.ReadLine());
+                _display.Print($"\n   Купить?\n Да - 1,\n Нет - 2.\nВыберете действие: ");
+                int confirmButton = int.Parse(Console.ReadLine());
                
-                if (ConfirmButton == 1) 
+                if (confirmButton == 1) 
                 {
-                    TotalPrice = _orderController.CountTotalPrice(IdProductForBuy, Quantity);
+                    decimal totalPrice = _orderController.CountTotalPrice(IdProductForBuy, quantity);
 
-                    PrintTotalPriceUi(TotalPrice);
+                    PrintTotalPriceUi(totalPrice);
 
-                    _orderController.Buy(TotalPrice, Quantity, UserName, PhoneNumber, Address);
-                    InformAboutSuccessUi();
-                }
+                    _orderController.BuyProduct(totalPrice, quantity, userName, phoneNumber, address);
+
+                    InformAboutSuccessUi(userName, phoneNumber, IdProductForBuy, address, quantity, totalPrice);
+                } 
                 else
                 {
-                    BuyUi();
+                    BuyProductUi();
                 }
             }
             catch (FormatException e)
             {
-                _display.PrintForDisplay(e.Message + "\n");
+                _display.Print(e.Message + "\n");
             }
         }
-
-        public void PrintTotalPriceUi(decimal totalPrice)
+        
+        private void PrintTotalPriceUi(decimal totalPrice)
         {
-            _display.PrintForDisplay($"\nСумма вашего заказа: {TotalPrice} грн");
+            _display.Print($"\nСумма вашего заказа: {totalPrice} грн");
         }
-        public void InformAboutSuccessUi()
+
+        private void InformAboutSuccessUi(string userName, string phoneNumber, int IdProductForBuy, string address, int quantity, decimal totalPrice)
         {
-            _display.PrintForDisplay("\nЗаказ оформлен, с вами свяжется администатор!\n");
+            _display.Print("\nЗаказ оформлен, с вами свяжется администатор!\n");
 
-            _display.PrintForDisplay($"\nДанные вашего заказа: \n Дата заказа: {DateTime.Now},\n Имя клиента: {UserName},\n Номер телефона: {PhoneNumber},\n Номер товара: {IdProductForBuy},\n Адресс доставки: {Address},\n кол-во товара: {Quantity},\nСумма вашего заказа: {TotalPrice}\n\n");
-
+            _display.Print($"\nДанные вашего заказа: \n Дата заказа: {DateTime.Now},\n Имя клиента: {userName},\n Номер телефона: {phoneNumber},\n Номер товара: {IdProductForBuy},\n Адресс доставки: {address},\n кол-во товара: {quantity},\nСумма вашего заказа: {totalPrice}\n\n");        
         }
     }      
  }

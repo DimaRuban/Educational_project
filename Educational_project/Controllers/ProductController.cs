@@ -10,15 +10,14 @@ namespace StorePhone.Controllers
         private readonly IDbContext _dbContext;
         private readonly ILogger _logger;
 
-        public ProductController(IDbContext dbContext, ILogger logger)
+        public ProductController(IDbContext dbContext)
         {   
             _dbContext = dbContext;
-            _logger = logger;
         }
 
-        public void AddNewProduct(string name, decimal price, string color, int memorySize)
+        public void AddProduct(string name, decimal price, string color, int memorySize)
         {
-            int newProductId = _dbContext.Products.Max(x => x.Id) + 1;
+            var newProductId = _dbContext.Products.Max(x => x.Id) + 1;
 
             _dbContext.Products.Add(new Product(newProductId, name, price, color, memorySize));
             _logger.Log($"{DateTime.Now} - был добавлен новый продукт, с ID = {newProductId}");

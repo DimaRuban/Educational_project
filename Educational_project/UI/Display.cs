@@ -5,7 +5,7 @@ namespace StorePhone.UI
 {
     public class Display : IDisplay
     {
-        public void PrintForDisplay(string message)
+        public void Print(string message)
         {
             Console.Write(message);
         }

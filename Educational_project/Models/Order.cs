@@ -7,7 +7,7 @@ namespace StorePhone.Models
         public Order()
         {
         }
-        public Order(int id, DateTime createdAt, string user, string phoneNumber, string address, int quantity, decimal totalPrice)
+        public Order(int id, DateTime createdAt, string user, string phoneNumber,string address, int quantity, decimal totalPrice  )
         {
             Id = id;
             CreatedAt = createdAt;

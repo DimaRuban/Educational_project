@@ -2,6 +2,6 @@
 {
     public interface IAccountController
     {
-        void Registration(string firstName, string lastName, string emailAddress, string phoneNumber, string userName, string password) { }
+        void Register(string firstName, string lastName, string emailAddress, string phoneNumber, string userName, string password) { }
     }
 }
