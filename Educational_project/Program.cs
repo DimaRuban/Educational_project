@@ -1,6 +1,7 @@
 ﻿using StorePhone.Controllers;
 using StorePhone.Data;
 using StorePhone.UI;
+using StorePhone.Validation;
 
 namespace EducationalProject
 {
@@ -10,14 +11,16 @@ namespace EducationalProject
         {   
             var display = new Display();
             var dbContext = new DbContext();
-           
+
+            var validator = new Validator();
+
             var productController = new ProductController(dbContext);
             var orderController = new OrderController(dbContext);
             var accountController = new AccountController(dbContext);
            
             var productUi = new ProductUi(display, dbContext, productController);
-            var orderUi = new OrderUi(display, orderController, productUi);
-            var accountUi = new AccountUi(display,accountController);
+            var orderUi = new OrderUi(display, orderController, productUi, validator);
+            var accountUi = new AccountUi(display,accountController, validator);
 
             var menu = new Menu(productUi, orderUi, accountUi, display);
             dbContext.InitData();
