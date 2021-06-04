@@ -10,14 +10,17 @@ namespace StorePhone.Controllers
         private readonly IDbContext _dbContext;
         private readonly ILogger _logger;
 
-        public OrderController(IDbContext dbContext)
+        public OrderController(IDbContext dbContext, ILogger logger)
         {
             _dbContext = dbContext;
+            _logger = logger;
         }
+
         public string GetNameForProductId(int id)
         {          
             return _dbContext.Products.FirstOrDefault(x => x.Id == id)?.Name;
         }
+
         public decimal CountTotalPrice(int idProductForBuy, int quantity)
         {
             decimal totalPrice = 0;

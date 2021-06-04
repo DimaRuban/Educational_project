@@ -45,6 +45,7 @@ namespace StorePhone.UI
                 RegisterUi();
             }
         }
+
         private void InformAboutSuccessUi(string firstName)
         {
             _display.Print($"\n{firstName}, Ваш профиль успешно создан!\n");

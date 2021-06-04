@@ -10,9 +10,10 @@ namespace StorePhone.Controllers
         private readonly IDbContext _dbContext;
         private readonly ILogger _logger;
 
-        public ProductController(IDbContext dbContext)
+        public ProductController(IDbContext dbContext, ILogger logger)
         {   
             _dbContext = dbContext;
+            _logger = logger;
         }
 
         public void AddProduct(string name, decimal price, string color, int memorySize)

@@ -2,7 +2,7 @@
 
 namespace StorePhone.Logging
 {
-    public class Logger:ILogger
+    public class Logger : ILogger
     {
          private readonly IFileManager _fileManager;
 
