@@ -29,7 +29,7 @@ namespace StorePhone.Controllers
         }
         public void Buy(decimal totalPrice, int quantity, string userName, string phoneNumber, string address)
         {
-             int newOrderId = _dbContext.Orders.Max(x => x.Id) + 1;
+             var newOrderId = _dbContext.Orders.Max(x => x.Id) + 1;
 
             _dbContext.Orders.Add(new Order(newOrderId, DateTime.Now, userName, phoneNumber, address, quantity, totalPrice));           
             _logger.Log($"{DateTime.Now} - был создан новый заказ, с ID = {newOrderId}");

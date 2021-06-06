@@ -11,7 +11,7 @@ namespace StorePhone.Logging
         private readonly IFileManager _fileManager;
         private readonly IDbContext _dbContext;
 
-        private string _directoryPath = Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar;
+        private string _directoryPath = Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "Store Phone system files" + Path.DirectorySeparatorChar;
 
         public Serializer(IFileManager fileManager,IDbContext dbContext)
         {
