@@ -7,11 +7,13 @@ namespace StorePhone.UI
     {
         private readonly IDisplay _display;
         private readonly IAccountController _accountController;
+        private readonly IValidator _validator;
 
-        public AccountUi(IDisplay display, IAccountController accountController)
+        public AccountUi(IDisplay display, IAccountController accountController, IValidator validator)
         {
             _display = display;
             _accountController = accountController;
+            _validator = validator;
         }
 
         public void RegisterUi()
@@ -29,6 +31,11 @@ namespace StorePhone.UI
 
                 _display.Print("Введите номер телефона: ");
                 string phoneNumber = Console.ReadLine();
+                if (!_validator.IsPhoneNumberValid(phoneNumber))
+                {
+                    _display.Print("\nВведите корректный номер телефона!");
+                    RegisterUi();
+                }
 
                 _display.Print("Введите имя пользователя: ");
                 string userName = Console.ReadLine();

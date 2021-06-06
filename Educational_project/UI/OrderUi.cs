@@ -10,12 +10,14 @@ namespace StorePhone.UI
         private readonly IDisplay _display;
         private readonly IOrderController _orderController;
         private readonly IProductUi _productUi;
+        private readonly IValidator _validator;
 
-        public OrderUi( IDisplay display, IOrderController orderController, IProductUi productUi)
+        public OrderUi( IDisplay display, IOrderController orderController, IProductUi productUi, IValidator validator)
         {
             _display = display;
             _orderController = orderController;
             _productUi = productUi;
+            _validator = validator;
         }
 
         public void ChooseProductUi() 
@@ -53,9 +55,19 @@ namespace StorePhone.UI
 
                 _display.Print("Введите номер телефона: ");
                 string phoneNumber = Console.ReadLine();
+                if (!_validator.IsPhoneNumberValid(phoneNumber))
+                {
+                    _display.Print("\nВведите корректный номер телефона!");
+                    BuyProductUi();
+                }
 
                 _display.Print("Введите адрес доставки: ");
                 string address = Console.ReadLine();
+                if (!_validator.IsHomeAddressValid(address))
+                {
+                    _display.Print("Вы ввели некорректный адрес!");
+                    BuyProductUi();
+                }
 
                 _display.Print("Введите кол-во товара для покупки: ");
                 int quantity = int.Parse(Console.ReadLine());
