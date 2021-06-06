@@ -2,6 +2,6 @@
 {
     public interface IFileManager
     {
-        void WorkWithFiles(string message) { }
+        void WorkWithFiles(string message);
     }
 }
