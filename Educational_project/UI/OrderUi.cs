@@ -55,7 +55,7 @@ namespace StorePhone.UI
 
                 _display.Print("Введите номер телефона: ");
                 string phoneNumber = Console.ReadLine();
-                if (_validator.IsPhoneNumberValid(phoneNumber) != true)
+                if (!_validator.IsPhoneNumberValid(phoneNumber))
                 {
                     _display.Print("\nВведите корректный номер телефона!");
                     BuyProductUi();
@@ -63,7 +63,7 @@ namespace StorePhone.UI
 
                 _display.Print("Введите адрес доставки: ");
                 string address = Console.ReadLine();
-                if (_validator.IsHomeAddressValid(address) != true)
+                if (!_validator.IsHomeAddressValid(address))
                 {
                     _display.Print("Вы ввели некорректный адрес!");
                     BuyProductUi();
