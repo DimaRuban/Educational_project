@@ -7,40 +7,39 @@ namespace StorePhone.Logging
 {
     public class FileManager : IFileManager
     {
-        private char _pathSeparator = Path.DirectorySeparatorChar;
-
-        private string GetDirectoryPath()
+        private void CreatFolder()
         {
-            return Directory.GetCurrentDirectory() + _pathSeparator + "Store Phone system files";
-        }
+            string path = Directory.GetCurrentDirectory() + "\\Store Phone system files";
 
-        private void CreateFolder()
-        {
-            if (!Directory.Exists(GetDirectoryPath()))
+            if (Directory.Exists(path) == false)
             {
-                Directory.CreateDirectory(GetDirectoryPath());
+                Directory.CreateDirectory(path);
             }
         }
 
-        private void CreateFile()
+        private void CreatFile()
         {
-            CreateFolder();
+            CreatFolder();
 
-            var filePath = GetDirectoryPath() + _pathSeparator + DateTime.Now.ToShortDateString() + ".txt";
+            string path = Directory.GetCurrentDirectory() + "\\Store Phone system files";
 
-            if (!File.Exists(filePath))
+            string pathFile = path + "\\" + DateTime.Now.ToShortDateString() + ".txt";
+
+            if (File.Exists(pathFile) == false)
             {
-                using (FileStream fileStream = new FileStream(filePath, FileMode.OpenOrCreate)) { }
+                using (FileStream fstream = new FileStream(pathFile, FileMode.OpenOrCreate)) { }
             }
         }
 
         public void WorkWithFiles(string message)
         {
-            CreateFile();
+            CreatFile();
 
-            var filePath = GetDirectoryPath() + _pathSeparator + DateTime.Now.ToShortDateString() + ".txt";
+            string path = Directory.GetCurrentDirectory() + "\\Store Phone system files";
 
-            using (StreamWriter streamWriter = new StreamWriter(filePath, true, Encoding.UTF8))
+            string pathFile = path + "\\" + DateTime.Now.ToShortDateString() + ".txt";
+
+            using (StreamWriter streamWriter = new StreamWriter(pathFile, true, Encoding.UTF8))
             {
                 streamWriter.WriteLine(message);
             }
