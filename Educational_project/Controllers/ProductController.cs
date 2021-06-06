@@ -1,5 +1,6 @@
 ﻿using StorePhone.Models;
 using StorePhone.Сontracts;
+using System;
 using System.Linq;
 
 namespace StorePhone.Controllers
@@ -7,10 +8,12 @@ namespace StorePhone.Controllers
     public class ProductController : IProductController
     {
         private readonly IDbContext _dbContext;
+        private readonly ILogger _logger;
 
-        public ProductController(IDbContext dbContext)
+        public ProductController(IDbContext dbContext, ILogger logger)
         {   
             _dbContext = dbContext;
+            _logger = logger;
         }
 
         public void AddProduct(string name, decimal price, string color, int memorySize)
@@ -18,6 +21,7 @@ namespace StorePhone.Controllers
             var newProductId = _dbContext.Products.Max(x => x.Id) + 1;
 
             _dbContext.Products.Add(new Product(newProductId, name, price, color, memorySize));
+            _logger.Log($"{DateTime.Now} - был добавлен новый продукт, с ID = {newProductId}");
         }
     }
 }

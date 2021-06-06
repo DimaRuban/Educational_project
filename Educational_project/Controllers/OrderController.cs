@@ -8,19 +8,22 @@ namespace StorePhone.Controllers
     public class OrderController : IOrderController
     {  
         private readonly IDbContext _dbContext;
+        private readonly ILogger _logger;
 
-        public OrderController(IDbContext dbContext)
+        public OrderController(IDbContext dbContext, ILogger logger)
         {
             _dbContext = dbContext;
+            _logger = logger;
         }
+
         public string GetNameForProductId(int id)
         {          
             return _dbContext.Products.FirstOrDefault(x => x.Id == id)?.Name;
         }
+
         public decimal CountTotalPrice(int idProductForBuy, int quantity)
         {
             decimal totalPrice = 0;
-
             foreach (var product in _dbContext.Products)
                 if (product.Id == idProductForBuy)
                      totalPrice = (decimal)quantity * product.Price;
@@ -32,6 +35,7 @@ namespace StorePhone.Controllers
              var newOrderId = _dbContext.Orders.Max(x => x.Id) + 1;
 
              _dbContext.Orders.Add(new Order(newOrderId, DateTime.Now, userName, phoneNumber, address, quantity, totalPrice));
+             _logger.Log($"{DateTime.Now} - был создан новый заказ, с ID = {newOrderId}");
         }
     }
 }

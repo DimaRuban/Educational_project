@@ -95,7 +95,7 @@ namespace StorePhone.UI
                 _display.Print(e.Message + "\n");
             }
         }
-
+        
         private void PrintTotalPriceUi(decimal totalPrice)
         {
             _display.Print($"\nСумма вашего заказа: {totalPrice} грн");
