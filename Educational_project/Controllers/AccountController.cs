@@ -12,6 +12,7 @@ namespace StorePhone.Controllers
         private readonly ILogger _logger;
         private readonly ISerializer _serialazer;
 
+        private string _role = "User";
         public AccountController(IDbContext dbContext, ILogger logger, ISerializer serialazer)
         {
             _dbContext = dbContext;
@@ -22,11 +23,9 @@ namespace StorePhone.Controllers
         {
             int newUserId = _dbContext.Users.Max(x => x.Id) + 1;
 
-            string role = "User";
-
-            _dbContext.Users.Add(new User(newUserId, firstName, lastName, emailAddress, phoneNumber, userName, password, new Role { Name = role }));
-            _serialazer.SerializeUsers();
+            _dbContext.Users.Add(new User(newUserId, firstName, lastName, emailAddress, phoneNumber, userName, password, new Role { Name = _role }));
             _logger.Log($"{DateTime.Now} - был добавлен новый пользователь, с ID = {newUserId}");
+            _serialazer.SerializeUsers();
         }
     }
 }

@@ -10,7 +10,9 @@ namespace StorePhone.Logging
     {
         private readonly IFileManager _fileManager;
         private readonly IDbContext _dbContext;
-        
+
+        private string _directoryPath = Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar;
+
         public Serializer(IFileManager fileManager,IDbContext dbContext)
         {
             _fileManager = fileManager;
@@ -33,9 +35,9 @@ namespace StorePhone.Logging
         }
         public void DeSerializeProducts()
         {
-            string pathSerializationProducts = Directory.GetCurrentDirectory() + "\\Store Phone system files" + "\\Serialization Products.txt";
+            var serializationProductsPath = _directoryPath + "Serialization Products.txt";
 
-            List<Product> products = JsonConvert.DeserializeObject<List<Product>>(File.ReadAllText(pathSerializationProducts));
+            List<Product> products = JsonConvert.DeserializeObject<List<Product>>(File.ReadAllText(serializationProductsPath));
 
             foreach (var item in products)
             {
@@ -44,9 +46,9 @@ namespace StorePhone.Logging
         }
         public void DeSerializeOrders()
         {
-            string pathSerializationOrders = Directory.GetCurrentDirectory() + "\\Store Phone system files" + "\\Serialization Orders.txt";
+            var serializationOrdersPath = _directoryPath + "Serialization Orders.txt";
 
-            List<Order> orders = JsonConvert.DeserializeObject<List<Order>>(File.ReadAllText(pathSerializationOrders));
+            List<Order> orders = JsonConvert.DeserializeObject<List<Order>>(File.ReadAllText(serializationOrdersPath));
 
             foreach (var item in orders)
             {
@@ -55,9 +57,9 @@ namespace StorePhone.Logging
         }
         public void DeSerializeUsers()
         {
-            string pathSerializationUsers = Directory.GetCurrentDirectory() + "\\Store Phone system files" + "\\Serialization Users.txt";
+            var serializationUsersPath = _directoryPath + "Serialization Users.txt";
 
-            List<User> users = JsonConvert.DeserializeObject<List<User>>(File.ReadAllText(pathSerializationUsers));
+            List<User> users = JsonConvert.DeserializeObject<List<User>>(File.ReadAllText(serializationUsersPath));
        
             foreach (var item in users)
             {

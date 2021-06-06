@@ -7,34 +7,40 @@ namespace StorePhone.Logging
 {
     public class FileManager : IFileManager
     {
-        private readonly string path = Directory.GetCurrentDirectory() + "\\Store Phone system files";
-        private void CreatFolder()
+        private char _pathSeparator = Path.DirectorySeparatorChar;
+
+        private string GetDirectoryPath()
         {
-            if (Directory.Exists(path) == false)
+            return Directory.GetCurrentDirectory() + _pathSeparator + "Store Phone system files";
+        }
+
+        private void CreateFolder()
+        {
+            if (!Directory.Exists(GetDirectoryPath()))
             {
-                Directory.CreateDirectory(path);
+                Directory.CreateDirectory(GetDirectoryPath());
             }
         }
 
-        private void CreatFile()
+        private void CreateFile()
         {
-            CreatFolder();           
+            CreateFolder();
 
-            string pathFile = path + "\\" + DateTime.Now.ToShortDateString() + ".txt";
+            var filePath = GetDirectoryPath() + _pathSeparator + DateTime.Now.ToShortDateString() + ".txt";
 
-            if (File.Exists(pathFile) == false)
+            if (!File.Exists(filePath))
             {
-                using (FileStream fstream = new FileStream(pathFile, FileMode.OpenOrCreate)) { }
-            }       
+                using (FileStream fileStream = new FileStream(filePath, FileMode.OpenOrCreate)) { }
+            }
         }
 
         public void WorkWithFiles(string message)
         {
-            CreatFile();
+            CreateFile();
 
-            string pathFile = path + "\\" + DateTime.Now.ToShortDateString() + ".txt";
+            var filePath = GetDirectoryPath() + _pathSeparator + DateTime.Now.ToShortDateString() + ".txt";
 
-            using (StreamWriter streamWriter = new StreamWriter(pathFile, true, Encoding.UTF8))
+            using (StreamWriter streamWriter = new StreamWriter(filePath, true, Encoding.UTF8))
             {
                 streamWriter.WriteLine(message);
             }
@@ -42,56 +48,45 @@ namespace StorePhone.Logging
 
         public void WorkWithSerializationFileProducts(string message)
         {
-            string pathSerializationProducts = path + "\\Serialization Products.txt";
+            var serializationProductsPath = GetDirectoryPath() + _pathSeparator + "Serialization Products.txt";
 
-            if (File.Exists(pathSerializationProducts) == true)
-            {
-                File.Delete(pathSerializationProducts);
-            }
+            if (File.Exists(serializationProductsPath))
+                File.Delete(serializationProductsPath);
 
-            if (File.Exists(pathSerializationProducts) == false)
-            {
-                File.Delete(pathSerializationProducts);
-                using (FileStream fstream = new FileStream(pathSerializationProducts, FileMode.OpenOrCreate)) { }
-            }
+            if (!File.Exists(serializationProductsPath))
+                using (FileStream fstream = new FileStream(serializationProductsPath, FileMode.OpenOrCreate)) { }
 
-            using (StreamWriter streamWriter = new StreamWriter(pathSerializationProducts, true, Encoding.UTF8))
+            using (StreamWriter streamWriter = new StreamWriter(serializationProductsPath, true, Encoding.UTF8))
             {
                 streamWriter.WriteLine(message);
             }
         }
         public void WorkWithSerializationFileOrders(string message)
         {
-            string pathSerializationOrders = path + "\\Serialization Orders.txt";
+            var serializationOrdersPath = GetDirectoryPath() + _pathSeparator + "Serialization Orders.txt";
 
-            if (File.Exists(pathSerializationOrders) == true)
-            {
-                File.Delete(pathSerializationOrders);
-            }
-            if (File.Exists(pathSerializationOrders) == false)
-            {
-                using (FileStream fstream = new FileStream(pathSerializationOrders, FileMode.OpenOrCreate)) { }
-            }
+            if (File.Exists(serializationOrdersPath))
+                File.Delete(serializationOrdersPath);
 
-            using (StreamWriter streamWriter = new StreamWriter(pathSerializationOrders, true, Encoding.UTF8))
+            if (!File.Exists(serializationOrdersPath))
+                using (FileStream fstream = new FileStream(serializationOrdersPath, FileMode.OpenOrCreate)) { }
+
+            using (StreamWriter streamWriter = new StreamWriter(serializationOrdersPath, true, Encoding.UTF8))
             {
                 streamWriter.WriteLine(message);
             }
         }
         public void WorkWithSerializationFileUsers(string message)
         {
-            string pathSerializationUsers = path + "\\Serialization Users.txt";
-           
-            if (File.Exists(pathSerializationUsers) == true)
-            {
-                File.Delete(pathSerializationUsers);
-            }
-            if (File.Exists(pathSerializationUsers) == true)
-            {
-                using (FileStream fstream = new FileStream(pathSerializationUsers, FileMode.OpenOrCreate)) { }
-            }
+            var serializationUsersPath = GetDirectoryPath() + _pathSeparator + "Serialization Users.txt";
 
-            using (StreamWriter streamWriter = new StreamWriter(pathSerializationUsers, true, Encoding.UTF8))
+            if (File.Exists(serializationUsersPath))
+                File.Delete(serializationUsersPath);
+
+            if (!File.Exists(serializationUsersPath))
+                using (FileStream fstream = new FileStream(serializationUsersPath, FileMode.OpenOrCreate)) { }
+
+            using (StreamWriter streamWriter = new StreamWriter(serializationUsersPath, true, Encoding.UTF8))
             {
                 streamWriter.WriteLine(message);
             }
