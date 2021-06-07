@@ -30,9 +30,9 @@ namespace EducationalProject
 
             var menu = new Menu(productUi, orderUi, accountUi, display);
 
-            serializer.DeSerializeProducts();
-            serializer.DeSerializeOrders();
-            serializer.DeSerializeUsers();
+            serializer.DeserializeProducts();
+            serializer.DeserializeOrders();
+            serializer.DeserializeUsers();
 
             display.PrintForDisplay("Здравствуйте! Вас приветствует магазин Store Phone!\n");
             while (true)

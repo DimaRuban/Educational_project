@@ -1,5 +1,4 @@
-﻿using StorePhone.Logging;
-using StorePhone.Models;
+﻿using StorePhone.Models;
 using StorePhone.Сontracts;
 using System;
 using System.Linq;
