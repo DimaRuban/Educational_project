@@ -17,7 +17,7 @@ namespace Delivery_discount
         private const double ChildDiscount = 0.25;
         private const double SameStreetDiscount = 0.15;
 
-        private static IEnumerable<decimal> NormalizeCurrencies(IEnumerable<decimal> prices, IEnumerable<string> currencies)
+        private IEnumerable<decimal> NormalizeCurrencies(IEnumerable<decimal> prices, IEnumerable<string> currencies)
         {
             var currenciesList = currencies.ToList();
             var priceList = prices.ToList();
@@ -32,7 +32,7 @@ namespace Delivery_discount
             return priceList;
         }
 
-        private static IEnumerable<decimal> ApplyStreetDiscount(IEnumerable<string> streetNames, IEnumerable<decimal> prices)
+        private IEnumerable<decimal> ApplyStreetDiscount(IEnumerable<string> streetNames, IEnumerable<decimal> prices)
         {
             int index = 0;
             var priceList = prices.ToList();
@@ -54,7 +54,7 @@ namespace Delivery_discount
             return priceList;
         }
 
-        private static IEnumerable<decimal> ApplySameStreetDiscount(IEnumerable<string> streetNames, IEnumerable<decimal> prices)
+        private IEnumerable<decimal> ApplySameStreetDiscount(IEnumerable<string> streetNames, IEnumerable<decimal> prices)
         {
             var discountedPricesList = prices.ToList();
             var streetNamesList = streetNames.ToList();
@@ -69,7 +69,7 @@ namespace Delivery_discount
             return discountedPricesList;
         }
 
-        private static IEnumerable<decimal> ApplyDiscountForKids(IEnumerable<int> infantsIds, IEnumerable<int> childrenIds, IEnumerable<decimal> prices)
+        private IEnumerable<decimal> ApplyDiscountForKids(IEnumerable<int> infantsIds, IEnumerable<int> childrenIds, IEnumerable<decimal> prices)
         {
             var infantsIdsList = infantsIds.ToList();
             var childrenIdsList = childrenIds.ToList();
@@ -85,7 +85,7 @@ namespace Delivery_discount
             }
             return discountedPrices;
         }
-        private static IEnumerable<string> GetStreetName(IEnumerable<string> destinations)
+        private IEnumerable<string> GetStreetName(IEnumerable<string> destinations)
         {
             var streets = new List<string>();
             var destinationList = destinations.ToList();
