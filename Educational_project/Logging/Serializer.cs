@@ -13,6 +13,10 @@ namespace StorePhone.Logging
 
         private string directoryPath = Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "Store Phone system files" + Path.DirectorySeparatorChar;
 
+        private string serializationUsersPath = "Serialization Users.txt";
+        private string serializationOrdersPath = "Serialization Orders.txt";
+        private string serializationProductsPath = "Serialization Products.txt";
+
         public Serializer(IFileManager fileManager,IDbContext dbContext)
         {
             _fileManager = fileManager;
@@ -22,26 +26,26 @@ namespace StorePhone.Logging
         public void SerializeProducts()
         {
             var serialized = JsonConvert.SerializeObject(_dbContext.Products);
-            _fileManager.WorkWithSerializationFileProducts(serialized);
+            _fileManager.WorkWithSerializationFile(serialized, serializationProductsPath);
         }
 
         public void SerializeOrders()
         {
             var serialized = JsonConvert.SerializeObject(_dbContext.Orders);
-            _fileManager.WorkWithSerializationFileOrders(serialized);
+            _fileManager.WorkWithSerializationFile(serialized, serializationOrdersPath);
         }
 
         public void SerializeUsers()
         {
             var serialized = JsonConvert.SerializeObject(_dbContext.Users);
-            _fileManager.WorkWithSerializationFileUsers(serialized);
+            _fileManager.WorkWithSerializationFile(serialized, serializationUsersPath);
         }
 
         public void DeserializeProducts()
         {
-            var serializationProductsPath = directoryPath + "Serialization Products.txt";
+            var serializationPath = directoryPath + serializationProductsPath;
 
-            var products = JsonConvert.DeserializeObject<List<Product>>(File.ReadAllText(serializationProductsPath));
+            var products = JsonConvert.DeserializeObject<List<Product>>(File.ReadAllText(serializationPath));
 
             foreach (var product in products)
             {
@@ -51,9 +55,9 @@ namespace StorePhone.Logging
 
         public void DeserializeOrders()
         {
-            var serializationOrdersPath = directoryPath + "Serialization Orders.txt";
+            var serializationPath = directoryPath + serializationOrdersPath;
 
-            var orders = JsonConvert.DeserializeObject<List<Order>>(File.ReadAllText(serializationOrdersPath));
+            var orders = JsonConvert.DeserializeObject<List<Order>>(File.ReadAllText(serializationPath));
 
             foreach (var order in orders)
             {
@@ -63,9 +67,9 @@ namespace StorePhone.Logging
 
         public void DeserializeUsers()
         {
-            var serializationUsersPath = directoryPath + "Serialization Users.txt";
+            var serializationPath = directoryPath + serializationUsersPath;
 
-            var users = JsonConvert.DeserializeObject<List<User>>(File.ReadAllText(serializationUsersPath));
+            var users = JsonConvert.DeserializeObject<List<User>>(File.ReadAllText(serializationPath));
        
             foreach (var user in users)
             {

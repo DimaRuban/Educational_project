@@ -46,40 +46,14 @@ namespace StorePhone.Logging
             }
         }
 
-        public void WorkWithSerializationFileProducts(string message)
+        public void WorkWithSerializationFile(string message, string serializationPath)
         {
-            var serializationProductsPath = GetDirectoryPath() + pathSeparator + "Serialization Products.txt";
+            var serializationProductsPath = GetDirectoryPath() + pathSeparator + serializationPath;
 
             if (!File.Exists(serializationProductsPath))
                 using (var fileStream = new FileStream(serializationProductsPath, FileMode.OpenOrCreate)) { }
 
             using (var streamWriter = new StreamWriter(serializationProductsPath, false, Encoding.UTF8))
-            {
-                streamWriter.WriteLine(message);
-            }
-        }
-
-        public void WorkWithSerializationFileOrders(string message)
-        {
-            var serializationOrdersPath = GetDirectoryPath() + pathSeparator + "Serialization Orders.txt";
-
-            if (!File.Exists(serializationOrdersPath))
-                using (var fileStream = new FileStream(serializationOrdersPath, FileMode.OpenOrCreate)) { }
-
-            using (var streamWriter = new StreamWriter(serializationOrdersPath, false, Encoding.UTF8))
-            {
-                streamWriter.WriteLine(message);
-            }
-        }
-
-        public void WorkWithSerializationFileUsers(string message)
-        {
-            var serializationUsersPath = GetDirectoryPath() + pathSeparator + "Serialization Users.txt";
-
-            if (!File.Exists(serializationUsersPath))
-                using (var fileStream = new FileStream(serializationUsersPath, FileMode.OpenOrCreate)) { }
-
-            using (var streamWriter = new StreamWriter(serializationUsersPath, false, Encoding.UTF8))
             {
                 streamWriter.WriteLine(message);
             }
