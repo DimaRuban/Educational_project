@@ -14,11 +14,14 @@ namespace EducationalProject
             
             var fileManager = new FileManager();
             var dbContext = new DbContext();
+
             var serializer = new Serializer(fileManager,dbContext);
 
             var logger = new Logger(fileManager);
 
             var validator = new Validator(dbContext, display);
+
+            var apiController = new APIController(dbContext);
 
             var productController = new ProductController(dbContext, logger,serializer);
             var orderController = new OrderController(dbContext, logger, serializer);
@@ -33,6 +36,8 @@ namespace EducationalProject
             serializer.DeserializeProducts();
             serializer.DeserializeOrders();
             serializer.DeserializeUsers();
+
+            apiController.GetCurrencyAsync();
 
             display.PrintForDisplay("Здравствуйте! Вас приветствует магазин Store Phone!\n");
             while (true)

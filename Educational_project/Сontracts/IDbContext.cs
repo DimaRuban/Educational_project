@@ -9,6 +9,8 @@ namespace StorePhone.Сontracts
 
          List<Order> Orders { get; set; }
 
-         List<User> Users { get; set; }     
+         List<User> Users { get; set; }
+        
+         List<Currency> Currencies { get; set; }
     }
 }

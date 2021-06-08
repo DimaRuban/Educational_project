@@ -18,6 +18,27 @@ namespace StorePhone.Controllers
             _serializer = serialazer;
         }
 
+        public decimal CountPriceToUsd(decimal totalPrice)
+        {
+            var currency = _dbContext.Currencies.FirstOrDefault(currency => currency.CurrencyName == "USD");
+
+            return totalPrice / currency.RateCurrencySale;
+        }
+
+        public decimal CountPriceToEur(decimal totalPrice)
+        {
+            var currency = _dbContext.Currencies.FirstOrDefault(currency => currency.CurrencyName == "EUR");
+
+            return totalPrice / currency.RateCurrencySale;
+        }
+
+        public decimal CountPriceToBtc(decimal totalPriceUsd)
+        {
+            var currency = _dbContext.Currencies.FirstOrDefault(currency => currency.CurrencyName == "BTC");
+
+            return totalPriceUsd / currency.RateCurrencySale;
+        }
+
         public decimal CountTotalPrice(int idProductForBuy, int quantity)
         {
             decimal totalPrice = 0;

@@ -12,11 +12,14 @@ namespace StorePhone.Data
 
         public List<User> Users { get; set; }
 
+        public List<Currency> Currencies { get; set; }
+
         public DbContext()
         {
             Products = new List<Product>();
             Orders = new List<Order>();
             Users = new List<User>();
+            Currencies = new List<Currency>();
         }
     }
 }
