@@ -50,13 +50,10 @@ namespace StorePhone.Logging
         {
             var serializationProductsPath = GetDirectoryPath() + pathSeparator + "Serialization Products.txt";
 
-            if (File.Exists(serializationProductsPath))
-                File.Delete(serializationProductsPath);
-
             if (!File.Exists(serializationProductsPath))
                 using (var fileStream = new FileStream(serializationProductsPath, FileMode.OpenOrCreate)) { }
 
-            using (var streamWriter = new StreamWriter(serializationProductsPath, true, Encoding.UTF8))
+            using (var streamWriter = new StreamWriter(serializationProductsPath, false, Encoding.UTF8))
             {
                 streamWriter.WriteLine(message);
             }
@@ -66,13 +63,10 @@ namespace StorePhone.Logging
         {
             var serializationOrdersPath = GetDirectoryPath() + pathSeparator + "Serialization Orders.txt";
 
-            if (File.Exists(serializationOrdersPath))
-                File.Delete(serializationOrdersPath);
-
             if (!File.Exists(serializationOrdersPath))
                 using (var fileStream = new FileStream(serializationOrdersPath, FileMode.OpenOrCreate)) { }
 
-            using (var streamWriter = new StreamWriter(serializationOrdersPath, true, Encoding.UTF8))
+            using (var streamWriter = new StreamWriter(serializationOrdersPath, false, Encoding.UTF8))
             {
                 streamWriter.WriteLine(message);
             }
@@ -82,13 +76,10 @@ namespace StorePhone.Logging
         {
             var serializationUsersPath = GetDirectoryPath() + pathSeparator + "Serialization Users.txt";
 
-            if (File.Exists(serializationUsersPath))
-                File.Delete(serializationUsersPath);
-
             if (!File.Exists(serializationUsersPath))
                 using (var fileStream = new FileStream(serializationUsersPath, FileMode.OpenOrCreate)) { }
 
-            using (var streamWriter = new StreamWriter(serializationUsersPath, true, Encoding.UTF8))
+            using (var streamWriter = new StreamWriter(serializationUsersPath, false, Encoding.UTF8))
             {
                 streamWriter.WriteLine(message);
             }
