@@ -71,8 +71,8 @@ namespace Delivery_discount
 
         private IEnumerable<decimal> ApplyDiscountForKids(IEnumerable<int> infantsIds, IEnumerable<int> childrenIds, IEnumerable<decimal> prices)
         {
-            var infantsIdsList = infantsIds.ToList();
-            var childrenIdsList = childrenIds.ToList();
+            var infantsIdsList = infantsIds;
+            var childrenIdsList = childrenIds;
             var discountedPrices = prices.ToList();
 
             foreach (var id in infantsIdsList)
@@ -88,7 +88,7 @@ namespace Delivery_discount
         private IEnumerable<string> GetStreetName(IEnumerable<string> destinations)
         {
             var streets = new List<string>();
-            var destinationList = destinations.ToList();
+            var destinationList = destinations;
 
             foreach (var destination in destinationList)
             {
@@ -111,16 +111,16 @@ namespace Delivery_discount
         {
             decimal fullPrice = default;
 
-            var deliveryPrice = NormalizeCurrencies(prices, currencies).ToList();
-            var streetNames = GetStreetName(destinations).ToList();
+            var deliveryPrices = NormalizeCurrencies(prices, currencies);
+            var streetNames = GetStreetName(destinations);
 
-            deliveryPrice = ApplyStreetDiscount(streetNames, deliveryPrice).ToList();
-            deliveryPrice = ApplyDiscountForKids(infantsIds, childrenIds, deliveryPrice).ToList();
-            deliveryPrice = ApplySameStreetDiscount(streetNames, deliveryPrice).ToList();
+            deliveryPrices = ApplyStreetDiscount(streetNames, deliveryPrices);
+            deliveryPrices = ApplyDiscountForKids(infantsIds, childrenIds, deliveryPrices);
+            deliveryPrices = ApplySameStreetDiscount(streetNames, deliveryPrices);
 
-            for (int i = 0; i < deliveryPrice.Count(); i++)
+            foreach (var deliveryPrice in deliveryPrices)
             {
-                fullPrice += deliveryPrice[i];
+                fullPrice += deliveryPrice;
             }
             return fullPrice;
         }
