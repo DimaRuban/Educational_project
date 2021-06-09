@@ -96,12 +96,12 @@ namespace StorePhone.UI
 
         public void PrintTotalPriceUi(decimal totalPrice)
         {
-            var totalPriceUsd = _orderController.CountPriceToUsd(totalPrice);
+            var totalPriceUsd = _orderController.ConvertCurrencyRate(totalPrice, "USD");
 
             _display.PrintForDisplay($"\nСумма вашего заказа: {TotalPrice} UAH," +
                                      $"\n                     {totalPriceUsd} USD"+
-                                     $"\n                     {_orderController.CountPriceToEur(totalPrice)} EUR"+
-                                     $"\n                     {_orderController.CountPriceToBtc(totalPriceUsd)} BTC");
+                                     $"\n                     {_orderController.ConvertCurrencyRate(totalPrice, "EUR")} EUR"+
+                                     $"\n                     {_orderController.ConvertCurrencyRate(totalPriceUsd, "BTC")} BTC");
         }
         public void InformAboutSuccessUi()
         {
