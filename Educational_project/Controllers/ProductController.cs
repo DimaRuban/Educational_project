@@ -9,21 +9,19 @@ namespace StorePhone.Controllers
     {
         private readonly IDbContext _dbContext;
         private readonly ILogger _logger;
-        private readonly ISerializer _serializer;
 
-        public ProductController(IDbContext dbContext, ILogger logger,ISerializer serializer)
+        public ProductController(IDbContext dbContext, ILogger logger)
         {   
             _dbContext = dbContext;
             _logger = logger;
-            _serializer = serializer;
         }
 
         public void AddNewProduct(string name, decimal price, string color, int memorySize)
         {
             var newProductId = _dbContext.Products.Max(x => x.Id) + 1;
             _dbContext.Products.Add(new Product(newProductId, name, price, color, memorySize));
+            _dbContext.Save();
             _logger.Log($"{DateTime.Now} - был добавлен новый продукт, с ID = {newProductId}");
-            _serializer.SerializeProducts();
         }
     }
 }

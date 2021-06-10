@@ -1,8 +1,12 @@
-﻿using StorePhone.Controllers;
+﻿using Newtonsoft.Json;
+using StorePhone.Controllers;
 using StorePhone.Data;
 using StorePhone.Logging;
+using StorePhone.Models;
 using StorePhone.UI;
 using StorePhone.Validation;
+using System.Collections.Generic;
+using System.IO;
 
 namespace EducationalProject
 {
@@ -12,17 +16,15 @@ namespace EducationalProject
         {   
             var display = new Display();
             
-            var fileManager = new FileManager();
-            var dbContext = new DbContext();
-            var serializer = new Serializer(fileManager,dbContext);
-
-            var logger = new Logger(fileManager);
+            var dbContext = new DbContext();   
+            
+            var logger = new Logger();
 
             var validator = new Validator(dbContext, display);
 
-            var productController = new ProductController(dbContext, logger,serializer);
-            var orderController = new OrderController(dbContext, logger, serializer);
-            var accountController = new AccountController(dbContext, logger, serializer);
+            var productController = new ProductController(dbContext, logger);
+            var orderController = new OrderController(dbContext, logger);
+            var accountController = new AccountController(dbContext, logger);
            
             var productUi = new ProductUi(display, dbContext, productController);
             var orderUi = new OrderUi(dbContext, display, orderController, productUi);
@@ -30,9 +32,7 @@ namespace EducationalProject
 
             var menu = new Menu(productUi, orderUi, accountUi, display);
 
-            serializer.DeserializeProducts();
-            serializer.DeserializeOrders();
-            serializer.DeserializeUsers();
+            dbContext.Init();
 
             display.PrintForDisplay("Здравствуйте! Вас приветствует магазин Store Phone!\n");
             while (true)
