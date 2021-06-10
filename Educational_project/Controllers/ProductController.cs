@@ -21,6 +21,7 @@ namespace StorePhone.Controllers
             var newProductId = _dbContext.Products.Max(x => x.Id) + 1;
 
             _dbContext.Products.Add(new Product(newProductId, name, price, color, memorySize));
+            _dbContext.Save();
             _logger.Log($"{DateTime.Now} - был добавлен новый продукт, с ID = {newProductId}");
         }
     }

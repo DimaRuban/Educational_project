@@ -11,6 +11,7 @@ namespace StorePhone.Сontracts
 
          List<User> Users { get; set; }
 
-         void InitData() { }
+         void Save();
+         void Init();
     }
 }

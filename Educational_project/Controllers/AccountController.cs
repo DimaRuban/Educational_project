@@ -12,6 +12,7 @@ namespace StorePhone.Controllers
 
         private const string Role = "User";
 
+
         public AccountController(IDbContext dbContext, ILogger logger)
         {
             _dbContext = dbContext;
@@ -25,13 +26,9 @@ namespace StorePhone.Controllers
             if(!IsUserExists(userName))
             {
                 _dbContext.Users.Add(new User(newUserId, firstName, lastName, emailAddress, phoneNumber, userName, password, new Role { Name = Role }));
+                _dbContext.Save();
                 _logger.Log($"{DateTime.Now} - был добавлен новый пользователь, с ID = {newUserId}");
             }
-        }
-
-        private bool IsUserExists(string userName)
-        {         
-            return _dbContext.Users.Any(user => user.UserName == userName);
         }
     }
 }
