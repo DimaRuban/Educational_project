@@ -9,13 +9,11 @@ namespace StorePhone.Controllers
     {  
         private readonly IDbContext _dbContext;
         private readonly ILogger _logger;
-        private readonly ISerializer _serializer;
 
-        public OrderController(IDbContext dbContext, ILogger logger,ISerializer serialazer)
+        public OrderController(IDbContext dbContext, ILogger logger)
         {
             _dbContext = dbContext;
             _logger = logger;
-            _serializer = serialazer;
         }
 
         public decimal ConvertCurrencyRate(decimal totalPrice, string carrencyName)
@@ -39,9 +37,9 @@ namespace StorePhone.Controllers
         {
              var newOrderId = _dbContext.Orders.Max(x => x.Id) + 1;
 
-            _dbContext.Orders.Add(new Order(newOrderId, DateTime.Now, userName, phoneNumber, address, quantity, totalPrice));           
+            _dbContext.Orders.Add(new Order(newOrderId, DateTime.Now, userName, phoneNumber, address, quantity, totalPrice));
+            _dbContext.Save();
             _logger.Log($"{DateTime.Now} - был создан новый заказ, с ID = {newOrderId}");
-            _serializer.SerializeOrders();
         }
     }
 }

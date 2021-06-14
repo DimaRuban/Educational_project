@@ -1,20 +1,37 @@
-﻿using StorePhone.Сontracts;
-using System;
+﻿using System;
 using System.IO;
+
 using System.Text;
 
 namespace StorePhone.Logging
 {
-    public class FileManager : IFileManager
-    {
-        private char pathSeparator = Path.DirectorySeparatorChar;
-
-        private string GetDirectoryPath()
+    public static class FileManager
+    {   
+        private const string PathDirectory = "Store Phone system files";
+        private const string PathProducts = "Serialization Products.txt";
+        private const string PathOrders = "Serialization Orders.txt";
+        private const string PathUsers = "Serialization Users.txt";
+        private static string GetDirectoryPath()
         {
-            return Directory.GetCurrentDirectory() + pathSeparator + "Store Phone system files";
+            return Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + PathDirectory;
         }
 
-        private void CreateFolder()
+        public static string GetProductsPath()
+        {
+            return GetDirectoryPath() + Path.DirectorySeparatorChar + PathProducts;
+        }
+
+        public static string GetOrdersPath()
+        {
+            return GetDirectoryPath() + Path.DirectorySeparatorChar + PathOrders;
+        }
+
+        public static string GetUsersPath()
+        {
+            return GetDirectoryPath() + Path.DirectorySeparatorChar + PathUsers;
+        }
+
+        private static void CreateFolder()
         {
             if (!Directory.Exists(GetDirectoryPath()))
             {
@@ -22,41 +39,32 @@ namespace StorePhone.Logging
             }
         }
 
-        private void CreateFile()
+        private static void CreateFile()
         {
             CreateFolder();
 
-            var filePath = GetDirectoryPath() + pathSeparator + DateTime.Now.ToShortDateString() + ".txt";
+            var filePath = GetDirectoryPath() + Path.DirectorySeparatorChar + DateTime.Now.ToShortDateString() + ".txt";
 
             if (!File.Exists(filePath))
             {
-                using (var fileStream = new FileStream(filePath, FileMode.OpenOrCreate)) { }
+                using var file = new FileStream(filePath, FileMode.Create);
             }
         }
 
-        public void WorkWithFiles(string message)
+        public static void Write(string message)
         {
             CreateFile();
 
-            var filePath = GetDirectoryPath() + pathSeparator + DateTime.Now.ToShortDateString() + ".txt";
+            var filePath = GetDirectoryPath() + Path.DirectorySeparatorChar + DateTime.Now.ToShortDateString() + ".txt";
 
-            using (var streamWriter = new StreamWriter(filePath, true, Encoding.UTF8))
-            {
-                streamWriter.WriteLine(message);
-            }
+            using var stream = new StreamWriter(filePath, false, Encoding.UTF8);
+            stream.WriteLine(message);
         }
 
-        public void WorkWithSerializationFile(string message, string serializationPath)
+        public static void Write(string message, string path)
         {
-            var serializationProductsPath = GetDirectoryPath() + pathSeparator + serializationPath;
-
-            if (!File.Exists(serializationProductsPath))
-                using (var fileStream = new FileStream(serializationProductsPath, FileMode.OpenOrCreate)) { }
-
-            using (var streamWriter = new StreamWriter(serializationProductsPath, false, Encoding.UTF8))
-            {
-                streamWriter.WriteLine(message);
-            }
+            using var stream = new StreamWriter(path, false, Encoding.UTF8);
+            stream.WriteLine(message);
         }
     }
 }

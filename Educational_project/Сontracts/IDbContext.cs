@@ -12,5 +12,8 @@ namespace StorePhone.Сontracts
          List<User> Users { get; set; }
         
          List<Currency> Currencies { get; set; }
+
+         void Save();
+         void Init();
     }
 }
