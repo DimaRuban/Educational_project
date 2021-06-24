@@ -7,12 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StorePhone", "Educational_p
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Delivery discount", "Delivery discount\Delivery discount.csproj", "{74E7461B-16F1-4F59-93E0-58DE6B32C49F}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SQL", "SQL", "{E1C09474-2592-4727-9A29-5DAA2FC57CB2}"
-	ProjectSection(SolutionItems) = preProject
-		..\..\..\OneDrive\Desktop\DeliveryFood.sql = ..\..\..\OneDrive\Desktop\DeliveryFood.sql
-		..\..\..\OneDrive\Desktop\Diagram.png = ..\..\..\OneDrive\Desktop\Diagram.png
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
