@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace StoreApp.Models
+﻿namespace StoreApp.Models
 {
     public class Provider
     {
@@ -8,21 +6,17 @@ namespace StoreApp.Models
         {               
         }
 
-        public Provider(int id, string name, List<Category> category, List<Product> product)
+        public Provider(int id, string name, string phone)
         {
             Id = id;
             Name = name;
-            Category = category;
-            Product = product;
+            Phone = phone;
         }
 
         public int Id { get; set; }
 
         public string Name { get; set; }
 
-        public List<Category> Category { get; set; }
-
-        public List<Product> Product  { get; set; }
-
+        public string Phone { get; set; }
     }
 }

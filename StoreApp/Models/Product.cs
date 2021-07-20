@@ -7,13 +7,17 @@ namespace StoreApp.Models
         public Product()
         {
         }
-        public Product(int id, string name, decimal price, List<Color> color, List<MemorySize> memorySize)
+       
+        public Product(int id, string name, string description, decimal price, Color color, MemorySize memorySize, Category category, Provider provider)
         {
             Id = id;
             Name = name;
+            Description = description;
             Price = price;
             Color = color;
             MemorySize = memorySize;
+            Category = category;
+            Provider = provider;
         }
 
         public int Id { get; set; }
@@ -24,11 +28,13 @@ namespace StoreApp.Models
 
         public decimal Price { get; set; }
 
-        public List<Color> Color { get; set; }
+        public Color Color { get; set; }
 
-        public List<MemorySize> MemorySize { get; set; }
+        public MemorySize MemorySize { get; set; }
 
         public Category Category { get; set; }
+
+        public Provider Provider  { get; set; }
 
         public string ImageName { get; set; }
     }
