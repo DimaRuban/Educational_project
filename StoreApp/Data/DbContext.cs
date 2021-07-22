@@ -1,9 +1,10 @@
-﻿using StoreApp.Models;
+﻿using StoreApp.Contracts;
+using StoreApp.Models;
 using System.Collections.Generic;
 
 namespace StoreApp.Data
 {
-    public class DbContext
+    public class DbContext : IDbContext
     {
         public List<Product> Products { get; set; }
 
@@ -29,5 +30,9 @@ namespace StoreApp.Data
             Providers = new List<Provider>();
             Roles = new List<Role>();
         }
+
+        public void InitData()
+        {
+        } 
     }
 }
