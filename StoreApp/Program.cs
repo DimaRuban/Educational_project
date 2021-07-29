@@ -45,6 +45,29 @@ namespace StoreApp
                 Console.WriteLine($"Provider: {product.providerName} - {product.count} products");
             }
 
+            Console.WriteLine("\n*****Task 5*****\n");
+
+            var firstProvider = dbContext.Products.Where(x => x.Provider.Name == "Apple.ua");
+            var secondProvider = dbContext.Products.Where(x => x.Provider.Name == "Citrus.ua");
+
+            var sameProduct = firstProvider.Intersect(secondProvider, new ProductComparer());
+
+            var differentProductForFirstProvider = firstProvider.Except(secondProvider, new ProductComparer());
+            var differentProductForSecondProvider = secondProvider.Except(firstProvider, new ProductComparer());
+
+            var concatDifferentProduct = differentProductForFirstProvider.Concat(differentProductForSecondProvider);
+
+            foreach (var product in sameProduct)
+            {
+                Console.WriteLine($"Same product have category name - {product.Category.Name}");
+            }
+
+            Console.WriteLine();
+
+            foreach (var product in concatDifferentProduct)
+            {
+                Console.WriteLine($"Different product - {product.Name}, with category name - {product.Category.Name}");
+            }
             Console.ReadKey();
         }
     }
