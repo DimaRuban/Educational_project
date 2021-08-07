@@ -20,7 +20,7 @@ namespace EducationalProject
             
             var logger = new Logger();
 
-            var validator = new Validator(dbContext, display);
+            var validator = new Validator();
 
             var productController = new ProductController(dbContext, logger);
             var orderController = new OrderController(dbContext, logger);
@@ -34,7 +34,7 @@ namespace EducationalProject
 
             dbContext.Init();
 
-            display.PrintForDisplay("Здравствуйте! Вас приветствует магазин Store Phone!\n");
+            display.Print("Здравствуйте! Вас приветствует магазин Store Phone!\n");
 
             while (true)
             {
