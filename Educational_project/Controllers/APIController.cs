@@ -6,11 +6,11 @@ using System.Net.Http;
 
 namespace StorePhone.Controllers
 {
-    public class APIController
+    public class ApiController
     {
         private readonly IDbContext _dbContext;
 
-        public APIController(IDbContext dbContext)
+        public ApiController(IDbContext dbContext)
         {
             _dbContext = dbContext;
         }
