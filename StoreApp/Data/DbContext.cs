@@ -12,9 +12,9 @@ namespace StoreApp.Data
 
         public List<User> Users { get; set; }
 
-        public List<Color> Color { get; set; }
+        public List<Color> Colors { get; set; }
 
-        public List<MemorySize> MemorySize { get; set; }
+        public List<MemorySize> MemorySizes { get; set; }
 
         public List<Provider> Providers { get; set; }
 
@@ -25,14 +25,10 @@ namespace StoreApp.Data
             Products = new List<Product>();
             Orders = new List<Order>();
             Users = new List<User>();
-            Color = new List<Color>();
-            MemorySize = new List<MemorySize>();
+            Colors = new List<Color>();
+            MemorySizes = new List<MemorySize>();
             Providers = new List<Provider>();
             Roles = new List<Role>();
         }
-
-        public void InitData()
-        {
-        } 
     }
 }
