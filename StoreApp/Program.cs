@@ -10,13 +10,16 @@ namespace StoreApp
     {
         static void Main(string[] args)
         {
+           
             var dbContext = new DbContext();
             dbContext.InitData();
 
+            var request = new LinqRequest(dbContext);
+
+
             Console.WriteLine("\n*****Task 1*****\n");
 
-            var productList1 = dbContext.Products.Select(x => x).OrderBy(x => x.Name);
-            foreach (var product in productList1)
+            foreach (var product in request.GetResultTask1())
             {
                 Console.WriteLine($"Product: {product.Name}");
             }
@@ -31,44 +34,34 @@ namespace StoreApp
 
             Console.WriteLine("\n*****Task 3*****\n");
 
-            var productList3 = dbContext.Products.GroupBy(x => x.Category.Name).Select(x => new { categoryName = x.Key, count = x.Count() });
-            foreach (var product in productList3)
+            foreach (var product in request.GetResultTask3())
             {
-                Console.WriteLine($"Category: {product.categoryName} - {product.count} products");
+                Console.WriteLine($"Category: {product.Item1} - {product.Item2} products");
             }
 
             Console.WriteLine("\n*****Task 4*****\n");
 
-            var productList4 = dbContext.Products.GroupBy(x => x.Provider.Name).Select(x => new { providerName = x.Key, count = x.Count() }).OrderByDescending(x => x.count);
-            foreach (var product in productList4)
+            foreach (var product in request.GetResultTask4())
             {
-                Console.WriteLine($"Provider: {product.providerName} - {product.count} products");
+                Console.WriteLine($"Provider: {product.Item1} - {product.Item2} products");
             }
 
             Console.WriteLine("\n*****Task 5*****\n");
 
-            var firstProvider = dbContext.Products.Where(x => x.Provider.Name == "Apple.ua");
-            var secondProvider = dbContext.Products.Where(x => x.Provider.Name == "Citrus.ua");
-
-            var sameProduct = firstProvider.Intersect(secondProvider, new ProductComparer());
-
-            var differentProductForFirstProvider = firstProvider.Except(secondProvider, new ProductComparer());
-            var differentProductForSecondProvider = secondProvider.Except(firstProvider, new ProductComparer());
-
-            var concatDifferentProduct = differentProductForFirstProvider.Concat(differentProductForSecondProvider);
-
-            foreach (var product in sameProduct)
+            foreach (var product in request.GetResultTask5_1())
             {
                 Console.WriteLine($"Same product have category name - {product.Category.Name}");
             }
 
             Console.WriteLine();
 
-            foreach (var product in concatDifferentProduct)
+            foreach (var product in request.GetResultTask5_2())
             {
                 Console.WriteLine($"Different product - {product.Name}, with category name - {product.Category.Name}");
             }
+
             Console.ReadKey();
         }
+       
     }
 }

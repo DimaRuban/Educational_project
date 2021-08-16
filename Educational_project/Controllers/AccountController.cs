@@ -23,7 +23,7 @@ namespace StorePhone.Controllers
         {
             var newUserId = _dbContext.Users.Max(x => x.Id) + 1;
             
-            if(!IsUserExists(userName))
+            //if(!IsUserExists(userName))
             {
                 _dbContext.Users.Add(new User(newUserId, firstName, lastName, emailAddress, phoneNumber, userName, password, new Role { Name = Role }));
                 _dbContext.Save();
