@@ -1,27 +1,18 @@
 ﻿using EF_Store.Data;
 using EF_Store.Domain;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace EF_Store.UI
 {
     class Program
     {
-        private static DataContext _context;
         static void Main(string[] args)
         {
-            _context = new DataContext();
-            _context.Database.EnsureCreated();
+            var dbContext = new DataContext();
+            var unitOfWork = new UnitOfWork(dbContext);
 
-            AddProduct();
-            GetProduct();
+            dbContext.Database.EnsureCreated();
 
-            Console.ReadKey();
-        }
-
-        private static void AddProduct()
-        {
             var productList = new List<Product> {
 
             new Product {  Name = "Iphone 11", Category = new Category { Name = "Iphone" }, Color = new Color { Name = "Black" }, MemorySize = new MemorySize { Size = 256 }, Description = "Text", Price = 20000, Provider = new Provider { Name = "Apple.ua" } },
@@ -34,22 +25,13 @@ namespace EF_Store.UI
             new Product {  Name = "Galaxy S21 Plus", Category = new Category { Name = "Samsung" }, Color = new Color { Name = "Black" }, MemorySize = new MemorySize { Size = 128 }, Description = "Text", Price = 35000, Provider = new Provider { Name = "Citrus.ua" } },
             new Product {  Name = "Xiaomi Mi 10", Category = new Category { Name = "Xiaomi" }, Color = new Color { Name = "Red" }, MemorySize = new MemorySize { Size = 128 }, Description = "Text", Price = 17000, Provider = new Provider { Name = "Xiaomi Ukraine" } },
             new Product {  Name = "Xiaomi Mi 11", Category = new Category { Name = "Xiaomi" }, Color = new Color { Name = "Black" }, MemorySize = new MemorySize { Size = 128 }, Description = "Text", Price = 24000, Provider = new Provider { Name = "Citrus.ua" } } };
-            
+
             foreach (var product in productList)
             {
-                _context.Products.Add(product);
+                unitOfWork.Products.CreateObject(product);
             }
 
-            _context.SaveChanges();
-        }
-
-        private static void GetProduct()
-        {
-            var products = _context.Products.ToList();
-            foreach (var product in products)
-            {
-                Console.WriteLine($"Product - {product.Name}, category - {product.Category.Name}, color - {product.Color.Name}, memory - {product.MemorySize.Size}, price - {product.Price}, provider - {product.Provider.Name}");
-            }
+            unitOfWork.Save();
         }
     }
 } 
