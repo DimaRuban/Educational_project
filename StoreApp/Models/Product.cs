@@ -4,22 +4,7 @@ namespace StoreApp.Models
 {
     public class Product
     {
-        public Product()
-        {
-        }
        
-        public Product(int id, string name, string description, decimal price, Color color, MemorySize memorySize, Category category, Provider provider)
-        {
-            Id = id;
-            Name = name;
-            Description = description;
-            Price = price;
-            Color = color;
-            MemorySize = memorySize;
-            Category = category;
-            Provider = provider;
-        }
-
         public int Id { get; set; }
 
         public string Name { get; set; }
@@ -30,11 +15,19 @@ namespace StoreApp.Models
 
         public Color Color { get; set; }
 
+        public int ColorId { get; set; }
+
         public MemorySize MemorySize { get; set; }
+
+        public int MemorySizeId { get; set; }
 
         public Category Category { get; set; }
 
+        public int CategoryId { get; set; }
+
         public Provider Provider  { get; set; }
+
+        public int ProviderId { get; set; }
 
         public string ImageName { get; set; }
     }

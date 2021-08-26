@@ -1,32 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace StoreApp.Models
 {
     public class Order
     {
-        public Order()
-        {
-        }
-
-        public Order(int id, DateTime createdAt, User user, string address, int quantity, decimal totalPrice, decimal deliveryCost, Status status)
-        {
-            Id = id;
-            CreatedAt = createdAt;
-            User = user;
-            Address = address;
-            Quantity = quantity;
-            TotalPrice = totalPrice;
-            DeliveryCost = deliveryCost;
-            Status = status;
-        }
 
         public int Id { get; set; }
 
         public User User { get; set; }
-        
-        public Product Product { get; set; }
 
-        public DateTime CreatedAt { get; set; }
+        public int UserId { get; set; }
+
+        public List<Product> Products { get; set; }
+        
+        public DateTime OrderDataTime { get; set; }
 
         public string Address { get; set; }
 
