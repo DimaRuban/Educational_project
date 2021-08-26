@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EF_Store.Data\EF_Store.Data.csproj" />
+    <ProjectReference Include="..\EF_Store.Domain\EF_Store.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
