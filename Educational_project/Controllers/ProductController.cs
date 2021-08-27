@@ -1,6 +1,7 @@
 ﻿using StorePhone.Models;
 using StorePhone.Сontracts;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace StorePhone.Controllers
@@ -23,6 +24,12 @@ namespace StorePhone.Controllers
             _dbContext.Products.Add(new Product(newProductId, name, price, color, memorySize));
             _dbContext.Save();
             _logger.Log($"{DateTime.Now} - был добавлен новый продукт, с ID = {newProductId}");
+        }
+
+        public IEnumerable<Product> GetProducts()
+        {
+            return _dbContext.Products.ToArray().Select(x => new Product())
+                    .ToList();
         }
     }
 }
