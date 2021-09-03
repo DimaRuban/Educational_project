@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using EF_Store.Data;
+using Newtonsoft.Json;
 using StorePhone.Controllers;
 using StorePhone.Data;
 using StorePhone.Logging;
@@ -14,32 +15,32 @@ namespace EducationalProject
     {
         static void Main(string[] args)   
         {   
-            var display = new Display();
+            //var display = new Display();
             
-            var dbContext = new DbContext();   
-            
-            var logger = new Logger();
+            //var dbContext = new DbContext();
 
-            var validator = new Validator();
+            //var logger = new Logger();
 
-            var productController = new ProductController(dbContext, logger);
-            var orderController = new OrderController(dbContext, logger);
-            var accountController = new AccountController(dbContext, logger);
+            //var validator = new Validator();
+
+            //var productController = new ProductController( logger);
+            //var orderController = new OrderController(dbContext, logger);
+            //var accountController = new AccountController(dbContext, logger);
            
-            var productUi = new ProductUi(display, dbContext, productController);
-            var orderUi = new OrderUi(display, orderController, productUi, validator);
-            var accountUi = new AccountUi(display,accountController, validator);
+            //var productUi = new ProductUi(display, dbContext, productController);
+            //var orderUi = new OrderUi(display, orderController, productUi, validator);
+            //var accountUi = new AccountUi(display,accountController, validator);
 
-            var menu = new Menu(productUi, orderUi, accountUi, display);
+            //var menu = new Menu(productUi, orderUi, accountUi, display);
 
-            dbContext.Init();
+            //dbContext.Init();
 
-            display.Print("Здравствуйте! Вас приветствует магазин Store Phone!\n");
+            //display.Print("Здравствуйте! Вас приветствует магазин Store Phone!\n");
 
-            while (true)
-            {
-                menu.GetMenu();         
-            }
+            //while (true)
+            //{
+            //    menu.GetMenu();         
+            //}
         }
     }
 }

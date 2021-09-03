@@ -9,7 +9,7 @@ namespace EF_Store.UI
         {
             var dbContext = new DataContext();
             var unitOfWork = new UnitOfWork(dbContext);
-
+          
             dbContext.Database.EnsureCreated();
 
             var productList = new List<Product> {
