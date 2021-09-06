@@ -5,7 +5,7 @@
         public Product()
         {
         }
-        public Product(int id ,string name, decimal price, string color, int memorySize)
+        public Product(int id, string name, decimal price, string color, int memorySize)
         {
             Id = id;
             Name = name;

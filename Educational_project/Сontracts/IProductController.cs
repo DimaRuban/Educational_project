@@ -1,4 +1,6 @@
-﻿namespace StorePhone.Сontracts
+﻿using EF_Store.Domain;
+
+namespace StorePhone.Сontracts
 {
     public interface IProductController
     {
