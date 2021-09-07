@@ -6,10 +6,10 @@ namespace StorePhone.UI
     public class AccountUi : IAccountUi
     {
         private readonly IDisplay _display;
-        private readonly IAccountController _accountController;
+        private readonly IAccountService _accountController;
         private readonly IValidator _validator;
 
-        public AccountUi(IDisplay display, IAccountController accountController, IValidator validator)
+        public AccountUi(IDisplay display, IAccountService accountController, IValidator validator)
         {
             _display = display;
             _accountController = accountController;

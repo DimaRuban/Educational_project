@@ -1,3 +1,5 @@
+using EF_Store.Data;
+using EF_Store.Data.Contracts;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -7,10 +9,15 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using StorePhone.Controllers;
+using StorePhone.Logging;
+using StorePhone.Services;
+using StorePhone.Ñontracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ILogger = StorePhone.Ñontracts.ILogger;
 
 namespace StorePhoneAPI
 {
@@ -23,9 +30,15 @@ namespace StorePhoneAPI
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<DataContext>();
+            services.AddSingleton<ILogger, Logger>();
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<IProductService, ProductService>();
+            services.AddSingleton<IOrderService, OrderService>();
+            services.AddTransient<IAccountService, AccountService>();
+            services.AddTransient<ICategoryService, CategoryService>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -34,7 +47,6 @@ namespace StorePhoneAPI
             });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())

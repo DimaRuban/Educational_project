@@ -7,9 +7,9 @@ namespace StorePhone.UI
     {
         private readonly IDisplay _display;
         private readonly IDbContext _dbContext;
-        private readonly IProductController _productController;
+        private readonly IProductService _productController;
 
-        public ProductUi(IDisplay display, IDbContext dbContext, IProductController productController)
+        public ProductUi(IDisplay display, IDbContext dbContext, IProductService productController)
         {
             _display = display;
             _dbContext = dbContext;

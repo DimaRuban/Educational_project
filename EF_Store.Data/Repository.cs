@@ -20,7 +20,11 @@ namespace EF_Store.Data
 
         public void DeleteObject(int id)
         {
-            throw new NotImplementedException();
+            T objectToDelete = _dbContext.Set<T>().Find(id);
+            if (objectToDelete != null)
+            {
+                _dbContext.Set<T>().Remove(objectToDelete);
+            }
         }
 
         public T GetObject(int id)

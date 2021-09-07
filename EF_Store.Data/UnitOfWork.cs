@@ -22,6 +22,7 @@ namespace EF_Store.Data
         {
             _dbContext = context;
             products = new Repository<Product>(_dbContext);
+            orders = new Repository<Order>(_dbContext);
             colors = new Repository<Color>(_dbContext);
         }
 
@@ -70,8 +71,7 @@ namespace EF_Store.Data
         {
             get
             {
-                return orders ??
-                    (orders = new Repository<Order>(_dbContext));
+                return orders;
             }
         }
 
