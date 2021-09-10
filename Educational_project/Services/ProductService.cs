@@ -3,6 +3,7 @@ using EF_Store.Domain;
 using StorePhone.Сontracts;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace StorePhone.Controllers
 {
@@ -36,6 +37,11 @@ namespace StorePhone.Controllers
         {
             _dbContext.Products.DeleteObject(id);
             _dbContext.Save();
+        }
+
+        public Product GetProduct(int id)
+        {
+            return _dbContext.Products.GetObject(id);
         }
 
         public IEnumerable<Product> GetProducts()

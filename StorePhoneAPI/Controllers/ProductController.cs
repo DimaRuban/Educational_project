@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace StorePhoneAPI.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class ProductController : ControllerBase
     {
         private readonly IProductService _productService;
@@ -16,19 +16,19 @@ namespace StorePhoneAPI.Controllers
             _productService = productService;
         }
 
-        [HttpGet]
+        [HttpGet("GetProducts")]
         public IEnumerable<Product> GetProducts()
         {
             return _productService.GetProducts();       
         }
 
-        [HttpPost]
+        [HttpPost("AddProducts")]
         public void AddProducts(Product product)
         {
             _productService.AddProduct(product);
         }
 
-        [HttpDelete]
+        [HttpDelete("DeleteProduct/{id?}")]
         public void DeleteProduct(int id)
         {
             _productService.DeleteProduct(id);

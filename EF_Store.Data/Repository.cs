@@ -29,7 +29,7 @@ namespace EF_Store.Data
 
         public T GetObject(int id)
         {
-            throw new NotImplementedException();
+            return _dbContext.Find<T>(id);
         }
 
         public IEnumerable<T> GetObjects()

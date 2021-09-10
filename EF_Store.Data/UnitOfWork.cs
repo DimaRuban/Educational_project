@@ -8,7 +8,7 @@ namespace EF_Store.Data
     {
         private readonly DataContext _dbContext;
 
-        private IRepository<Product> products;
+        private IProductRepository products;
         private IRepository<Category> categories;
         private IRepository<Color> colors;
         private IRepository<MemorySize> memorySizes;
@@ -21,12 +21,12 @@ namespace EF_Store.Data
         public UnitOfWork(DataContext context)
         {
             _dbContext = context;
-            products = new Repository<Product>(_dbContext);
+            products = new ProductRepository(_dbContext);
             orders = new Repository<Order>(_dbContext);
             colors = new Repository<Color>(_dbContext);
         }
 
-        public IRepository<Product> Products
+        public IProductRepository Products
         {
             get
             {

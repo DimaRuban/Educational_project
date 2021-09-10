@@ -41,6 +41,7 @@ namespace StorePhoneAPI
             services.AddTransient<ICategoryService, CategoryService>();
 
             services.AddControllers();
+            services.AddMvc();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "StorePhoneAPI", Version = "v1" });

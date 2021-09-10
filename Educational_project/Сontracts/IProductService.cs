@@ -7,6 +7,8 @@ namespace StorePhone.Сontracts
     {
         IEnumerable<Product> GetProducts();
 
+       Product GetProduct(int id);
+
         void AddProduct(string name, decimal price, string color, int memorySize);
 
         void AddProduct(Product product);

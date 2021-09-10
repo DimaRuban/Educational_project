@@ -14,7 +14,7 @@ namespace StorePhoneAPI.Controllers
         {
             _orderService = orderService;
         }
-        [HttpPost]
+        [HttpPost("AddOrder")]
         public void AddOrder(Order order)
         {
             _orderService.AddOrder(order);
