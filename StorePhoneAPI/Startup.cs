@@ -10,14 +10,13 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using StorePhone.Controllers;
-using StorePhone.Logging;
 using StorePhone.Services;
 using StorePhone.Ñontracts;
+using StorePhoneAPI.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ILogger = StorePhone.Ñontracts.ILogger;
 
 namespace StorePhoneAPI
 {
@@ -33,12 +32,14 @@ namespace StorePhoneAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<DataContext>();
-            services.AddSingleton<ILogger, Logger>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IProductService, ProductService>();
             services.AddSingleton<IOrderService, OrderService>();
             services.AddTransient<IAccountService, AccountService>();
             services.AddTransient<ICategoryService, CategoryService>();
+            services.AddSingleton<ExceptionFilter>();
+            services.AddSingleton<RequestBodyActionFilter>();
+            services.AddSingleton<Microsoft.Extensions.Logging.ILogger, Logger<ExceptionFilter>>();
 
             services.AddControllers();
             services.AddMvc();

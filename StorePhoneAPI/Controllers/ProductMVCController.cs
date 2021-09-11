@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using StorePhone.Сontracts;
+using StorePhoneAPI.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace StorePhoneAPI.Controllers
 {
     [ApiController]
     [Route("mvc/[controller]")]
+    [ServiceFilter(typeof(ExceptionFilter))]
     public class ProductMVCController : Controller
     {
         private readonly IProductService _productService;
@@ -21,7 +23,8 @@ namespace StorePhoneAPI.Controllers
         }
 
         // GET: ProductMVCController
-        [HttpGet("index")]      
+        [HttpGet("index")]
+        [ServiceFilter(typeof(RequestBodyActionFilter))]
         public ActionResult Index()
         {
            var products = _productService.GetProducts();
