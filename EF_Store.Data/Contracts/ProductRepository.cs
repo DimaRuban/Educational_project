@@ -32,12 +32,12 @@ namespace EF_Store.Data.Contracts
 
         public Product GetObject(int id)
         {
-            return _dbContext.Products.Where(x => x.Id == id).FirstOrDefault();
+            return _dbContext.Products.Include(x => x.Category).Include(x=>x.Provider).Include(x => x.Color).Include(x=>x.MemorySize).Where(x => x.Id == id).FirstOrDefault();
         }
 
         public IEnumerable<Product> GetObjects()
         {
-            return _dbContext.Set<Product>();
+            return _dbContext.Products.Include(x => x.Category).Include(x => x.Provider).Include(x => x.Color).Include(x => x.MemorySize);
         }
 
         public void UpdateObject(Product item)
