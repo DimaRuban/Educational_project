@@ -3,11 +3,10 @@
         ViewData["Title"] = "Index";
     }
 
-    <h1>Index</h1>
     <h1>GetProducts</h1>
 
     <p>
-        <a asp-action="Create">Create New</a>
+        @Html.ActionLink("Create new product", "Create", new {})
     </p>
     <table class="table">
         <thead>
@@ -68,9 +67,9 @@
                         @Html.DisplayFor(modelItem => item.Provider.Name)
                     </td>
                     <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        @Html.ActionLink("Edit", "Edit", new { item.Id }) |
                         @Html.ActionLink("Details", "Details", new { item.Id }) |
-                        @Html.ActionLink("Delete", "Delete", new { item.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { item.Id })   |
                     </td>
                 </tr>
             }

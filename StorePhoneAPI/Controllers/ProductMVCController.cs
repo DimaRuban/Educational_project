@@ -40,13 +40,17 @@ namespace StorePhoneAPI.Controllers
         [HttpGet("create")]
         public ActionResult Create()
         {
-            return View();
+            return View("Create");
         }
 
         // POST: ProductMVCController/Create
         [HttpPost("create")]
         public ActionResult Create(Product product)
         {
+            if (!ModelState.IsValid)
+            {
+                return View("Create");
+            }
             _productService.AddProduct(product);
 
             return RedirectToAction("index");

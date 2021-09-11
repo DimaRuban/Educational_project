@@ -3,40 +3,64 @@
         ViewData["Title"] = "Details";
     }
 
-    <h2>ff</h2>
+    <h2>Details</h2>
 
     <div>
-        <h4>CategoryVM</h4>
         <hr />
         <dl class="dl-horizontal">
             <dt>
-                @Html.DisplayNameFor(model => model.Id)
+                @Html.DisplayNameFor(model => model.Id):
             </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Id)
+            </dd>
 
+            <dt>
+                @Html.DisplayNameFor(model => model.Name):
+            </dt>
             <dd>
                 @Html.DisplayFor(model => model.Name)
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.Price)
+                @Html.DisplayNameFor(model => model.Category):
             </dt>
-
             <dd>
-                @Html.DisplayFor(model => model.MemorySize)
+                @Html.DisplayFor(model => model.Category.Name)
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.Color)
+                @Html.DisplayNameFor(model => model.MemorySize):
             </dt>
-
             <dd>
-                @Html.DisplayFor(model => model.Category.Name)
+                @Html.DisplayFor(model => model.MemorySize.Size)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Color):
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Color.Name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Description):
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Price):
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Price)
             </dd>
 
         </dl>
     </div>
     <p>
         @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-        @Html.ActionLink("Edit", "Delete", new { id = Model.Id }) |
+        @Html.ActionLink("Delete", "Delete", new { id = Model.Id }) |
         @Html.ActionLink("Back to List", "Index")
     </p>
