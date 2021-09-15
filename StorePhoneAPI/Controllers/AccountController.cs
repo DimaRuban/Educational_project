@@ -15,7 +15,7 @@ namespace StorePhoneAPI.Controllers
         {
             _accountService = accountService;
         }
-        // GET: api/<AccountController>
+
         [HttpGet]
         public IEnumerable<User> GetUsers()
         {

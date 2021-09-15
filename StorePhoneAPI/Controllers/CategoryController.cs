@@ -16,21 +16,20 @@ namespace StorePhoneAPI.Controllers
         {
             _categoryService = categoryService;
         }
-        // GET: api/<CategoryController>
+      
         [HttpGet]
         public IEnumerable<Category> Get()
         {
             return _categoryService.GetProducts();
         }     
 
-        // POST api/<CategoryController>
         [HttpPost]
-        public void AddCategory(Category category)
+        public IActionResult AddCategory(Category category)
         {
             _categoryService.AddCategory(category);
+            return Ok();
         }
-
-        // DELETE api/<CategoryController>/5
+      
         [HttpDelete("{id}")]
         public void Delete(int id)
         {

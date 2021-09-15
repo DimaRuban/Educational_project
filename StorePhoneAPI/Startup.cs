@@ -2,22 +2,13 @@ using EF_Store.Data;
 using EF_Store.Data.Contracts;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using StorePhone.Controllers;
-using StorePhone.Logging;
 using StorePhone.Services;
 using StorePhone.Ñontracts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using ILogger = StorePhone.Ñontracts.ILogger;
 
 namespace StorePhoneAPI
 {
@@ -33,7 +24,6 @@ namespace StorePhoneAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<DataContext>();
-            services.AddSingleton<ILogger, Logger>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IProductService, ProductService>();
             services.AddSingleton<IOrderService, OrderService>();
