@@ -17,6 +17,7 @@ namespace StorePhoneAPI.Controllers
         }
 
         [HttpGet("GetProducts")]
+        [ResponseCache(Duration = 120)]
         public IEnumerable<Product> GetProducts()
         {
             return _productService.GetProducts();       
