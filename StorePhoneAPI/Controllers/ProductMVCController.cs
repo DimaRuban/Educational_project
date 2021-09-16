@@ -22,7 +22,6 @@ namespace StorePhoneAPI.Controllers
             _productService = productService;
         }
 
-        // GET: ProductMVCController
         [HttpGet("index")]
         [ServiceFilter(typeof(RequestBodyActionFilter))]
         public ActionResult Index()
@@ -31,7 +30,6 @@ namespace StorePhoneAPI.Controllers
             return View("Index",products);
         }
 
-        // GET: ProductMVCController/Details/id
         [HttpGet("Details/{id}")]
         public ActionResult Details(int id)
         {
@@ -39,14 +37,12 @@ namespace StorePhoneAPI.Controllers
             return View("Details", product);
         }
 
-        // GET: ProductMVCController/Create
         [HttpGet("create")]
         public ActionResult Create()
         {
             return View("Create");
         }
 
-        // POST: ProductMVCController/Create
         [HttpPost("create")]
         public ActionResult Create(Product product)
         {
@@ -59,7 +55,6 @@ namespace StorePhoneAPI.Controllers
             return RedirectToAction("index");
         }
 
-        // GET: ProductMVCController/Delete/id
         [HttpGet("delete/{id}")]
         public ActionResult Delete(int id)
         {
