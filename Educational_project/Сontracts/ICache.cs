@@ -3,9 +3,8 @@ using System.Collections.Generic;
 
 namespace StorePhone.Сontracts
 {
-    public interface ICacheService
+    public interface ICache
     {
-        IEnumerable<Product> Get();
-        void Set(Product product);
+        List<Product> DataCache { get; set; }
     }
 }

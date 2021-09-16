@@ -12,13 +12,17 @@ namespace EducationalProject
         {   
             var display = new Display();
             
-            var dbContext = new DbContext();   
+            var dbContext = new DbContext();
+
+            var cache = new Cache();
             
             var logger = new Logger();
 
             var validator = new Validator();
 
-            var productController = new ProductController(dbContext, logger);
+            var cacheService = new CacheService(cache);
+
+            var productController = new ProductController(dbContext, logger, cacheService);
             var orderController = new OrderController(dbContext, logger);
             var accountController = new AccountController(dbContext, logger);
            

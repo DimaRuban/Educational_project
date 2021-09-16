@@ -2,21 +2,52 @@
 using StorePhone.Сontracts;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace StorePhone.Data
 {
     public class CacheService : ICacheService
     {
-        public Queue<Product> Products { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        private readonly Cache _cache;
+        private static readonly object _locker = new object();
 
-        public void Get()
+        public CacheService(Cache cache)
         {
-            throw new NotImplementedException();
+            _cache = cache;
         }
 
-        public void Set()
+        public CacheService()
+        {        
+        }
+
+        public IEnumerable<Product> Get()
         {
-            throw new NotImplementedException();
+            lock (_locker)
+            {
+                if (_cache.DataCache.Count != 0)
+                {
+                    while (_cache.DataCache.Count < 5)
+                    {
+                        return _cache.DataCache;
+                    }              
+                } 
+                return _cache.DataCache;
+            }
+        }
+
+        public void Set(Product product)
+        {
+            lock (_locker)
+            {
+                if (_cache.DataCache.Count == 5)
+                {
+                    _cache.DataCache.RemoveAt(0);
+                }
+                else
+                {
+                    _cache.DataCache.Add(product);
+                }
+            }
         }
     }
 }
