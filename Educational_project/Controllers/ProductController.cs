@@ -19,14 +19,15 @@ namespace StorePhone.Controllers
             _cacheService = cacheService;
         }
 
-        public void AddProduct(string name, decimal price, string color, int memorySize)
+        public void AddProduct(Product product)
         {
-            var newProductId = _dbContext.Products.Max(x => x.Id) + 1;
+            product.Id  = _dbContext.Products.Max(x => x.Id) + 1;
 
-            _dbContext.Products.Add(new Product(newProductId, name, price, color, memorySize));
+            _dbContext.Products.Add(new Product(product.Id, product.Name, product.Price, product.Color, product.MemorySize));
             _dbContext.Save();
-            _logger.Log($"{DateTime.Now} - был добавлен новый продукт, с ID = {newProductId}");
-            CacheDelegate cacheDelegate = _cacheService.Set();
+            _logger.Log($"{DateTime.Now} - был добавлен новый продукт, с ID = {product.Id}");
+            CacheDelegate cacheDelegate = _cacheService.Set;
+            cacheDelegate(product);
         }
     }
 }
