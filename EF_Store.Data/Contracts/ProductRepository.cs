@@ -23,7 +23,7 @@ namespace EF_Store.Data.Contracts
 
         public void DeleteObject(int id)
         {
-            Product objectToDelete = _dbContext.Set<Product>().Find(id);
+            var objectToDelete = _dbContext.Set<Product>().Find(id);
             if (objectToDelete != null)
             {
                 _dbContext.Set<Product>().Remove(objectToDelete);
