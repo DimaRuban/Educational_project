@@ -24,15 +24,17 @@ namespace StorePhoneAPI.Controllers
         }     
 
         [HttpPost("AddCategory")]
-        public void AddCategory(Category category)
+        public IActionResult AddCategory(Category category)
         {
             _categoryService.AddCategory(category);
+            return Ok();
         }
 
         [HttpDelete("DeleteCategory/{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
             _categoryService.DeleteCategory(id);
+            return Ok();
         }
     }
 }

@@ -23,9 +23,10 @@ namespace StorePhoneAPI.Controllers
         }
 
         [HttpPost("Register")]
-        public void Register(User user)
+        public IActionResult Register(User user)
         {
             _accountService.Register(user);
+            return Ok();
         }
     }
 }
