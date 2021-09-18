@@ -1,16 +1,24 @@
-﻿using StorePhone.Models;
+﻿using EF_Store.Data.Contracts;
+using StorePhone.Models;
 using StorePhone.Сontracts;
 using System;
 using System.Linq;
 
 namespace StorePhone.Controllers
 {
-    public class OrderController : IOrderController
+    public class OrderService : IOrderService
     {  
         private readonly IDbContext _dbContext;
         private readonly ILogger _logger;
 
-        public OrderController(IDbContext dbContext, ILogger logger)
+        private readonly IUnitOfWork _unitOfWork;
+
+        public OrderService(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
+
+        public OrderService(IDbContext dbContext, ILogger logger)
         {
             _dbContext = dbContext;
             _logger = logger;
@@ -37,6 +45,12 @@ namespace StorePhone.Controllers
             _dbContext.Orders.Add(new Order(newOrderId, DateTime.Now, userName, phoneNumber, address, quantity, totalPrice));
             _dbContext.Save();
             _logger.Log($"{DateTime.Now} - был создан новый заказ, с ID = {newOrderId}");
+        }
+
+        public void AddOrder(EF_Store.Domain.Order order)
+        {
+            _unitOfWork.Orders.CreateObject(order);
+            _unitOfWork.Save();
         }
     }
 }

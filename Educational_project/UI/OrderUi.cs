@@ -8,11 +8,11 @@ namespace StorePhone.UI
         private int IdProductForBuy { get; set; }
 
         private readonly IDisplay _display;
-        private readonly IOrderController _orderController;
+        private readonly IOrderService _orderController;
         private readonly IProductUi _productUi;
         private readonly IValidator _validator;
 
-        public OrderUi( IDisplay display, IOrderController orderController, IProductUi productUi, IValidator validator)
+        public OrderUi( IDisplay display, IOrderService orderController, IProductUi productUi, IValidator validator)
         {
             _display = display;
             _orderController = orderController;
