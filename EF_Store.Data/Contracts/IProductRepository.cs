@@ -9,10 +9,10 @@ namespace EF_Store.Data.Contracts
 {
     public interface IProductRepository
     {
-        IEnumerable<Product> GetObjects();
-        Product GetObject(int id);
-        void CreateObject(Product item);
-        void UpdateObject(Product item);
-        void DeleteObject(int id);
+        IEnumerable<Product> Get();
+        Product Get(int id);
+        void Create(Product item);
+        void Update(Product item);
+        void Delete(int id);
     }
 }

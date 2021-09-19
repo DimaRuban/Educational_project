@@ -22,7 +22,6 @@ namespace StorePhoneAPI.Controllers
             _productService = productService;
         }
 
-
         [HttpGet("index")]
         [ServiceFilter(typeof(RequestBodyActionFilter))]
         public ActionResult Index()
@@ -30,7 +29,6 @@ namespace StorePhoneAPI.Controllers
            var products = _productService.GetProducts();
             return View("Index",products);
         }
-
 
         [HttpGet("Details/{id}")]
         public ActionResult Details(int id)
@@ -46,7 +44,6 @@ namespace StorePhoneAPI.Controllers
             return View("Create");
         }
 
-
         [HttpPost("create")]
         public ActionResult Create(Product product)
         {
@@ -58,7 +55,6 @@ namespace StorePhoneAPI.Controllers
 
             return RedirectToAction("index");
         }
-
 
         [HttpGet("delete/{id}")]
         public ActionResult Delete(int id)

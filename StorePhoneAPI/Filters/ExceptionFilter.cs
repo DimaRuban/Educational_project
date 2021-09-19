@@ -21,12 +21,12 @@ namespace StorePhoneAPI.Filters
             if (_env.IsProduction())
             {
                 context.ExceptionHandled = true;
-                Console.WriteLine($"Occurred an error - {context.Exception.Message}");
+                _logger.LogInformation($"Occurred an error - {context.Exception.Message}");
             }
             if (_env.IsEnvironment("QA"))
             {
                 context.ExceptionHandled = true;
-                Console.WriteLine($"Occurred an error - {context.Exception.Message} with call stack {context.Exception.StackTrace}");
+                _logger.LogInformation($"Occurred an error - {context.Exception.Message} with call stack {context.Exception.StackTrace}");
             }                   
         }
     }

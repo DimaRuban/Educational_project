@@ -24,29 +24,28 @@ namespace StorePhone.Controllers
         }
         public void AddProduct(string name, decimal price, string color, int memorySize)
         {
-            throw new NotImplementedException();
         }
 
         public void AddProduct(Product product)
         {
-            _dbContext.Products.CreateObject(product);
+            _dbContext.Products.Create(product);
             _dbContext.Save();
         }
 
         public void DeleteProduct(int id)
         {
-            _dbContext.Products.DeleteObject(id);
+            _dbContext.Products.Delete(id);
             _dbContext.Save();
         }
 
         public Product GetProduct(int id)
         {
-            return _dbContext.Products.GetObject(id);
+            return _dbContext.Products.Get(id);
         }
 
         public IEnumerable<Product> GetProducts()
         {
-            return _dbContext.Products.GetObjects();
+            return _dbContext.Products.Get();
         }
     }
 }
