@@ -8,8 +8,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using StorePhone.Service;
 using StorePhone.Logging;
-using StorePhone.Controllers;
-
+using StorePhone.Ñontracts;
+using StorePhoneAPI.Filters;
+using Microsoft.Extensions.Logging;
 
 namespace StorePhoneAPI
 {
