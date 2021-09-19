@@ -5,7 +5,7 @@ using StorePhone.Сontracts;
 namespace StorePhoneAPI.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class OrderController : ControllerBase
     {
         private readonly IOrderService _orderService;
@@ -16,9 +16,11 @@ namespace StorePhoneAPI.Controllers
         }
 
         [HttpPost("AddOrder")]
-        public void AddOrder(Order order)
+        public IActionResult AddOrder(Order order)
+
         {
             _orderService.AddOrder(order);
+            return Ok();
         }
     }
 }

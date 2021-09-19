@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace StorePhone.Controllers
+namespace StorePhone.Service
 {
     public class ProductService : IProductService
     {
@@ -22,6 +22,7 @@ namespace StorePhone.Controllers
             _dbContext = dbContext;
             _logger = logger;
         }
+
         public void AddProduct(string name, decimal price, string color, int memorySize)
         {
         }

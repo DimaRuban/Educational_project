@@ -22,41 +22,42 @@ namespace StorePhoneAPI.Controllers
             _productService = productService;
         }
 
-        [HttpGet("index")]
+
         [ServiceFilter(typeof(RequestBodyActionFilter))]
+        [HttpGet("index")]      
         public ActionResult Index()
         {
            var products = _productService.GetProducts();
             return View("Index",products);
         }
 
-        [HttpGet("Details/{id}")]
+
+        [HttpGet("ProductDetails/{id}")]
         public ActionResult Details(int id)
         {
             var product = _productService.GetProduct(id);
-            return View("Details", product);
+            return View("ProductDetails", product);
         }
 
-
-        [HttpGet("create")]
+        [HttpGet("CreateProduct")]
         public ActionResult Create()
         {
-            return View("Create");
+            return View("CreateProduct");
         }
 
-        [HttpPost("create")]
+        [HttpPost("CreateProduct")]
         public ActionResult Create(Product product)
         {
             if (!ModelState.IsValid)
             {
-                return View("Create");
+                return View("CreateProduct");
             }
             _productService.AddProduct(product);
 
             return RedirectToAction("index");
         }
 
-        [HttpGet("delete/{id}")]
+        [HttpGet("DeleteProduct/{id}")]
         public ActionResult Delete(int id)
         {
             _productService.DeleteProduct(id);

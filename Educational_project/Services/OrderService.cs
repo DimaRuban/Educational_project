@@ -4,7 +4,7 @@ using StorePhone.Сontracts;
 using System;
 using System.Linq;
 
-namespace StorePhone.Controllers
+namespace StorePhone.Service
 {
     public class OrderService : IOrderService
     {  
