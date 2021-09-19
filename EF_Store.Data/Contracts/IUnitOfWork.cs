@@ -4,7 +4,7 @@ namespace EF_Store.Data.Contracts
 {
     public interface IUnitOfWork
     {
-        IRepository<Product> Products { get; }
+        IProductRepository Products { get; }
         IRepository<Order> Orders { get; }
         IRepository<User> Users { get; }
         IRepository<Category> Categories { get; }

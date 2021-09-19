@@ -6,9 +6,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using StorePhone.Service;
+using StorePhone.Logging;
 using StorePhone.Controllers;
-using StorePhone.Services;
-using StorePhone.Ñontracts;
+
 
 namespace StorePhoneAPI
 {
@@ -31,6 +32,7 @@ namespace StorePhoneAPI
             services.AddTransient<ICategoryService, CategoryService>();
 
             services.AddControllers();
+            services.AddMvc();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "StorePhoneAPI", Version = "v1" });

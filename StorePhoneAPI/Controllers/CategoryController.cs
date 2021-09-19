@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace StorePhoneAPI.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class CategoryController : ControllerBase
     {
@@ -16,24 +16,28 @@ namespace StorePhoneAPI.Controllers
         {
             _categoryService = categoryService;
         }
-      
-        [HttpGet]
+
+        [HttpGet("GetCategory")]
+
         public IEnumerable<Category> Get()
         {
             return _categoryService.GetProducts();
         }     
 
-        [HttpPost]
+        [HttpPost("AddCategory")]
+
         public IActionResult AddCategory(Category category)
         {
             _categoryService.AddCategory(category);
             return Ok();
         }
-      
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+
+        [HttpDelete("DeleteCategory/{id}")]
+        public IActionResult Delete(int id)
+
         {
             _categoryService.DeleteCategory(id);
+            return Ok();
         }
     }
 }

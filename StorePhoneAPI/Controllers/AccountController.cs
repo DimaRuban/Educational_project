@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace StorePhoneAPI.Controllers
 {
     [ApiController]
-    [Route("[controller]")] 
+    [Route("api/[controller]")] 
     public class AccountController : ControllerBase
     {
         private readonly IAccountService _accountService;
@@ -16,16 +16,18 @@ namespace StorePhoneAPI.Controllers
             _accountService = accountService;
         }
 
-        [HttpGet]
+        [HttpGet("GetUsers")]
+
         public IEnumerable<User> GetUsers()
         {
             return _accountService.GetUsers();
         }
 
-        [HttpPost]
-        public void Register(User user)
+        [HttpPost("Register")]
+        public IActionResult Register(User user)
         {
             _accountService.Register(user);
+            return Ok();
         }
     }
 }

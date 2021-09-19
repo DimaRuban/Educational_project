@@ -4,7 +4,7 @@ using StorePhone.Сontracts;
 using System;
 using System.Collections.Generic;
 
-namespace StorePhone.Controllers
+namespace StorePhone.Service
 {
     public class AccountService : IAccountService
     {       
