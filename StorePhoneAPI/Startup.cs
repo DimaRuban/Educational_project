@@ -2,8 +2,6 @@ using EF_Store.Data;
 using EF_Store.Data.Contracts;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -13,10 +11,6 @@ using StorePhone.Controllers;
 using StorePhone.Services;
 using StorePhone.Ñontracts;
 using StorePhoneAPI.Filters;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace StorePhoneAPI
 {
