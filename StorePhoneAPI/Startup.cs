@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using StorePhone.Service;
-using StorePhone.Ñontracts;
+using StorePhone.Contracts;
 using StorePhoneAPI.Filters;
 using Microsoft.Extensions.Logging;
 
