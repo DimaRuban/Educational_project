@@ -6,15 +6,13 @@ namespace EF_Store.Data
 {
     public class DataContext : DbContext
     {
-        private readonly IConfiguration _configuration;
+        private string _connectionString;
 
-        public DataContext()
-        {
-        }
 
-        public DataContext(IConfiguration configuration)
+        public DataContext(string connectionString)
         {
-            _configuration = configuration;
+            _connectionString = connectionString;
+            Database.EnsureCreated();
         }
 
         public DbSet<Product> Products { get; set; }
@@ -29,7 +27,7 @@ namespace EF_Store.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
-            builder.UseSqlServer(_configuration.GetConnectionString("PhoneStoreDB"));
+            builder.UseSqlServer(_connectionString);
         }
         protected override void OnModelCreating(ModelBuilder builder)
         {
