@@ -1,6 +1,7 @@
 ﻿using EF_Store.Domain;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using StorePhoneAPI.Filters;
 using StorePhone.Contracts;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ namespace StorePhoneAPI.Controllers
 {
     [ApiController]
     [Route("mvc/[controller]")]
+    [ServiceFilter(typeof(ExceptionFilter))]
     public class ProductMVCController : Controller
     {
         private readonly IProductService _productService;
@@ -20,7 +22,8 @@ namespace StorePhoneAPI.Controllers
             _productService = productService;
         }
 
-        [HttpGet("index")]      
+        [HttpGet("index")]
+        [ServiceFilter(typeof(RequestBodyActionFilter))]
         public ActionResult Index()
         {
            var products = _productService.GetProducts();

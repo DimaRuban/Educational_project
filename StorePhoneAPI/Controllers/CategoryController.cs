@@ -18,7 +18,6 @@ namespace StorePhoneAPI.Controllers
         }
 
         [HttpGet("GetCategory")]
-
         public IEnumerable<Category> Get()
         {
             return _categoryService.GetProducts();
@@ -34,7 +33,6 @@ namespace StorePhoneAPI.Controllers
 
         [HttpDelete("DeleteCategory/{id}")]
         public IActionResult Delete(int id)
-
         {
             _categoryService.DeleteCategory(id);
             return Ok();

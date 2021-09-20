@@ -2,8 +2,9 @@
     @{
         ViewData["Title"] = "Index";
     }
-
-    <h1>GetProducts</h1>
+  @using StorePhoneAPI.Filters
+  
+  <h1>GetProducts</h1>
 
     <p>
         @Html.ActionLink("Create new product", "Create", new {})
@@ -39,39 +40,6 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Id)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Description)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Price)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.MemorySize.Size)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Color.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Category.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Provider.Name)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { item.Id }) |
-                        @Html.ActionLink("Details", "Details", new { item.Id }) |
-                        @Html.ActionLink("Delete", "Delete", new { item.Id })   |
-                    </td>
-                </tr>
-            }
+           @ProductsHelper.PrintProducs(Model);
         </tbody>
     </table>

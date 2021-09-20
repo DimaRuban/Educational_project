@@ -30,6 +30,9 @@ namespace StorePhoneAPI
             services.AddSingleton<IOrderService, OrderService>();
             services.AddTransient<IAccountService, AccountService>();
             services.AddTransient<ICategoryService, CategoryService>();
+            services.AddSingleton<ExceptionFilter>();
+            services.AddSingleton<RequestBodyActionFilter>();
+            services.AddSingleton<Microsoft.Extensions.Logging.ILogger, Logger<ExceptionFilter>>();
 
             services.AddControllers();
             services.AddMvc();
