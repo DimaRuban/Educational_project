@@ -16,12 +16,12 @@ namespace EF_Store.Data.Contracts
         {
             _dbContext = DbContext;
         }
-        public void CreateObject(Product item)
+        public void Create(Product item)
         {
             _dbContext.Add(item);
         }
 
-        public void DeleteObject(int id)
+        public void Delete(int id)
         {
             var objectToDelete = _dbContext.Set<Product>().Find(id);
             if (objectToDelete != null)
@@ -30,18 +30,18 @@ namespace EF_Store.Data.Contracts
             }
         }
 
-        public Product GetObject(int id)
+        public Product Get(int id)
         {
 
             return _dbContext.Products.Include(x => x.Category).Include(x=>x.Provider).Include(x => x.Color).Include(x=>x.MemorySize).Where(x => x.Id == id).FirstOrDefault();
         }
 
-        public IEnumerable<Product> GetObjects()
+        public IEnumerable<Product> Get()
         {
             return _dbContext.Products.Include(x => x.Category).Include(x => x.Provider).Include(x => x.Color).Include(x => x.MemorySize);
         }
 
-        public void UpdateObject(Product item)
+        public void Update(Product item)
         {
             _dbContext.Entry(item).State = EntityState.Modified;
         }

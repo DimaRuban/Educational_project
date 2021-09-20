@@ -1,8 +1,8 @@
 ﻿using EF_Store.Domain;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using StorePhoneAPI.Filters;
 using StorePhone.Contracts;
+using StorePhoneAPI.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,13 +22,14 @@ namespace StorePhoneAPI.Controllers
             _productService = productService;
         }
 
-        [HttpGet("index")]
         [ServiceFilter(typeof(RequestBodyActionFilter))]
+        [HttpGet("index")]      
         public ActionResult Index()
         {
            var products = _productService.GetProducts();
             return View("Index",products);
         }
+
 
         [HttpGet("ProductDetails/{id}")]
         public ActionResult Details(int id)

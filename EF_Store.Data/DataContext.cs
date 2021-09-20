@@ -1,10 +1,19 @@
 ﻿using EF_Store.Domain;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace EF_Store.Data
 {
     public class DataContext : DbContext
     {
+        private string _connectionString;
+
+        public DataContext(string connectionString)
+        {
+            _connectionString = connectionString;
+            Database.EnsureCreated();
+        }
+
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Color> Colors { get; set; }
@@ -17,7 +26,7 @@ namespace EF_Store.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
-            builder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB; Initial Catalog = EF_StorePhone ;Integrated Security=True");
+            builder.UseSqlServer(_connectionString);
         }
         protected override void OnModelCreating(ModelBuilder builder)
         {

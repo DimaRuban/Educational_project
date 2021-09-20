@@ -11,7 +11,7 @@ namespace StorePhoneAPI.Filters
     {
         public static HtmlString PrintProducs (IEnumerable<Product> products)
         {
-            var result = "";
+            var result = string.Empty;
             foreach (var product in products)
             {
                 result += "<tr>";

@@ -17,7 +17,6 @@ namespace StorePhoneAPI.Controllers
 
         [HttpPost("AddOrder")]
         public IActionResult AddOrder(Order order)
-
         {
             _orderService.AddOrder(order);
             return Ok();

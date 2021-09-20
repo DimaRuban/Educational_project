@@ -7,24 +7,26 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using StorePhone.Service;
-using StorePhone.Logging;
+using StorePhoneAPI.Filters;
+using Microsoft.Extensions.Logging;
 using StorePhone.Contracts;
-using StorePhone.Services;
 
 namespace StorePhoneAPI
 {
     public class Startup
-    {
+    {  
+        public IConfiguration Configuration { get; }
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-        }
-
-        public IConfiguration Configuration { get; }
+        }      
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<DataContext>();
+            var connectionString = Configuration.GetConnectionString("PhoneStoreDB");
+
+            services.AddSingleton<DataContext>(new DataContext(connectionString));
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IProductService, ProductService>();
             services.AddSingleton<IOrderService, OrderService>();

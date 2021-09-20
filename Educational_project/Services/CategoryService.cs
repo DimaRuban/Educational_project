@@ -3,7 +3,7 @@ using EF_Store.Domain;
 using StorePhone.Contracts;
 using System.Collections.Generic;
 
-namespace StorePhone.Services
+namespace StorePhone.Service
 {
     public class CategoryService : ICategoryService
     {
