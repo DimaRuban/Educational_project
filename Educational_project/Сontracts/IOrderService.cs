@@ -1,6 +1,6 @@
 ﻿using EF_Store.Domain;
 
-namespace StorePhone.Сontracts
+namespace StorePhone.Сontract
 {
     public interface IOrderService
     {

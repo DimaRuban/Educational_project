@@ -1,4 +1,4 @@
-﻿namespace StorePhone.Сontracts
+﻿namespace StorePhone.Сontract
 {
     public interface IOrderUi 
     {

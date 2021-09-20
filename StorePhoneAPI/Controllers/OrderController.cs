@@ -1,6 +1,6 @@
 ﻿using EF_Store.Domain;
 using Microsoft.AspNetCore.Mvc;
-using StorePhone.Сontracts;
+using StorePhone.Сontract;
 
 namespace StorePhoneAPI.Controllers
 {

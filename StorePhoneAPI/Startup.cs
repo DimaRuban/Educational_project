@@ -9,7 +9,7 @@ using Microsoft.OpenApi.Models;
 using StorePhone.Service;
 using StorePhoneAPI.Filters;
 using Microsoft.Extensions.Logging;
-using StorePhone.Ñontracts;
+using StorePhone.Ñontract;
 
 namespace StorePhoneAPI
 {

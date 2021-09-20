@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using StorePhone.Logging;
 using StorePhone.Models;
-using StorePhone.Сontracts;
+using StorePhone.Сontract;
 using System.Collections.Generic;
 using System.IO;
 
