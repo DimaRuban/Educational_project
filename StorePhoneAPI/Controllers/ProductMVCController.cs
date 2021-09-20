@@ -22,7 +22,6 @@ namespace StorePhoneAPI.Controllers
             _productService = productService;
         }
 
-
         [ServiceFilter(typeof(RequestBodyActionFilter))]
         [HttpGet("index")]      
         public ActionResult Index()
