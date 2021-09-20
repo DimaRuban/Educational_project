@@ -8,7 +8,6 @@ namespace EF_Store.Data
     {
         private string _connectionString;
 
-
         public DataContext(string connectionString)
         {
             _connectionString = connectionString;

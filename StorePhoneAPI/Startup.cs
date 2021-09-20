@@ -24,8 +24,8 @@ namespace StorePhoneAPI
 
         public void ConfigureServices(IServiceCollection services)
         {
-            var connectionString = Configuration["PhoneStoreDB"];
-            services.AddSingleton<DataContext>();
+            var connectionString = Configuration.GetConnectionString("PhoneStoreDB");
+
             services.AddSingleton<DataContext>(new DataContext(connectionString));
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IProductService, ProductService>();
