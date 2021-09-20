@@ -1,7 +1,7 @@
 ﻿using EF_Store.Domain;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using StorePhone.Сontracts;
+using StorePhone.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;

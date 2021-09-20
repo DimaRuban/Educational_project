@@ -1,6 +1,6 @@
 ﻿using EF_Store.Data.Contracts;
 using StorePhone.Models;
-using StorePhone.Сontracts;
+using StorePhone.Contracts;
 using System;
 using System.Linq;
 

@@ -1,7 +1,7 @@
 ﻿using StorePhone.Models;
 using System.Collections.Generic;
 
-namespace StorePhone.Сontracts
+namespace StorePhone.Contracts
 {
     public interface IDbContext
     {

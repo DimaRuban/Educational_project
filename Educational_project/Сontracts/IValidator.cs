@@ -1,4 +1,4 @@
-﻿namespace StorePhone.Сontracts
+﻿namespace StorePhone.Contracts
 {
     public interface IValidator
     {
