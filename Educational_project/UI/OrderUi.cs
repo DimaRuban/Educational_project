@@ -1,4 +1,4 @@
-﻿using StorePhone.Сontracts;
+﻿using StorePhone.Contracts;
 using System;
 
 namespace StorePhone.UI

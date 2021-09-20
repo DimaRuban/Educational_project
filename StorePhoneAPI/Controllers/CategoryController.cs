@@ -1,6 +1,6 @@
 ﻿using EF_Store.Domain;
 using Microsoft.AspNetCore.Mvc;
-using StorePhone.Сontracts;
+using StorePhone.Contracts;
 using System.Collections.Generic;
 
 
@@ -17,22 +17,25 @@ namespace StorePhoneAPI.Controllers
             _categoryService = categoryService;
         }
 
-        [HttpGet("Get")]
+        [HttpGet("GetCategory")]
         public IEnumerable<Category> Get()
         {
             return _categoryService.GetProducts();
         }     
 
         [HttpPost("AddCategory")]
-        public void AddCategory(Category category)
+
+        public IActionResult AddCategory(Category category)
         {
             _categoryService.AddCategory(category);
+            return Ok();
         }
 
-        [HttpDelete("Delete/{id}")]
-        public void Delete(int id)
+        [HttpDelete("DeleteCategory/{id}")]
+        public IActionResult Delete(int id)
         {
             _categoryService.DeleteCategory(id);
+            return Ok();
         }
     }
 }

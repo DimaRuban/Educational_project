@@ -1,6 +1,6 @@
 ﻿using EF_Store.Domain;
 using Microsoft.AspNetCore.Mvc;
-using StorePhone.Сontracts;
+using StorePhone.Contracts;
 using System.Collections.Generic;
 
 namespace StorePhoneAPI.Controllers
@@ -23,15 +23,17 @@ namespace StorePhoneAPI.Controllers
         }
 
         [HttpPost("AddProducts")]
-        public void AddProducts(Product product)
+        public IActionResult AddProducts(Product product)
         {
             _productService.AddProduct(product);
+            return Ok();
         }
 
         [HttpDelete("DeleteProduct/{id?}")]
-        public void DeleteProduct(int id)
+        public IActionResult DeleteProduct(int id)
         {
             _productService.DeleteProduct(id);
+            return Ok();
         }
     }
 }

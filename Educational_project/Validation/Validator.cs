@@ -1,4 +1,4 @@
-﻿using StorePhone.Сontracts;
+﻿using StorePhone.Contracts;
 using System.Text.RegularExpressions;
 
 namespace StorePhone.Validation

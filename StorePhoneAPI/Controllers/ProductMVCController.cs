@@ -1,8 +1,8 @@
 ﻿using EF_Store.Domain;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using StorePhone.Сontracts;
 using StorePhoneAPI.Filters;
+using StorePhone.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,32 +30,32 @@ namespace StorePhoneAPI.Controllers
             return View("Index",products);
         }
 
-        [HttpGet("Details/{id}")]
+        [HttpGet("ProductDetails/{id}")]
         public ActionResult Details(int id)
         {
             var product = _productService.GetProduct(id);
-            return View("Details", product);
+            return View("ProductDetails", product);
         }
 
-        [HttpGet("create")]
+        [HttpGet("CreateProduct")]
         public ActionResult Create()
         {
-            return View("Create");
+            return View("CreateProduct");
         }
 
-        [HttpPost("create")]
+        [HttpPost("CreateProduct")]
         public ActionResult Create(Product product)
         {
             if (!ModelState.IsValid)
             {
-                return View("Create");
+                return View("CreateProduct");
             }
             _productService.AddProduct(product);
 
             return RedirectToAction("index");
         }
 
-        [HttpGet("delete/{id}")]
+        [HttpGet("DeleteProduct/{id}")]
         public ActionResult Delete(int id)
         {
             _productService.DeleteProduct(id);

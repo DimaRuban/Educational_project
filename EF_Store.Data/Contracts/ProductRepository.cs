@@ -23,7 +23,7 @@ namespace EF_Store.Data.Contracts
 
         public void DeleteObject(int id)
         {
-            Product objectToDelete = _dbContext.Set<Product>().Find(id);
+            var objectToDelete = _dbContext.Set<Product>().Find(id);
             if (objectToDelete != null)
             {
                 _dbContext.Set<Product>().Remove(objectToDelete);
@@ -32,7 +32,8 @@ namespace EF_Store.Data.Contracts
 
         public Product GetObject(int id)
         {
-            return _dbContext.Products.Include(x => x.Category).Include(x => x.Provider).Include(x => x.Color).Include(x => x.MemorySize).Where(x => x.Id == id).FirstOrDefault();
+
+            return _dbContext.Products.Include(x => x.Category).Include(x=>x.Provider).Include(x => x.Color).Include(x=>x.MemorySize).Where(x => x.Id == id).FirstOrDefault();
         }
 
         public IEnumerable<Product> GetObjects()

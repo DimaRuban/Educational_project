@@ -1,6 +1,6 @@
 ﻿using EF_Store.Data;
 using Newtonsoft.Json;
-using StorePhone.Controllers;
+using StorePhone.Service;
 using StorePhone.Data;
 using StorePhone.Logging;
 using StorePhone.Models;

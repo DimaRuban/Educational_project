@@ -1,6 +1,6 @@
 ﻿using EF_Store.Domain;
 using Microsoft.AspNetCore.Mvc;
-using StorePhone.Сontracts;
+using StorePhone.Contracts;
 using System.Collections.Generic;
 
 namespace StorePhoneAPI.Controllers
@@ -17,15 +17,17 @@ namespace StorePhoneAPI.Controllers
         }
 
         [HttpGet("GetUsers")]
+
         public IEnumerable<User> GetUsers()
         {
             return _accountService.GetUsers();
         }
 
         [HttpPost("Register")]
-        public void Register(User user)
+        public IActionResult Register(User user)
         {
             _accountService.Register(user);
+            return Ok();
         }
     }
 }
