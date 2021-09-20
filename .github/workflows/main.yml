@@ -18,8 +18,8 @@ jobs:
       with:
         dotnet-version: 5.0.x
     - name: Restore dependencies
-      run: dotnet restore "EducationalProject/EducationalProject.sln"
+      run: dotnet restore "StorePhoneAPI/StorePhoneAPI.csproj"
     - name: Build
-      run: dotnet build "EducationalProject/EducationalProject.sln" --no-restore
+      run: dotnet build "StorePhoneAPI/StorePhoneAPI.csproj" --no-restore
     - name: Test
-      run: dotnet test "EducationalProject/EducationalProject.sln" --no-build --verbosity normal
+      run: dotnet test "StorePhoneAPI/StorePhoneAPI.csproj" --no-build --verbosity normal
