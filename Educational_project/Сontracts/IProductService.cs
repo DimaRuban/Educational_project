@@ -1,7 +1,7 @@
 ﻿using EF_Store.Domain;
 using System.Collections.Generic;
 
-namespace StorePhone.Сontract
+namespace StorePhone.Contracts
 {
     public interface IProductService
     {

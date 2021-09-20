@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StorePhone.Сontract
+namespace StorePhone.Contracts
 {
     public interface ICategoryService
     {

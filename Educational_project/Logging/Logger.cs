@@ -1,4 +1,4 @@
-﻿using StorePhone.Сontract;
+﻿using StorePhone.Contracts;
 
 namespace StorePhone.Logging
 {

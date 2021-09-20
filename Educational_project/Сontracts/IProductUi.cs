@@ -1,4 +1,4 @@
-﻿namespace StorePhone.Сontract
+﻿namespace StorePhone.Contracts
 {
     public interface IProductUi
     {
